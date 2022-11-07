@@ -1,4 +1,4 @@
-import { env } from "process"
+import { $fetch } from "ohmyfetch";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -6,16 +6,20 @@ interface Props {
 }
 
 const PrimaryPost = ({ postId }: Props) => {
-    const [post, setPost] = useState([])
-    useEffect(() => {
-        fetch(`${process.env.FEED_API_BASE_URL}posts/${postId}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`)
-            .then((response) => response.json())
-            .then((post) => {
-                console.log(post)
-                setPost(post)
-            })
-    })
-    console.log(post)
+    /* const [post, setPost] = useState([])
+    useEffect( () => {
+        const url = `${process.env.FEED_API_BASE_URL}posts/${postId}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
+        console.log(url)
+        const dataFetch = async () => {
+            const data = await (
+                await $fetch(url,{ method: "GET" })
+            ).json();
+            console.log("data: ", data)
+        }
+        dataFetch();
+    }, []);  */
+    
+    //console.log(post)
     return (
         <div className="md:w-1/4 my-40 bg-white border border-gray-200 shadow-2xl rounded-2xl mx-auto">
             <div
@@ -34,7 +38,7 @@ const PrimaryPost = ({ postId }: Props) => {
                     src="/flex-ui-assets/images/dashboard/cards/avatar.png"
                     alt="avatar"
                 />
-                <h2 className="text-sm font-medium text-coolGray-900">{post}</h2>
+                <h2 className="text-sm font-medium text-coolGray-900">Raul</h2>
                 <h3 className="mb-3 text-xs font-medium text-coolGray-400">
                     johndoe@flex.co
                 </h3>
