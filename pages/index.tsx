@@ -1,11 +1,8 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import MetaTags from '../components/MetaTags'
 import PrimaryHeader from '../components/Primary/PrimaryHeader'
 import PrimaryPost from '../components/Primary/PrimaryPost'
 import React from 'react'
 import GlobalPlayer from '../components/Player/GlobalPlayer'
-import { render } from 'react-dom'
 
 type Props = {
   post: string
@@ -14,9 +11,11 @@ type Props = {
 type State = {
   post: string
 }
+//santeetji: 62b131b4db1ec8000f04084e
+//begaes: 628e108820eaae000f00a887
 class Home extends React.Component<Props,State> {
   state: State = {
-    post: "62135d919fe293000fd41dce"
+    post: "62b131b4db1ec8000f04084e"
   }
   render(){
     return (
@@ -25,7 +24,7 @@ class Home extends React.Component<Props,State> {
         <main>
           <PrimaryHeader/>
           <PrimaryPost postId={this.state.post}/>
-          <GlobalPlayer/>
+          <GlobalPlayer postId={this.state.post}/>
         </main>
       </div>
     )
