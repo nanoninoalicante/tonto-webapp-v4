@@ -55,7 +55,7 @@ class PrimaryPost extends Component<Props, State> {
     render(): React.ReactNode {
         console.log(this.state)
         return (
-            <div className="md:w-1/4 my-40 bg-white border border-gray-200 shadow-2xl rounded-2xl mx-auto">
+            <div className="md:w-1/3 my-40 bg-white border border-gray-200 shadow-2xl rounded-t-xl mx-auto">
                 <div
                     className="
                 flex flex-col

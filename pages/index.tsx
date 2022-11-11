@@ -2,7 +2,7 @@ import MetaTags from '../components/MetaTags'
 import PrimaryHeader from '../components/Primary/PrimaryHeader'
 import PrimaryPost from '../components/Primary/PrimaryPost'
 import React from 'react'
-import GlobalPlayer from '../components/Player/GlobalPlayer'
+import {GlobalPlayer} from '../components/Player/GlobalPlayer'
 
 type Props = {
   post: string
@@ -15,7 +15,7 @@ type State = {
 //begaes: 628e108820eaae000f00a887
 class Home extends React.Component<Props,State> {
   state: State = {
-    post: "62b131b4db1ec8000f04084e"
+    post: "628e108820eaae000f00a887"
   }
   render(){
     return (

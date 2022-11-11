@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState }from "react"
 import AudioPlayerHolder from "./AudioPlayerHolder"
 import BackSkipButton from "./BackSkipButton"
 import ForwardSkipButton from "./ForwardSkipButton"
@@ -6,7 +6,10 @@ import PlayerSeeker from "./PlayerSeeker"
 import PlayPauseButton from "./PlayPauseButton"
 import TimeDisplay from "./TimeDisplay"
 import ReactPlayer from "react-player"
-
+import { BiRightArrowAlt } from "react-icons/bi"
+import { BiLeftArrowAlt } from "react-icons/bi"
+import { FaPlay } from "react-icons/fa"
+import { FaPause } from "react-icons/fa"
 interface Props {
     postId: string
 }
@@ -14,121 +17,46 @@ interface State {
     streamingUrl: string
 }
 
-class GlobalPlayer extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props)
-        this.state = {
-            streamingUrl: ""
-        }
-    }
-    async componentDidMount(): Promise<void> {
-        const url = `${process.env.FEED_API_BASE_URL}posts/${this.props.postId}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
-        await fetch(url, { method: "GET" })
+const GlobalPlayer = (props: any) => {
+    // state
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    // references
+    
+    useEffect(() => {
+        const url = `${process.env.FEED_API_BASE_URL}posts/${props.postId}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
+        fetch(url, { method: "GET" })
             .then((response) => {
                 return response.json()
             })
             .then((data) => {
-                this.setState(data.data[0])
+                //this.setState(data.data[0])
             })
-    }
-    render(): React.ReactNode {
-        console.log(this.state)
+    })
+
+    const togglePlayPause = () => { setIsPlaying(!isPlaying); } 
         return (
-            <div className="fixed z-9 bottom-0 w-full p-6 md:p-12">
-                <div
-                    className="
-                    py-10
-                    px-2
-                    mx-auto
-                    w-full
-                    md:w-4/5
-                    lg:w-[500px]
-                    bg-white bg-opacity-30
-                    backdrop-blur-lg
-                    max-w-6xl
-                    border border-gray-200
-                    rounded-2xl
-                    shadow-5xl
-                    "
-                >
-                    <div className="flex flex-col justify-center items-center w-full py-4 px-2">
-                        <AudioPlayerHolder />
-                        <div
-                            className="
-                            flex flex-row
-                            justify-center
-                            items-center
-                            w-full
-                            mb-2
-                        "
-
-                        >
-                            <div
-                                className="
-                                flex
-                                w-1/4
-                                justify-center
-                                w-full
-                                mb-0
-                                md:mb-0
-                                "
-                            >
-                                <BackSkipButton />
-                            </div>
-                            <div
-                                className="flex w-1/5 justify-start w-full mb-0 md:mb-0"
-                            >
-                               {/*  <TimeDisplay
-                                />{/*0{{playerStore.getCurrentTime}}
-                            </TimeDisplay> */}
-                        </div>
-                        <div
-                            className="
-                                flex
-                                w-1/5
-                                justify-center
-                                w-full
-                                mb-0
-                                md:mb-0
-                                "
-                        >
-                            <PlayPauseButton />
-                        </div>
-                        <div
-                            className="
-                                flex
-                                w-1/5
-                                justify-start
-                                pl-5
-                                w-full
-                                mb-0
-                                md:mb-0
-                            "
-                        >
-                            {/* <TimeDisplay></TimeDisplay>{ {{ playerStore.getTotalDuration }}
-                            </TimeDisplay> } */}
-                                </div>
-                                <div className="
-                                flex
-                                w-1/5
-                                justify-center
-                                w-full
-                                mb-0
-                                md:mb-0
-                                "
-                                >
-                                    <ForwardSkipButton></ForwardSkipButton>
-                                
-
-                                </div>
-                            </div>
-                            <div className="w-full">
-                                <PlayerSeeker />
-                            </div>
-                        </div>
-                    </div>
+            <div className="md:w-1/3  mx-auto py-10 px-2  bg-gray-400 bg-opacity-30 border border-gray-100 rounded-b-3xl shadow-3xl">
+                <div className="flex flex-row justify-center items-center w-full py-4 px-2">
+                    <audio src="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2022-10-4/295063124-44100-2-967bc9c977063.mp3" preload="metadata" />
+                    <button className="p-3 mx-7 bg-teal-500 rounded-full"><BiLeftArrowAlt size={30}/></button>
+                    <button onClick={togglePlayPause} className="p-3 mx-7 bg-teal-500 rounded-full">
+                        { isPlaying ? <FaPause size={30}/> : <FaPlay size={30}/>}
+                    </button>
+                    <button className="p-3 mx-7 bg-teal-500 rounded-full"><BiRightArrowAlt size={30}/></button>
                 </div>
+                <div className="flex flex-row justify-center font-mono items-center w-full py-4 px-2">
+                    {/* current time */}
+                    <div className="p-1 mx-7 bg-teal-500 rounded-md">0:00</div>
+
+                    {/* progress bar */}
+                    <div className="p-1 mx-7">
+                        <input id="default-range" type="range" value="0" className="overflow-hidden appearance-none bg-gray-400 h-3 w-full"/>
+                    </div>
+                    {/* duration */}
+                    <div className="p-1 mx-7 bg-teal-500 rounded-md">48:00</div>
+                </div>
+            </div>
         )
-    }
 }
-export default GlobalPlayer;
+export { GlobalPlayer };
