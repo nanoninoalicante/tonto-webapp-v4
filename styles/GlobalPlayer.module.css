@@ -1,0 +1,15 @@
+.progressBar {
+    --bar-bg: teal;
+    --seek-before-width: 100px;
+    --seek-before-color: #99f6e4;
+    --knobby: #3452a5;
+    --selectedKnobby: #26c9c3;
+
+    appearance: none;
+    background: var(--bar-bg);
+    border-radius: 10px;
+    position: relative;
+    width: 30em;
+    height: 11px;
+    outline: none;
+}

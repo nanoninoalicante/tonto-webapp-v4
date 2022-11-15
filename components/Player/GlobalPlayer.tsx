@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react"
 import AudioPlayerHolder from "./AudioPlayerHolder"
 import BackSkipButton from "./BackSkipButton"
 import ForwardSkipButton from "./ForwardSkipButton"
-import PlayerSeeker from "./PlayerSeeker"
+import {PlayerSeeker} from "./PlayerSeeker"
 import PlayPauseButton from "./PlayPauseButton"
 import TimeDisplay from "./TimeDisplay"
 import ReactPlayer from "react-player"
@@ -10,7 +10,7 @@ import { BiRightArrowAlt } from "react-icons/bi"
 import { BiLeftArrowAlt } from "react-icons/bi"
 import { FaPlay } from "react-icons/fa"
 import { FaPause } from "react-icons/fa"
-import { Progress } from "@material-tailwind/react";
+import style from "../../styles/GlobalPlayer.module.css"
 interface Props {
     postId: string
 }
@@ -23,23 +23,11 @@ const GlobalPlayer = (props: any) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
-
     // references
     const audioPlayer: any = useRef();
     const progressBar: any = useRef();
-
-    const togglePlayPause = () => { 
-        const prevValue = isPlaying
-        setIsPlaying(!isPlaying); 
-        
-        if(!prevValue){
-            audioPlayer.current.play();
-        } else {
-            audioPlayer.current.pause();
-        }
-
-    }
-
+    const animationRef: any = useRef();
+    
     useEffect(() => {
         const url = `${process.env.FEED_API_BASE_URL}posts/${props.postId}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
         fetch(url, { method: "GET" })
@@ -51,7 +39,29 @@ const GlobalPlayer = (props: any) => {
             })
         const seconds = Math.floor(audioPlayer.current.duration)
         setDuration(seconds)
+        progressBar.current.max = seconds
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
+
+    const togglePlayPause = () => { 
+        const prevValue = isPlaying
+        setIsPlaying(!prevValue); 
+        
+        if(!prevValue){
+            audioPlayer.current.play();
+            animationRef.current = requestAnimationFrame(whilePlaying)
+        } else {
+            audioPlayer.current.pause();
+            cancelAnimationFrame(animationRef.current)
+        }
+
+    }
+
+    const whilePlaying = () => {
+        progressBar.current.value = audioPlayer.current.currentTime
+        changePlayerCurrentTime();
+        animationRef.current = requestAnimationFrame(whilePlaying)
+    }
+
 
     const calculateTime = (secs: number) => {
         const minutes = Math.floor(secs / 60);
@@ -61,11 +71,14 @@ const GlobalPlayer = (props: any) => {
         return `${returnMin}:${returnSecs}`
     }
 
-    const changeRange = () =>{
+    const onChangeRange = () =>{
         audioPlayer.current.currentTime = progressBar.current.value;
-        //console.log(progressBar.current)
-        //progressBar.current.value = progressBar.current.value
-        //setCurrentTime(progressBar.current.value)
+        changePlayerCurrentTime();
+    }
+
+    const changePlayerCurrentTime = () => {
+        progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / duration * 100}%`)
+        setCurrentTime(progressBar.current.value)
     }
 
     return (
@@ -85,8 +98,8 @@ const GlobalPlayer = (props: any) => {
                 </div>
 
                 {/* progress bar */}
-                <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                    <div ref={progressBar} onChange={changeRange} className="bg-teal-500 h-2.5 rounded-full" style={{ width: `0%`}} ></div>
+                <div className="">
+                    <input type="range" defaultValue="0" className={style.progressBar} ref={progressBar} onChange={onChangeRange}/>
                 </div>
 
                 {/* duration */}

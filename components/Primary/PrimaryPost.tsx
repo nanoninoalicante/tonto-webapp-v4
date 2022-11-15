@@ -53,7 +53,6 @@ class PrimaryPost extends Component<Props, State> {
     }
 
     render(): React.ReactNode {
-        console.log(this.state)
         return (
             <div className="md:w-1/3 my-40 bg-white border border-gray-200 shadow-2xl rounded-t-xl mx-auto">
                 <div
