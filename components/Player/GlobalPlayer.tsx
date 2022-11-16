@@ -18,11 +18,14 @@ interface State {
     streamingUrl: string
 }
 
+const AudioPlayerContext = React.createContext([{}, () => {}])
+
 const GlobalPlayer = (props: any) => {
     // state
     const [isPlaying, setIsPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
+    const [data, setData] = useState({})
     // references
     const audioPlayer: any = useRef();
     const progressBar: any = useRef();
@@ -35,7 +38,7 @@ const GlobalPlayer = (props: any) => {
                 return response.json()
             })
             .then((data) => {
-                //this.setState(data.data[0])
+                setData(data.data[0])
             })
         const seconds = Math.floor(audioPlayer.current.duration)
         setDuration(seconds)
