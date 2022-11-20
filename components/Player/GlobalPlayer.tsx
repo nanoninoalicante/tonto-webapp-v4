@@ -85,7 +85,7 @@ const GlobalPlayer = (props: any) => {
     }
 
     return (
-        <div className="md:w-1/3  mx-auto py-10 px-2  bg-gray-400 bg-opacity-30 border border-gray-100 rounded-b-3xl shadow-3xl">
+        <div className="md:w-1/3 lg:w-1/2 mt-50 bg-white border border-gray-200 shadow-2xl rounded-b-xl mx-auto">
             <div className="flex flex-row justify-center items-center w-full py-4 px-2">
                 <audio ref={audioPlayer} src="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2022-10-4/295063124-44100-2-967bc9c977063.mp3" preload="metadata" />
                 <button className="p-3 mx-7 bg-teal-500 rounded-full"><BiLeftArrowAlt size={30} /></button>
