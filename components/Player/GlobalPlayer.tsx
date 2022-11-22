@@ -42,43 +42,34 @@ const GlobalPlayer = (props: any) => {
     const progressBar: any = useRef();
     const animationRef: any = useRef();
 
-    useEffect(() => {
-        const url = `${process.env.FEED_API_BASE_URL}posts/${props.postId}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
-        fetch(url, { method: "GET" })
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {                
-                setData(data.data[0])
-            })
-
-        console.log("audioplayer holder: ", data.streamingUrl);
-        if (data?.streamingUrl) {
-            loadHlsAudio({ streamingUrl: data.streamingUrl });
-        } else {
-            console.log("cannot load player");
-            // alertsStore.addAlert({ message: "Cannot load audio", type: "error" });
-        }
+    useEffect( () => {        
         const seconds = Math.floor(audioPlayer.current.duration)
         setDuration(seconds)
         progressBar.current.max = seconds
-        console.log("audioplayer holder: ", data.streamingUrl);
-        if (data?.streamingUrl) {
-            loadHlsAudio({ streamingUrl: data.streamingUrl });
-        } else {
-            console.log("cannot load player");
-        }
+        
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
-    const loadHlsAudio = async ({ streamingUrl }: { streamingUrl: any }) => {
+    useEffect(() => {
+        const url = `${process.env.FEED_API_BASE_URL}posts/${props.postId}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
+        fetch(url, { method: "GET" })
+            .then((response) => response.json())
+            .then((data) => {            
+                setData(data.data[0])
+            })
+
+            loadHlsAudio();
+    },[])
+
+    const loadHlsAudio = async () => {
         if (Hls.isSupported()) {
             const hls = new Hls();
-            console.log("hls is supported: ", streamingUrl);
-            hls.loadSource(streamingUrl);
+            console.log("hls is supported: ", data.streamingUrl);
+            hls.loadSource(data.streamingUrl);
             hls.attachMedia(audioPlayer.value);
+            console.log(hls.startLoad)
         } else {
             console.log("hls not required");
-            audioPlayer.value.setAttribute("src", streamingUrl);
+            audioPlayer.value.setAttribute("src", data.streamingUrl);
         }
         return Promise.resolve("loadHlsAudio");
     };
