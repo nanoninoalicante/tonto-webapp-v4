@@ -29,30 +29,31 @@ const PrimaryPost = (props: any) => {
     const [userData, setUserData] = useState(userInfo)
 
     useEffect(() => {
-        const url = `${process.env.FEED_API_BASE_URL}posts/${props.postId}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
+        const url = `https://webfeed-dev.apis.gettonto.com/posts/${props.postId}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
         setIsLoading(true)
         fetch(url, { method: "GET" })
             .then((response) => {
-            return response.json()
-        })
-        .then((data) => {
-            setData(data.data[0])
-            setUserData(data.data[0].userInfo)
-            setIsLoading(false)
-        })
-    },[])
+                return response.json()
+            })
+            .then((data) => {
+                console.log(data)
+                setData(data.data[0])
+                setUserData(data.data[0].userInfo)
+                setIsLoading(false)
+            })
+    }, [])
 
     useEffect(() => {
         console.log(data)
         console.log(userData)
-        if(userData.profileImg === "")
-        setUserData({...userData,profileImg: "https://invis.io/a/cl4ifg00001dw0onspygyech3"})
-    },[data.userInfo])
+        if (userData.profileImg === "")
+            setUserData({ ...userData, profileImg: "/flex-ui-assets/images/tontoprofile_defualt.png" })
+    }, [data.userInfo])
 
     return (
         <>
             {!isLoading ?
-                (<div className="md:w-1/3 lg:w-1/2 mt-40 bg-teal-500 border border-gray-200 shadow-2xl rounded-t-xl mx-auto">
+                (<div className="md:w-1/2 mt-40 text-orange-100 bg-teal-500 border border-gray-200 xl:shadow-2xl xl:rounded-t-xl xl:mx-auto">
                     <div
                         className="
                 flex flex-col
@@ -118,7 +119,7 @@ const PrimaryPost = (props: any) => {
                                 pt-8
                                 pb-6
                                 border-b border-black
-            "
+                        "
                         >
                             <div
                                 className="mb-4 w-20 rounded-full bg-slate-700"

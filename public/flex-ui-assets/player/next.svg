@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="32px" viewBox="0 0 26 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>player/next</title>
+    <defs>
+        <path d="M2.13333333,0.269087442 L18.1333333,12.2690874 C18.4493827,12.5061245 18.6249657,12.8485113 18.6600823,13.2026037 L18.666,13.335 L18.6600823,13.4689045 C18.6249657,13.8229969 18.4493827,14.1653837 18.1333333,14.4024208 L2.13333333,26.4024208 C1.25435166,27.061657 0,26.4344812 0,25.3357541 L0,1.33575411 C0,0.237027018 1.25435166,-0.390148812 2.13333333,0.269087442 Z M21.3333333,0.00242077567 L21.3333333,26.6690874 L18.6666667,26.6690874 L18.6666667,0.00242077567 L21.3333333,0.00242077567 Z" id="path-1"></path>
+        <filter x="-14.1%" y="-11.2%" width="128.1%" height="122.5%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-979.000000, -330.000000)" id="Group">
+            <g transform="translate(976.000000, 330.000000)">
+                <g id="player-skip-forward" transform="translate(5.333333, 2.666667)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Combined-Shape">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-1"></use>
+                        <use fill="#4A4A4A" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>player/play</title>
+    <defs>
+        <path d="M25.0020068,2.94552551 L4.89389876,14.4921611 C3.70454299,15.1751223 3.70146438,16.7275832 4.888104,17.4143062 L24.9962121,29.0511167 C26.2909279,29.8003847 28,28.9700253 28,27.5917144 L28,4.40826827 C28,3.0327359 26.2970702,2.20186403 25.0020068,2.94552551 Z" id="path-1"></path>
+        <filter x="-12.5%" y="-11.2%" width="125.0%" height="122.5%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-967.000000, -397.000000)" id="Group">
+            <g transform="translate(964.000000, 392.000000)">
+                <g id="Buttons/circle" transform="translate(3.000000, 5.000000)" fill="#4A4A4A">
+                    <path d="M25,0 C38.8071187,0 50,11.1928813 50,25 C50,38.8071187 38.8071187,50 25,50 C11.1928813,50 0,38.8071187 0,25 C0,11.1928813 11.1928813,0 25,0 Z M25,2 C12.2974508,2 2,12.2974508 2,25 C2,37.7025492 12.2974508,48 25,48 C37.7025492,48 48,37.7025492 48,25 C48,12.2974508 37.7025492,2 25,2 Z" id="Oval"></path>
+                </g>
+                <g transform="translate(15.000000, 14.000000)" id="24-/-check">
+                    <g id="Play_big2" transform="translate(16.000000, 16.000000) scale(-1, -1) translate(-16.000000, -16.000000) ">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#4A4A4A" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
