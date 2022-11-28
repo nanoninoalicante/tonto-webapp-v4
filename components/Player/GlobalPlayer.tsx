@@ -33,7 +33,7 @@ const GlobalPlayer = (props: any) => {
     const [data, setData] = useState(state)
     // references
     const audioPlayer: any = useRef(null);
-    const hlsRef: any = useRef<Hls | null>(null)
+    const hlsRef: any = useRef()
     const progressBar: any = useRef();
     const animationRef: any = useRef();
 
@@ -50,21 +50,19 @@ const GlobalPlayer = (props: any) => {
         .then((response) => response.json())
         .then((data) => {            
             setData(data.data[0])
-            console.log(data.data[0].userInfo.profileImg)
         })
     },[])
     
     useEffect(() => {
-        if(hlsRef.current){
+        if(hlsRef?.current){
             hlsRef.current.destroy()
         }
 
-        if(audioPlayer.current) {
+        if(audioPlayer?.current) {
             hlsRef.current = new Hls();
             hlsRef.current.attachMedia(audioPlayer.current);
             hlsRef.current.on(Hls.Events.MEDIA_ATTACHED, () => {
-                hlsRef.current?.loadSource(data.streamingUrl);
-
+                hlsRef.current?.loadSource(data?.streamingUrl);
                 hlsRef.current?.on(Hls.Events.MANIFEST_PARSED, () => {
                     hlsRef.current?.on(Hls.Events.LEVEL_LOADED, (_: string, data: any) => {
                         const duration: number = data.details.totalduration;
@@ -159,7 +157,7 @@ const GlobalPlayer = (props: any) => {
 
                 {/* duration */}
                 <div className="p-1 relative mx-1 rounded-md">
-                    {duration && calculateTime(duration)}
+                    {duration && data ? calculateTime(duration) : calculateTime(0)}
                 </div>
             </div>
         </div>
