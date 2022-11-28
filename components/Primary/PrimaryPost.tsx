@@ -53,21 +53,10 @@ const PrimaryPost = (props: any) => {
     return (
         <>
             {!isLoading ?
-                (<div className="md:w-1/2 mt-40 text-orange-100 bg-teal-500 border border-gray-200 xl:shadow-2xl xl:rounded-t-xl xl:mx-auto">
-                    <div
-                        className="
-                flex flex-col
-                justify-center
-                items-center
-                px-4
-                pt-8
-                pb-6
-                border-b border-gray-200 
-                border-b-2
-            "
-                    >
+                (<div className="bg-teal-500 w-full mt-20">
+                    <div className="">
                         <img
-                            className="mb-4 w-20 rounded-full"
+                            className="my-10 w-20 rounded-full"
                             src={userData.profileImg}
                             alt="avatar"
                         />
@@ -79,7 +68,7 @@ const PrimaryPost = (props: any) => {
                         </h3>
                     </div>
                     <div className="flex flex-row pt-4 pb-6 m-2">
-                        <div className="w-full md:w-1/3 p-2">
+                        <div className="w-full p-2">
                             <div className="text-center">
                                 <p className="mb-1 text-xs text-coolGray-900 font-semibold">
                                     {data.likesCount}
@@ -87,7 +76,7 @@ const PrimaryPost = (props: any) => {
                                 <p className="text-xs text-coolGray-400 font-medium">Likes</p>
                             </div>
                         </div>
-                        <div className="w-full md:w-1/3 p-2">
+                        <div className="w-full p-2">
                             <div className="text-center">
                                 <p className="mb-1 text-xs text-coolGray-900 font-semibold">
                                     {data.commentsCount}
@@ -97,7 +86,7 @@ const PrimaryPost = (props: any) => {
                                 </p>
                             </div>
                         </div>
-                        <div className="w-full md:w-1/3 p-2">
+                        <div className="w-full p-2">
                             <div className="text-center">
                                 <p className="mb-1 text-xs text-coolGray-900 font-semibold">
                                     {data.shareCount}

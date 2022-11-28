@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react"
 import style from "../../styles/GlobalPlayer.module.css"
-import Hls from "hls.js"
+import Hls, { HlsPerformanceTiming } from "hls.js"
 import Play from "../../public/flex-ui-assets/player/play.svg"
 import Pause from "../../public/flex-ui-assets/player/pause.svg"
 import Next10 from "../../public/flex-ui-assets/player/next10.svg"
@@ -66,7 +66,7 @@ const GlobalPlayer = (props: any) => {
                 hlsRef.current?.loadSource(data.streamingUrl);
 
                 hlsRef.current?.on(Hls.Events.MANIFEST_PARSED, () => {
-                    hlsRef.current?.on(Hls.Events.LEVEL_LOADED, (_: string, data: Hls.loadedmetadata) => {
+                    hlsRef.current?.on(Hls.Events.LEVEL_LOADED, (_: string, data: any) => {
                         const duration: number = data.details.totalduration;
                         setDuration(duration);
                         setCurrentTime(0);
