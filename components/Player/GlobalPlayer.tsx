@@ -75,10 +75,9 @@ const GlobalPlayer = (props: any) => {
     },[data])
 
     const togglePlayPause = () => {
-        const prevValue = isPlaying
-        setIsPlaying(!prevValue);
+        setIsPlaying(!isPlaying);
 
-        if (!prevValue) {
+        if (!isPlaying) {
             audioPlayer.current.play();
             animationRef.current = requestAnimationFrame(whilePlaying)
         } else {
