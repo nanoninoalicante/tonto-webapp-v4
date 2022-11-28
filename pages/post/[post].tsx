@@ -15,7 +15,8 @@ type State = {
 }
 //santeetji: 62b131b4db1ec8000f04084e
 //begaes: 628e108820eaae000f00a887
-const slug = "6381ce9059b930327afece05"
+//raul: 6381ce9059b930327afece05
+const slug = "628e108820eaae000f00a887"
 const Post = () => {
   /* const router = useRouter()
   const { slug } = router.query */

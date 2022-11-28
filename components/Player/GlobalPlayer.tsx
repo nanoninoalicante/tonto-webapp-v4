@@ -125,7 +125,8 @@ const GlobalPlayer = (props: any) => {
         changePlayerCurrentTime();
     }
     return (
-        <div className="md:w-1/3 lg:w-1/2 mt-70 bg-teal-500 border border-gray-200 shadow-2xl rounded-b-xl mx-auto">
+
+        <div className="fixed bottom-0 z-50 w-full bg-teal-500 shadow-2xl rounded-t-xl">
             <div className="flex flex-row justify-center items-center w-full py-4 px-2">
                 <audio ref={audioPlayer} preload="metadata" />
 
@@ -147,17 +148,17 @@ const GlobalPlayer = (props: any) => {
             <div className="flex flex-row justify-center font-mono items-center w-full py-4 px-2">
                 
                 {/* current time */}
-                <div className="p-1 mx-7 rounded-md">
+                <div className="p-1 mx-1 rounded-md">
                     {calculateTime(currentTime)}
                 </div>
 
                 {/* progress bar */}
-                <div className="">
+                <div>
                     <input type="range" defaultValue="0" className={style.progressBar} ref={progressBar} onChange={onChangeRange} />
                 </div>
 
                 {/* duration */}
-                <div className="p-1 relative mx-7 rounded-md">
+                <div className="p-1 relative mx-1 rounded-md">
                     {duration && calculateTime(duration)}
                 </div>
             </div>
