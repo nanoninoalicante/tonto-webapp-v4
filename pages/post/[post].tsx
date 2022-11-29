@@ -18,8 +18,9 @@ type State = {
 //raul: 6381ce9059b930327afece05
 const slug = "6381ce9059b930327afece05"
 const Post = () => {
-  /* const router = useRouter()
+ /*  const router = useRouter()
   const { slug } = router.query */
+  console.log(slug)
     return (
       <div>
         <MetaTags />

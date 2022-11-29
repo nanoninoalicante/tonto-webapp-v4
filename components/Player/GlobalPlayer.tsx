@@ -84,7 +84,6 @@ const GlobalPlayer = (props: any) => {
             audioPlayer.current.pause();
             cancelAnimationFrame(animationRef.current)
         }
-
     }
 
     const whilePlaying = () => {
@@ -123,22 +122,22 @@ const GlobalPlayer = (props: any) => {
     }
     return (
 
-        <div className="fixed bottom-0 z-50 w-full bg-teal-500 shadow-2xl rounded-t-xl">
+        <div className="fixed bottom-0 z-50 w-full bg-white rounded-t-xl">
             <div className="flex flex-row justify-center items-center w-full py-4 px-2">
                 <audio ref={audioPlayer} preload="metadata" />
 
                 {/* REDO 10*/}
-                <button className="p-3 mx-7 bg-teal-500 rounded-full" onClick={handleRedo}>
+                <button className="p-3 mx-7 rounded-full" onClick={handleRedo}>
                     <Redo10 size={30} />
                 </button>
 
                 {/* PLAY / PAUSE */}
-                <button onClick={togglePlayPause} className="p-3 mx-7 bg-teal-500 rounded-full">
+                <button onClick={togglePlayPause} className="p-3 mx-7 rounded-full">
                     {isPlaying ? <Pause size={30}/> : <Play size={30} />}
                 </button>
 
                 {/* NEXT 10 */}
-                <button className="p-3 mx-7 bg-teal-500 rounded-full" onClick={handleNext}>
+                <button className="p-3 mx-7 rounded-full" onClick={handleNext}>
                     <Next10 size={30} />
                 </button>
             </div>

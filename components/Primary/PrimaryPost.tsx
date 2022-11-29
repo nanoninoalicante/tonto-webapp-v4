@@ -48,7 +48,7 @@ const PrimaryPost = (props: any) => {
     }, [data.userInfo])
 
     return (
-        <div className="container mx-auto mt-20 justify-center bg-teal-500 rounded-b-xl">
+        <div className="container mx-auto mt-28 justify-center bg-white rounded-b-xl">
             <div className="flex flex-col justify-center items-center border-b-2">
                 <img
                     className="my-7 rounded-full w-24"
@@ -62,7 +62,7 @@ const PrimaryPost = (props: any) => {
                     {data.description}
                 </h3>
             </div>
-            <div className="flex flex-wrap pt-4 pb-6 m-2 rounded-b shadow-xl">
+            <div className="flex flex-wrap pt-4 pb-6 m-2 rounded-b shadow-2xl">
                 <div className="p-2 w-1/3">
                     <div className="text-center">
                         <p className="mb-1 text-xs text-coolGray-900 font-semibold">
