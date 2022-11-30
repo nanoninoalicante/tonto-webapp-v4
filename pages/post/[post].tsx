@@ -16,18 +16,25 @@ type State = {
 //santeetji: 62b131b4db1ec8000f04084e
 //begaes: 628e108820eaae000f00a887
 //raul: 6381ce9059b930327afece05
-const slug = "6381ce9059b930327afece05"
-const Post = () => {
- /*  const router = useRouter()
-  const { slug } = router.query */
-  console.log(slug)
+//const slug = "62b131b4db1ec8000f04084e"
+export async function getServerSideProps() {
+  const router = useRouter()
+  const { slug } = router.query 
+  return {
+    props: {
+      postId: slug
+    }
+  }
+}
+const Post = ({postId}:any) => {
+
     return (
       <div>
         <MetaTags />
         <main >
           <PrimaryHeader/>
-          <PrimaryPost postId={slug}/>
-          <GlobalPlayer postId={slug}/>
+          <PrimaryPost postId={postId}/>
+          <GlobalPlayer postId={postId}/>
         </main>
       </div>
     )
