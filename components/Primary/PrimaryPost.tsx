@@ -29,7 +29,8 @@ const PrimaryPost = (props: any) => {
     const [userData, setUserData] = useState(userInfo)
 
     useEffect(() => {
-        const url = `https://webfeed-dev.apis.gettonto.com/posts/${props.postId}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
+        console.log(props.props)
+        const url = `https://webfeed-dev.apis.gettonto.com/posts/${props.props}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
         setIsLoading(true)
         fetch(url, { method: "GET" })
             .then((response) => {
@@ -45,9 +46,10 @@ const PrimaryPost = (props: any) => {
     useEffect(() => {
         if (userData.profileImg === "")
             setUserData({ ...userData, profileImg: "/flex-ui-assets/images/tontoprofile_defualt.png" })
-    }, [data.userInfo])
+    }, [data?.userInfo])
 
     return (
+/*         isLoading ? */
         <div className="container mx-auto mt-28 justify-center bg-white rounded-b-xl">
             <div className="flex flex-col justify-center items-center border-b-2">
                 <img
@@ -92,7 +94,46 @@ const PrimaryPost = (props: any) => {
                     </div>
                 </div>
             </div>
+        </div>/*  :
+        <div className="container mx-auto mt-28 justify-center bg-white rounded-b-xl">
+        <div className="flex flex-col justify-center items-center border-b-2">
+            <img
+                className="my-7 rounded-full w-24"
+                alt="avatar"
+            />
+            <h2 className="mb-4 text-sm font-medium text-coolGray-900">
+            </h2>
+            <h3 className="mb-4 mx-4 text-xs font-medium text-coolGray-400">
+            </h3>
         </div>
+        <div className="flex flex-wrap pt-4 pb-6 m-2 rounded-b ">
+            <div className="p-2 w-1/3">
+                <div className="text-center">
+                    <p className="mb-1 text-xs text-coolGray-900 font-semibold">
+                    </p>
+                    <p className="text-xs text-coolGray-400 font-medium">Likes</p>
+                </div>
+            </div>
+            <div className="p-2 w-1/3">
+                <div className="text-center">
+                    <p className="mb-1 text-xs text-coolGray-900 font-semibold">
+                    </p>
+                    <p className="text-xs text-coolGray-400 font-medium">
+                        Comments
+                    </p>
+                </div>
+            </div>
+            <div className="p-2 w-1/3">
+                <div className="text-center">
+                    <p className="mb-1 text-xs text-coolGray-900 font-semibold">
+                    </p>
+                    <p className="text-xs text-coolGray-400 font-medium">
+                        Shared
+                    </p>
+                </div>
+            </div>
+        </div> 
+    </div>*/
     )
 
 }

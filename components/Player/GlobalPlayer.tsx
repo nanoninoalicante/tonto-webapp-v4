@@ -44,14 +44,14 @@ const GlobalPlayer = (props: any) => {
         
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
-    useEffect(() => {
-        const url = `https://webfeed-dev.apis.gettonto.com/posts/${props.postId}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
+   useEffect(() => {
+        const url = `https://webfeed-dev.apis.gettonto.com/posts/${props.props}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
         fetch(url, { method: "GET" })
         .then((response) => response.json())
         .then((data) => {            
             setData(data.data[0])
         })
-    },[])
+    },[]) 
     
     useEffect(() => {
         if(hlsRef?.current){
