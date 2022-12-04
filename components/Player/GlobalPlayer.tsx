@@ -78,8 +78,13 @@ const GlobalPlayer = (props: any) => {
         setIsPlaying(!isPlaying);
 
         if (!isPlaying) {
-            audioPlayer.current.play();
-            animationRef.current = requestAnimationFrame(whilePlaying)
+            const play = audioPlayer.current.play();
+            if(play !== undefined){
+                play.then(() => {
+                    animationRef.current = requestAnimationFrame(whilePlaying)
+
+                })
+            }
         } else {
             audioPlayer.current.pause();
             cancelAnimationFrame(animationRef.current)
@@ -113,11 +118,13 @@ const GlobalPlayer = (props: any) => {
 
     const handleRedo = () => {
         audioPlayer.current.currentTime = audioPlayer.current.currentTime - 10
+        progressBar.current.value = audioPlayer.current.currentTime
         changePlayerCurrentTime();
     }
 
     const handleNext = () => {
         audioPlayer.current.currentTime = audioPlayer.current.currentTime + 10
+        progressBar.current.value = audioPlayer.current.currentTime
         changePlayerCurrentTime();
     }
     return (
