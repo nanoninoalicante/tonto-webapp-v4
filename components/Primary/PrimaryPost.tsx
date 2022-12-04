@@ -50,7 +50,7 @@ const PrimaryPost = (props: any) => {
 
     return (
 /*         isLoading ? */
-        <div className="container mx-auto mt-28 justify-center bg-white rounded-b-xl">
+        <div className="mx-full mt-28 justify-center bg-white rounded-b-xl">
             <div className="flex flex-col justify-center items-center border-b-2">
                 <img
                     className="my-7 rounded-full w-24"

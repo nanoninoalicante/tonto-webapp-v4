@@ -1,9 +1,9 @@
-import MetaTags from '../../components/MetaTags'
-import PrimaryHeader from '../../components/Primary/PrimaryHeader'
-import PrimaryPost from '../../components/Primary/PrimaryPost'
+import MetaTags from '../components/MetaTags'
+import PrimaryHeader from '../components/Primary/PrimaryHeader'
+import PrimaryPost from '../components/Primary/PrimaryPost'
 import React from 'react'
 import { useRouter } from 'next/router'
-import {GlobalPlayer} from '../../components/Player/GlobalPlayer'
+import {GlobalPlayer} from '../components/Player/GlobalPlayer'
 import Link from 'next/link'
 
 type Props = {
