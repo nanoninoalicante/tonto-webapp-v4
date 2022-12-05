@@ -5,6 +5,7 @@ import Play from "../../public/flex-ui-assets/player/play.svg"
 import Pause from "../../public/flex-ui-assets/player/pause.svg"
 import Next10 from "../../public/flex-ui-assets/player/next10.svg"
 import Redo10 from "../../public/flex-ui-assets/player/redo10.svg"
+import { Select, Option } from "@material-tailwind/react";
 interface Props {
     postId: string
 }
@@ -30,35 +31,39 @@ const GlobalPlayer = (props: any) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
-    const [data, setData] = useState(state)
+    const [data, setData] = useState(state);
+    const [speed, setSpeed] = useState(1);
     // references
     const audioPlayer: any = useRef(null);
     const hlsRef: any = useRef()
     const progressBar: any = useRef();
     const animationRef: any = useRef();
 
-    useEffect( () => {        
+    useEffect(() => {
         const seconds = Math.floor(audioPlayer.current.duration)
         setDuration(seconds)
         progressBar.current.max = seconds
-        
+
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
-   useEffect(() => {
+    useEffect(() => {
         const url = `https://webfeed-dev.apis.gettonto.com/posts/${props.props}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
         fetch(url, { method: "GET" })
-        .then((response) => response.json())
-        .then((data) => {            
-            setData(data.data[0])
-        })
-    },[]) 
-    
+            .then((response) => response.json())
+            .then((data) => {
+                setData(data.data[0])
+                console.log("data: ", data)
+            })
+    }, [])
+
     useEffect(() => {
-        if(hlsRef?.current){
+        if (hlsRef?.current) {
             hlsRef.current.destroy()
         }
-
-        if(audioPlayer?.current) {
+        console.log("data: ", data)
+        console.log("audioplayer: ", audioPlayer)
+        console.log("hls: ", hlsRef)
+        if (audioPlayer?.current) {
             hlsRef.current = new Hls();
             hlsRef.current.attachMedia(audioPlayer.current);
             hlsRef.current.on(Hls.Events.MEDIA_ATTACHED, () => {
@@ -72,15 +77,14 @@ const GlobalPlayer = (props: any) => {
                 });
             })
         }
-    },[data])
+    }, [data])
 
     const togglePlayPause = () => {
         setIsPlaying(!isPlaying);
 
         if (!isPlaying) {
-            audioPlayer.current.playbackRate = 2.5;
             const play = audioPlayer.current.play();
-            if(play !== undefined){
+            if (play !== undefined) {
                 play.then(() => {
                     animationRef.current = requestAnimationFrame(whilePlaying)
 
@@ -90,7 +94,7 @@ const GlobalPlayer = (props: any) => {
             }
         } else {
             const pause = audioPlayer.current.pause();
-            if(pause !== undefined){
+            if (pause !== undefined) {
                 pause.then(() => {
                     cancelAnimationFrame(animationRef.current)
 
@@ -98,7 +102,7 @@ const GlobalPlayer = (props: any) => {
                     console.log(error, pause, isPlaying)
                 })
             }
-            
+
         }
     }
 
@@ -138,10 +142,38 @@ const GlobalPlayer = (props: any) => {
         progressBar.current.value = audioPlayer.current.currentTime
         changePlayerCurrentTime();
     }
+
+    const handleSpeed = () => {
+        switch (speed) {
+            case 1:  
+                audioPlayer.current.playbackRate = 1.5;  
+                setSpeed(1.5)            
+                break;        
+            case 1.5:
+                audioPlayer.current.playbackRate = 2;
+                setSpeed(2)   
+                break;
+            case 2:
+                audioPlayer.current.playbackRate = 1;
+                setSpeed(1) 
+                break
+        }
+    }
+
+    const renderSpeed = () => {
+        switch (speed) {
+            case 1:  
+                return <div>x1</div>    
+            case 1.5:
+                return <div>x1.5</div> 
+            case 2:
+                return <div>x2</div> 
+        }
+    }
     return (
 
         <div className="fixed bottom-0 z-50 w-full bg-white rounded-t-xl">
-            <div className="flex flex-row justify-center items-center w-full py-4 px-2">
+            <div className="flex flex-row justify-center items-center w-full my-2">
                 <audio ref={audioPlayer} preload="metadata" />
 
                 {/* REDO 10*/}
@@ -151,7 +183,7 @@ const GlobalPlayer = (props: any) => {
 
                 {/* PLAY / PAUSE */}
                 <button onClick={togglePlayPause} className="p-3 mx-7 rounded-full">
-                    {isPlaying ? <Pause size={30}/> : <Play size={30} />}
+                    {isPlaying ? <Pause size={30} /> : <Play size={30} />}
                 </button>
 
                 {/* NEXT 10 */}
@@ -159,8 +191,20 @@ const GlobalPlayer = (props: any) => {
                     <Next10 size={30} />
                 </button>
             </div>
-            <div className="flex flex-row justify-center font-mono items-center w-full py-4 px-2">
-                
+            <div className="flex flex-row justify-center mb-2">
+                {/* SPEED CONTROL */}
+                <button onClick={handleSpeed} className="w-14 border-2 border-gray-600 rounded-full">
+                    {
+                        {
+                            1: "1x",
+                            1.5: "1.5x",
+                            2: "2x"
+                        } [speed]
+                    }
+                </button>
+            </div>
+            <div className="flex flex-row justify-center font-mono items-center w-full py-0 px-0 mb-2">
+
                 {/* current time */}
                 <div className="p-1 mx-1 rounded-md">
                     {calculateTime(currentTime)}
