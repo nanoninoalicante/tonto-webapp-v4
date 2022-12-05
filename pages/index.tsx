@@ -3,7 +3,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import {GlobalPlayer} from '../components/Player/GlobalPlayer'
 import Link from 'next/link'
-import Post from './post'
+import Post from './[user]/post'
 
 type Props = {
   post: string

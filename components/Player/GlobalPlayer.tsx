@@ -5,6 +5,8 @@ import Play from "../../public/flex-ui-assets/player/play.svg"
 import Pause from "../../public/flex-ui-assets/player/pause.svg"
 import Next10 from "../../public/flex-ui-assets/player/next10.svg"
 import Redo10 from "../../public/flex-ui-assets/player/redo10.svg"
+import Next from "../../public/flex-ui-assets/player/next.svg"
+import Back from "../../public/flex-ui-assets/player/back.svg"
 import { Select, Option } from "@material-tailwind/react";
 interface Props {
     postId: string
@@ -52,30 +54,33 @@ const GlobalPlayer = (props: any) => {
             .then((response) => response.json())
             .then((data) => {
                 setData(data.data[0])
-                console.log("data: ", data)
+                //console.log("data: ", data)
             })
     }, [])
 
     useEffect(() => {
-        if (hlsRef?.current) {
-            hlsRef.current.destroy()
-        }
-        console.log("data: ", data)
-        console.log("audioplayer: ", audioPlayer)
-        console.log("hls: ", hlsRef)
-        if (audioPlayer?.current) {
-            hlsRef.current = new Hls();
-            hlsRef.current.attachMedia(audioPlayer.current);
-            hlsRef.current.on(Hls.Events.MEDIA_ATTACHED, () => {
-                hlsRef.current?.loadSource(data?.streamingUrl);
-                hlsRef.current?.on(Hls.Events.MANIFEST_PARSED, () => {
-                    hlsRef.current?.on(Hls.Events.LEVEL_LOADED, (_: string, data: any) => {
-                        const duration: number = data.details.totalduration;
-                        setDuration(duration);
-                        setCurrentTime(0);
-                    })
-                });
-            })
+        if(Hls.isSupported()){
+            if (hlsRef?.current) {
+                hlsRef.current.destroy()
+            }
+            if (audioPlayer?.current) {
+                hlsRef.current = new Hls();
+                hlsRef.current.attachMedia(audioPlayer.current);
+                hlsRef.current.on(Hls.Events.MEDIA_ATTACHED, () => {
+                    hlsRef.current?.loadSource(data?.streamingUrl);
+                    hlsRef.current?.on(Hls.Events.MANIFEST_PARSED, () => {
+                        hlsRef.current?.on(Hls.Events.LEVEL_LOADED, (_: string, data: any) => {
+                            const duration: number = data.details.totalduration;
+                            setDuration(duration);
+                            setCurrentTime(0);
+                        })
+                    });
+                })
+            }            
+        } else {
+            audioPlayer.current.src = data?.streamingUrl;
+            setDuration(duration);
+            setCurrentTime(0);
         }
     }, [data])
 
@@ -137,10 +142,18 @@ const GlobalPlayer = (props: any) => {
         changePlayerCurrentTime();
     }
 
-    const handleNext = () => {
+    const handleNext10 = () => {
         audioPlayer.current.currentTime = audioPlayer.current.currentTime + 10
         progressBar.current.value = audioPlayer.current.currentTime
         changePlayerCurrentTime();
+    }
+
+    const handleBack = () => {
+
+    }
+
+    const handleNext = () => {
+
     }
 
     const handleSpeed = () => {
@@ -176,19 +189,27 @@ const GlobalPlayer = (props: any) => {
             <div className="flex flex-row justify-center items-center w-full my-2">
                 <audio ref={audioPlayer} preload="metadata" />
 
+                <button className="p-3 mx-2 rounded-full" onClick={handleBack}>
+                    <Back size={30} />
+                </button>
+
                 {/* REDO 10*/}
-                <button className="p-3 mx-7 rounded-full" onClick={handleRedo}>
+                <button className="p-3 mx-2 rounded-full" onClick={handleRedo}>
                     <Redo10 size={30} />
                 </button>
 
                 {/* PLAY / PAUSE */}
-                <button onClick={togglePlayPause} className="p-3 mx-7 rounded-full">
+                <button onClick={togglePlayPause} className="p-3 mx-2 rounded-full">
                     {isPlaying ? <Pause size={30} /> : <Play size={30} />}
                 </button>
 
                 {/* NEXT 10 */}
-                <button className="p-3 mx-7 rounded-full" onClick={handleNext}>
+                <button className="p-3 mx-2 rounded-full" onClick={handleNext10}>
                     <Next10 size={30} />
+                </button>
+
+                <button className="p-3 mx-2 rounded-full" onClick={handleNext}>
+                    <Next size={30} />
                 </button>
             </div>
             <div className="flex flex-row justify-center mb-2">
