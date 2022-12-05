@@ -78,6 +78,7 @@ const GlobalPlayer = (props: any) => {
         setIsPlaying(!isPlaying);
 
         if (!isPlaying) {
+            audioPlayer.current.playbackRate = 2.5;
             const play = audioPlayer.current.play();
             if(play !== undefined){
                 play.then(() => {
