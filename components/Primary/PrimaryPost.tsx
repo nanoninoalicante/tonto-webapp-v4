@@ -25,28 +25,14 @@ const userInfo = { id: '', userName: '', profileImg: '', isUserVerified: null }
 
 const PrimaryPost = (props: any) => {
     const [isLoading, setIsLoading] = useState(false);
-    const [data, setData] = useState(state)
     const [userData, setUserData] = useState(userInfo)
-
-    useEffect(() => {
-        console.log(props.props)
-        const url = `https://webfeed-dev.apis.gettonto.com/posts/${props.props}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
-        setIsLoading(true)
-        fetch(url, { method: "GET" })
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {
-                setData(data.data[0])
-                setUserData(data.data[0].userInfo)
-                setIsLoading(false)
-            })
-    }, [])
+    
+    console.log(props)
 
     useEffect(() => {
         if (userData.profileImg === "")
             setUserData({ ...userData, profileImg: "/flex-ui-assets/images/tontoprofile_defualt.png" })
-    }, [data?.userInfo])
+    }, [])
 
     return (
 /*         isLoading ? */
@@ -61,14 +47,14 @@ const PrimaryPost = (props: any) => {
                     {userData.userName}
                 </h2>
                 <h3 className="mb-4 mx-4 text-xs font-medium text-coolGray-400">
-                    {data.description}
+                    {props.data.description}
                 </h3>
             </div>
             <div className="flex flex-wrap pt-4 pb-6 m-2 rounded-b ">
                 <div className="p-2 w-1/3">
                     <div className="text-center">
                         <p className="mb-1 text-xs text-coolGray-900 font-semibold">
-                            {data.likesCount}
+                            {props.data.likesCount}
                         </p>
                         <p className="text-xs text-coolGray-400 font-medium">Likes</p>
                     </div>
@@ -76,7 +62,7 @@ const PrimaryPost = (props: any) => {
                 <div className="p-2 w-1/3">
                     <div className="text-center">
                         <p className="mb-1 text-xs text-coolGray-900 font-semibold">
-                            {data.commentsCount}
+                            {props.data.commentsCount}
                         </p>
                         <p className="text-xs text-coolGray-400 font-medium">
                             Comments
@@ -86,7 +72,7 @@ const PrimaryPost = (props: any) => {
                 <div className="p-2 w-1/3">
                     <div className="text-center">
                         <p className="mb-1 text-xs text-coolGray-900 font-semibold">
-                            {data.shareCount}
+                            {props.data.shareCount}
                         </p>
                         <p className="text-xs text-coolGray-400 font-medium">
                             Shared

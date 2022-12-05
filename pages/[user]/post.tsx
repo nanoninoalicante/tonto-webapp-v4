@@ -1,9 +1,9 @@
 import MetaTags from '../../components/MetaTags'
+import React, { useEffect, useState, useRef } from "react"
 import PrimaryHeader from '../../components/Primary/PrimaryHeader'
 import PrimaryPost from '../../components/Primary/PrimaryPost'
-import React from 'react'
 import { useRouter } from 'next/router'
-import {GlobalPlayer} from '../../components/Player/GlobalPlayer'
+import { GlobalPlayer } from '../../components/Player/GlobalPlayer'
 import Link from 'next/link'
 
 type Props = {
@@ -18,23 +18,53 @@ type State = {
 //raul: 6381ce9059b930327afece05
 //const slug = "62b131b4db1ec8000f04084e"
 
-export const getServerSideProps = async (context: any) =>  {
+export const getServerSideProps = async (context: any) => {
+  let post = {
+    commentsCount: 0,
+    createdAt: "",
+    description: "",
+    explicit: { badWords: 'no', sex: 'no', content: 'no', others: 'no', violence: 'no' },
+    hasExplicitContent: false,
+    language: "en",
+    likesCount: 0,
+    shareCount: 0,
+    status: "",
+    streamingUrl: "",
+    updatedAt: "",
+    userInfo: { id: '', userName: '', profileImg: '', isUserVerified: null },
+    uuid: "",
+    visibility: ""
+  }
   const { id } = context.query;
-  console.log(context.query)
+  
+  const url = `https://webfeed-dev.apis.gettonto.com/posts/${id}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
+  fetch(url, { method: "GET" })
+    .then((response) => response.json())
+    .then((data) => {
+      post = data.data[0]
+      //console.log("data: ", post)
+    })
+  const urlUuid = `https://feed-dev.apis.urloapp.com/feed/63777035bb048712627106ba/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
+  fetch(urlUuid, { method: "GET" })
+    .then((response) => response.json())
+    .then((data) => {
+      //console.log("data: ", data)
+    })
   return {
-    props: { post: id },
+    props: { post: id, data: post},
   };
 };
 
-export default function Post({post}:any){
-    return (
-      <div>
-        <MetaTags />
-        <main >
-          <PrimaryHeader/>          
-          <PrimaryPost props={post}/>
-          <GlobalPlayer props={post}/>
-        </main>
-      </div>
-    )
+export default function Post(props: any) {
+  console.log(props)
+  return (
+    <div>
+      <MetaTags />
+      <main >
+        <PrimaryHeader />
+        <PrimaryPost props={props} />
+        <GlobalPlayer props={props} />
+      </main>
+    </div>
+  )
 }

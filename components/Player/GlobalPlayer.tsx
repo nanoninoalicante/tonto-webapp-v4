@@ -11,29 +11,13 @@ import { Select, Option } from "@material-tailwind/react";
 interface Props {
     postId: string
 }
-const state = {
-    commentsCount: 0,
-    createdAt: "",
-    description: "",
-    explicit: { badWords: 'no', sex: 'no', content: 'no', others: 'no', violence: 'no' },
-    hasExplicitContent: false,
-    language: "en",
-    likesCount: 0,
-    shareCount: 0,
-    status: "",
-    streamingUrl: "",
-    updatedAt: "",
-    userInfo: { id: '', userName: '', profileImg: '', isUserVerified: null },
-    uuid: "",
-    visibility: ""
-}
+
 
 const GlobalPlayer = (props: any) => {
     // state
     const [isPlaying, setIsPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
-    const [data, setData] = useState(state);
     const [speed, setSpeed] = useState(1);
     // references
     const audioPlayer: any = useRef(null);
@@ -48,15 +32,7 @@ const GlobalPlayer = (props: any) => {
 
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
-    useEffect(() => {
-        const url = `https://webfeed-dev.apis.gettonto.com/posts/${props.props}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
-        fetch(url, { method: "GET" })
-            .then((response) => response.json())
-            .then((data) => {
-                setData(data.data[0])
-                //console.log("data: ", data)
-            })
-    }, [])
+    
 
     useEffect(() => {
         if(Hls.isSupported()){
@@ -67,7 +43,7 @@ const GlobalPlayer = (props: any) => {
                 hlsRef.current = new Hls();
                 hlsRef.current.attachMedia(audioPlayer.current);
                 hlsRef.current.on(Hls.Events.MEDIA_ATTACHED, () => {
-                    hlsRef.current?.loadSource(data?.streamingUrl);
+                    hlsRef.current?.loadSource(props.data?.streamingUrl);
                     hlsRef.current?.on(Hls.Events.MANIFEST_PARSED, () => {
                         hlsRef.current?.on(Hls.Events.LEVEL_LOADED, (_: string, data: any) => {
                             const duration: number = data.details.totalduration;
@@ -78,11 +54,11 @@ const GlobalPlayer = (props: any) => {
                 })
             }            
         } else {
-            audioPlayer.current.src = data?.streamingUrl;
+            audioPlayer.current.src = props.data?.streamingUrl;
             setDuration(duration);
             setCurrentTime(0);
         }
-    }, [data])
+    }, [])
 
     const togglePlayPause = () => {
         setIsPlaying(!isPlaying);
@@ -173,18 +149,7 @@ const GlobalPlayer = (props: any) => {
         }
     }
 
-    const renderSpeed = () => {
-        switch (speed) {
-            case 1:  
-                return <div>x1</div>    
-            case 1.5:
-                return <div>x1.5</div> 
-            case 2:
-                return <div>x2</div> 
-        }
-    }
     return (
-
         <div className="fixed bottom-0 z-50 w-full bg-white rounded-t-xl">
             <div className="flex flex-row justify-center items-center w-full my-2">
                 <audio ref={audioPlayer} preload="metadata" />
@@ -238,7 +203,7 @@ const GlobalPlayer = (props: any) => {
 
                 {/* duration */}
                 <div className="p-1 relative mx-1 rounded-md">
-                    {duration && data ? calculateTime(duration) : calculateTime(0)}
+                    {duration && props.data ? calculateTime(duration) : calculateTime(0)}
                 </div>
             </div>
         </div>
