@@ -70,6 +70,7 @@ const GlobalPlayer = (props: any) => {
                     animationRef.current = requestAnimationFrame(whilePlaying)
                     audioPlayer.current.play();
                 }).catch((error: any) => {
+                    console.log(error)
                     audioPlayer.current.pause();
                 })
             }
@@ -80,6 +81,7 @@ const GlobalPlayer = (props: any) => {
                     cancelAnimationFrame(animationRef.current)
                     audioPlayer.current.pause();
                 }).catch((error: any) => {
+                    console.log(error)
                     audioPlayer.current.play();
                 })
             }
