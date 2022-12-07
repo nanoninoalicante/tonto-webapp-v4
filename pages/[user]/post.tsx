@@ -18,53 +18,70 @@ type State = {
 //raul: 6381ce9059b930327afece05
 //const slug = "62b131b4db1ec8000f04084e"
 
+const post = {
+  commentsCount: 0,
+  createdAt: "",
+  description: "",
+  explicit: { badWords: 'no', sex: 'no', content: 'no', others: 'no', violence: 'no' },
+  hasExplicitContent: false,
+  language: "en",
+  likesCount: 0,
+  shareCount: 0,
+  status: "",
+  streamingUrl: "",
+  updatedAt: "",
+  userInfo: { id: '', userName: '', profileImg: '', isUserVerified: null },
+  uuid: "",
+  visibility: ""
+}
 export const getServerSideProps = async (context: any) => {
-  let post = {
-    commentsCount: 0,
-    createdAt: "",
-    description: "",
-    explicit: { badWords: 'no', sex: 'no', content: 'no', others: 'no', violence: 'no' },
-    hasExplicitContent: false,
-    language: "en",
-    likesCount: 0,
-    shareCount: 0,
-    status: "",
-    streamingUrl: "",
-    updatedAt: "",
-    userInfo: { id: '', userName: '', profileImg: '', isUserVerified: null },
-    uuid: "",
-    visibility: ""
-  }
   const { id } = context.query;
-  
-  const url = `https://webfeed-dev.apis.gettonto.com/posts/${id}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
-  fetch(url, { method: "GET" })
-    .then((response) => response.json())
-    .then((data) => {
-      post = data.data[0]
-      //console.log("data: ", post)
-    })
-  const urlUuid = `https://feed-dev.apis.urloapp.com/feed/63777035bb048712627106ba/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
-  fetch(urlUuid, { method: "GET" })
-    .then((response) => response.json())
-    .then((data) => {
-      //console.log("data: ", data)
-    })
   return {
-    props: { post: id, data: post},
+    props: { post: id }
   };
 };
 
 export default function Post(props: any) {
-  console.log(props)
+  const [data, setData] = useState(post)
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    //console.log(props)
+    setIsLoading(true)
+    const url = `https://webfeed-dev.apis.gettonto.com/posts/${props.post}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
+    fetch(url, { method: "GET" })
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data.data[0])
+      })
+      .catch(error => {
+        console.log(error)
+      })
+      .finally(() => { setIsLoading(false) })
+  }, [])
+
   return (
     <div>
       <MetaTags />
       <main >
         <PrimaryHeader />
-        <PrimaryPost props={props} />
-        <GlobalPlayer props={props} />
+        {!isLoading &&
+          <React.Fragment>
+            <PrimaryPost props={data} />
+            <GlobalPlayer props={data} />
+          </React.Fragment>
+        }
       </main>
     </div>
   )
 }
+
+/* useEffect(() => {
+  const urlUuid = `https://feed-dev.apis.urloapp.com/feed/${data.uuid}/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
+  fetch(urlUuid, { method: "GET" })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("data: ", data)
+    })
+}, [data]) 
+  useEffect(() => {
+*/

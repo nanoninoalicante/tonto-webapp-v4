@@ -32,18 +32,18 @@ const GlobalPlayer = (props: any) => {
 
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
-    
+
 
     useEffect(() => {
         if(Hls.isSupported()){
             if (hlsRef?.current) {
                 hlsRef.current.destroy()
             }
-            if (audioPlayer?.current) {
+            if (audioPlayer?.current) {                
                 hlsRef.current = new Hls();
                 hlsRef.current.attachMedia(audioPlayer.current);
                 hlsRef.current.on(Hls.Events.MEDIA_ATTACHED, () => {
-                    hlsRef.current?.loadSource(props.data?.streamingUrl);
+                    hlsRef.current?.loadSource(props.props?.streamingUrl);
                     hlsRef.current?.on(Hls.Events.MANIFEST_PARSED, () => {
                         hlsRef.current?.on(Hls.Events.LEVEL_LOADED, (_: string, data: any) => {
                             const duration: number = data.details.totalduration;
@@ -54,7 +54,7 @@ const GlobalPlayer = (props: any) => {
                 })
             }            
         } else {
-            audioPlayer.current.src = props.data?.streamingUrl;
+            audioPlayer.current.src = props.props?.streamingUrl;
             setDuration(duration);
             setCurrentTime(0);
         }
@@ -134,17 +134,17 @@ const GlobalPlayer = (props: any) => {
 
     const handleSpeed = () => {
         switch (speed) {
-            case 1:  
-                audioPlayer.current.playbackRate = 1.5;  
-                setSpeed(1.5)            
-                break;        
+            case 1:
+                audioPlayer.current.playbackRate = 1.5;
+                setSpeed(1.5)
+                break;
             case 1.5:
                 audioPlayer.current.playbackRate = 2;
-                setSpeed(2)   
+                setSpeed(2)
                 break;
             case 2:
                 audioPlayer.current.playbackRate = 1;
-                setSpeed(1) 
+                setSpeed(1)
                 break
         }
     }
@@ -185,7 +185,7 @@ const GlobalPlayer = (props: any) => {
                             1: "1x",
                             1.5: "1.5x",
                             2: "2x"
-                        } [speed]
+                        }[speed]
                     }
                 </button>
             </div>
@@ -203,7 +203,7 @@ const GlobalPlayer = (props: any) => {
 
                 {/* duration */}
                 <div className="p-1 relative mx-1 rounded-md">
-                    {duration && props.data ? calculateTime(duration) : calculateTime(0)}
+                    {duration && props.props ? calculateTime(duration) : calculateTime(0)}
                 </div>
             </div>
         </div>
