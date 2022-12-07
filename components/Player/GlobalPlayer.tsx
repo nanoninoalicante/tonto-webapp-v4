@@ -73,7 +73,6 @@ const GlobalPlayer = (props: any) => {
                     audioPlayer.current.play();
                 }).catch((error: any) => {
                     console.log(error)
-                    audioPlayer.current.pause();
                 })
             }
         } else {
@@ -85,7 +84,6 @@ const GlobalPlayer = (props: any) => {
                     audioPlayer.current.pause();
                 }).catch((error: any) => {
                     console.log(error)
-                    audioPlayer.current.play();
                 })
             }
 

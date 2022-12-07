@@ -44,8 +44,10 @@ export const getServerSideProps = async (context: any) => {
 export default function Post(props: any) {
   const [data, setData] = useState(post)
   const [isLoading, setIsLoading] = useState(false);
+  const [uuids, setUuids] = useState([])
+  const [pagination, setPagination] = useState(true)
+  const [page, setPage] = useState(1)
   useEffect(() => {
-    //console.log(props)
     setIsLoading(true)
     const url = `https://webfeed-dev.apis.gettonto.com/posts/${props.post}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
     fetch(url, { method: "GET" })
@@ -56,9 +58,39 @@ export default function Post(props: any) {
       .catch(error => {
         console.log(error)
       })
-      .finally(() => { setIsLoading(false) })
+      .finally(() => { setIsLoading(false); })
   }, [])
 
+  useEffect(() => {
+    const limit = 50;
+    const fetchData = async () => {
+      const urlUuid = `https://feed-dev.apis.urloapp.com/feed/${data.userInfo.id}/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7&limit=50&page=${page}`;
+      let aux: any = []
+      await fetch(urlUuid, { method: "GET" })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+          if(data?.data){
+            let aux = data.data.map((post: any) => {
+              return post.uuid
+            })
+            //console.log(aux)
+            setPage(page+1);
+            if (data.numberOfItems === limit) { 
+              console.log(page);
+              fetchData() 
+            }
+          }
+        })
+        .catch( error => {
+          console.log(error)
+        })
+
+    };
+
+    fetchData()
+    console.log(uuids)
+  }, [data])
   return (
     <div>
       <MetaTags />
@@ -67,21 +99,10 @@ export default function Post(props: any) {
         {!isLoading &&
           <React.Fragment>
             <PrimaryPost props={data} />
-            <GlobalPlayer props={data} />
+            <GlobalPlayer props={{ data: { data, uuids } }} />
           </React.Fragment>
         }
       </main>
     </div>
   )
 }
-
-/* useEffect(() => {
-  const urlUuid = `https://feed-dev.apis.urloapp.com/feed/${data.uuid}/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
-  fetch(urlUuid, { method: "GET" })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("data: ", data)
-    })
-}, [data]) 
-  useEffect(() => {
-*/
