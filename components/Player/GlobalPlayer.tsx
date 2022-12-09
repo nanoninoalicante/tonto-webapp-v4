@@ -35,6 +35,7 @@ const GlobalPlayer = (props: any) => {
 
 
     useEffect(() => {
+        console.log(props)
         if(Hls.isSupported()){
             if (hlsRef?.current) {
                 hlsRef.current.destroy()
@@ -43,7 +44,7 @@ const GlobalPlayer = (props: any) => {
                 hlsRef.current = new Hls();
                 hlsRef.current.attachMedia(audioPlayer.current);
                 hlsRef.current.on(Hls.Events.MEDIA_ATTACHED, () => {
-                    hlsRef.current?.loadSource(props.props?.streamingUrl);
+                    hlsRef.current?.loadSource(props.props.data.data?.streamingUrl);
                     hlsRef.current?.on(Hls.Events.MANIFEST_PARSED, () => {
                         hlsRef.current?.on(Hls.Events.LEVEL_LOADED, (_: string, data: any) => {
                             const duration: number = data.details.totalduration;
@@ -54,7 +55,7 @@ const GlobalPlayer = (props: any) => {
                 })
             }            
         } else {
-            audioPlayer.current.src = props.props?.streamingUrl;
+            audioPlayer.current.src = props.props.data.data?.streamingUrl;
             setDuration(duration);
             setCurrentTime(0);
         }
@@ -68,9 +69,7 @@ const GlobalPlayer = (props: any) => {
 
             if (play !== undefined) {
                 play.then(() => {
-                    console.log(play)
                     animationRef.current = requestAnimationFrame(whilePlaying)
-                    audioPlayer.current.play();
                 }).catch((error: any) => {
                     console.log(error)
                 })
@@ -79,9 +78,7 @@ const GlobalPlayer = (props: any) => {
             const pause = audioPlayer.current.pause();
             if (pause !== undefined) {
                 pause.then(() => {
-                    console.log(pause)
                     cancelAnimationFrame(animationRef.current)
-                    audioPlayer.current.pause();
                 }).catch((error: any) => {
                     console.log(error)
                 })
@@ -206,7 +203,7 @@ const GlobalPlayer = (props: any) => {
 
                 {/* duration */}
                 <div className="p-1 relative mx-1 rounded-md">
-                    {duration && props.props ? calculateTime(duration) : calculateTime(0)}
+                    {duration && props.props.data.data ? calculateTime(duration) : calculateTime(0)}
                 </div>
             </div>
         </div>
