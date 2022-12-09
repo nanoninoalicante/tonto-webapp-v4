@@ -35,20 +35,19 @@ const post = {
     visibility: ""
 }
 export const getServerSideProps = async (context: any) => {
-    const { id } = context.query;
-    return {
-        props: { post: id }
-    };
 };
 
-export default function Post(props: any) {
+const Post = (props: any) => {
+    const router = useRouter();
+    const {id}  = router.query;
     const [data, setData] = useState(post)
     const [isLoading, setIsLoading] = useState(false);
-    const [uuids, setUuids] = useState([])
     const [page, setPage] = useState(1)
+    const [back, setBack] = useState(0)
+    const [next, setNext] = useState(0)
     useEffect(() => {
         setIsLoading(true)
-        const url = `https://webfeed-dev.apis.gettonto.com/posts/${props.post}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
+        const url = `https://webfeed-dev.apis.gettonto.com/posts/${id}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
         fetch(url, { method: "GET" })
             .then((response) => response.json())
             .then((data) => {
@@ -57,28 +56,41 @@ export default function Post(props: any) {
             .catch(error => {
                 console.log(error)
             })
-            .finally(() => { setIsLoading(false); })
+
     }, [])
 
     useEffect(() => {
-        getUuids();      
+        getUuids();
     }, [data])
 
-    function getUuids() {        
+    function getUuids() {
         const limit = 50;
+        console.log(data)
         const urlUuid = `https://feed-dev.apis.urloapp.com/feed/${data.userInfo.id}/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7&limit=50&page=${page}`;
         fetch(urlUuid, { method: "GET" })
             .then((response) => response.json())
             .then((profile) => {
                 if (profile?.data) {
-                    let aux = profile.data.map((post: any) => {
-                        return post.uuid
-                    })
-                    setUuids(uuids.concat(aux))
-                    if (profile.numberOfItems === limit) {
-                        setPage(page + 1);
-
+                    let postPos = 0;
+                    for(let i = 0; i < profile.data.length; i++){
+                        if(profile.data[i].uuid === id){
+                            postPos = i;
+                        }
                     }
+                    if(postPos >= 0){
+                        if(postPos !== 0){
+                            setNext(profile.data[postPos+1].uuid)
+                            setBack(profile.data[postPos-1].uuid)
+                            setIsLoading(false)
+                        }
+                    }
+                    /* if(id){
+                        const next = profile.data.filter((post:any) => (console.log(post)))
+                        const back = profile.data.filter((post:any) => (post.graphId === id[0].graphId-1))
+                        console.log(back, next)
+                    } else {
+                        setPage(page+1)
+                    } */
                 }
             })
             .catch(error => {
@@ -97,10 +109,14 @@ export default function Post(props: any) {
                 {!isLoading &&
                     <React.Fragment>
                         <PrimaryPost props={data} />
-                        <GlobalPlayer props={{ data: { data, uuids } }} />
+                        <GlobalPlayer props={{ data: { data, back, next } }} />
                     </React.Fragment>
                 }
             </main>
         </div>
     )
+
+    Post.getInitialProps = async (ctx) => {
+        
+    }
 }

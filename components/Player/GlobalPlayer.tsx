@@ -7,13 +7,14 @@ import Next10 from "../../public/flex-ui-assets/player/next10.svg"
 import Redo10 from "../../public/flex-ui-assets/player/redo10.svg"
 import Next from "../../public/flex-ui-assets/player/next.svg"
 import Back from "../../public/flex-ui-assets/player/back.svg"
-import { Select, Option } from "@material-tailwind/react";
+import { useRouter } from "next/router"
 interface Props {
     postId: string
 }
 
 
-const GlobalPlayer = (props: any) => {
+const GlobalPlayer = (props: any, shallow=true) => {
+    const router = useRouter()
     // state
     const [isPlaying, setIsPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
@@ -93,7 +94,6 @@ const GlobalPlayer = (props: any) => {
         animationRef.current = requestAnimationFrame(whilePlaying)
     }
 
-
     const calculateTime = (secs: number) => {
         const minutes = Math.floor(secs / 60);
         const returnMin = minutes < 10 ? `0${minutes}` : `${minutes}`;
@@ -129,7 +129,13 @@ const GlobalPlayer = (props: any) => {
     }
 
     const handleNext = () => {
-
+        console.log(router.query)
+        router.push({
+            pathname: `/post/post/`,
+            query: {
+                id: props.props.data.next
+            }
+        })
     }
 
     const handleSpeed = () => {
@@ -173,9 +179,9 @@ const GlobalPlayer = (props: any) => {
                     <Next10 size={30} />
                 </button>
 
-                <button className="p-3 mx-2 rounded-full" onClick={handleNext}>
+                <a className="p-3 mx-2 rounded-full" onClick={handleNext}>
                     <Next size={30} />
-                </button>
+                </a>
             </div>
             <div className="flex flex-row justify-center mb-2">
                 {/* SPEED CONTROL */}
