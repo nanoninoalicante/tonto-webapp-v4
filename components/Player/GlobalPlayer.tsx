@@ -13,7 +13,7 @@ interface Props {
 }
 
 
-const GlobalPlayer = (props: any, shallow=true) => {
+const GlobalPlayer = (props: any) => {
     const router = useRouter()
     // state
     const [isPlaying, setIsPlaying] = useState(false);
@@ -84,7 +84,6 @@ const GlobalPlayer = (props: any, shallow=true) => {
                     console.log(error)
                 })
             }
-
         }
     }
 
@@ -125,17 +124,12 @@ const GlobalPlayer = (props: any, shallow=true) => {
     }
 
     const handleBack = () => {
-
+        console.log(window.location)
     }
 
     const handleNext = () => {
-        console.log(router.query)
-        router.push({
-            pathname: `/post/post/`,
-            query: {
-                id: props.props.data.next
-            }
-        })
+        window.location.href = `/post/${props.props.data.next}` 
+        //router.push(`/post/${props.props.data.next}`)      
     }
 
     const handleSpeed = () => {

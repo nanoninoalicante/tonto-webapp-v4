@@ -35,19 +35,24 @@ const post = {
     visibility: ""
 }
 export const getServerSideProps = async (context: any) => {
+    const { post } = context.query;
+    return {
+        props: {
+            id: post
+        }
+    }
 };
 
 const Post = (props: any) => {
-    const router = useRouter();
-    const {id}  = router.query;
     const [data, setData] = useState(post)
     const [isLoading, setIsLoading] = useState(false);
     const [page, setPage] = useState(1)
     const [back, setBack] = useState(0)
     const [next, setNext] = useState(0)
+
     useEffect(() => {
         setIsLoading(true)
-        const url = `https://webfeed-dev.apis.gettonto.com/posts/${id}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
+        const url = `https://webfeed-dev.apis.gettonto.com/posts/${props.id}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
         fetch(url, { method: "GET" })
             .then((response) => response.json())
             .then((data) => {
@@ -72,15 +77,15 @@ const Post = (props: any) => {
             .then((profile) => {
                 if (profile?.data) {
                     let postPos = 0;
-                    for(let i = 0; i < profile.data.length; i++){
-                        if(profile.data[i].uuid === id){
+                    for (let i = 0; i < profile.data.length; i++) {
+                        if (profile.data[i].uuid === props.id) {
                             postPos = i;
                         }
                     }
-                    if(postPos >= 0){
-                        if(postPos !== 0){
-                            setNext(profile.data[postPos+1].uuid)
-                            setBack(profile.data[postPos-1].uuid)
+                    if (postPos >= 0) {
+                        if (postPos !== 0) {
+                            setNext(profile.data[postPos + 1].uuid)
+                            setBack(profile.data[postPos - 1].uuid)
                             setIsLoading(false)
                         }
                     }
@@ -115,8 +120,6 @@ const Post = (props: any) => {
             </main>
         </div>
     )
-
-    Post.getInitialProps = async (ctx) => {
-        
-    }
 }
+
+export default Post;
