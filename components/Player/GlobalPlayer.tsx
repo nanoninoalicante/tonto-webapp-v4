@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react"
 import style from "../../styles/GlobalPlayer.module.css"
-import Hls, { HlsPerformanceTiming } from "hls.js"
+import Hls from "hls.js"
 import Play from "../../public/flex-ui-assets/player/play.svg"
 import Pause from "../../public/flex-ui-assets/player/pause.svg"
 import Next10 from "../../public/flex-ui-assets/player/next10.svg"

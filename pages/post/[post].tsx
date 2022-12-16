@@ -77,35 +77,24 @@ const Post = (props: any) => {
             .then((profile) => {
                 if (profile?.data) {
                     let postPos = 0;
-                    for (let i = 0; i < profile.data.length; i++) {
-                        if (profile.data[i].uuid === props.id) {
-                            postPos = i;
-                        }
-                    }
+                    for (let i = 0; i < profile.data.length; i++) 
+                        if (profile.data[i].uuid === props.id) postPos = i;
+                    
                     if (postPos >= 0) {
-                        if (postPos !== 0 && postPos !== profile.data.length-1) {
+                        if (postPos !== 0 && postPos !== profile.data.length - 1) {
                             setNext(profile.data[postPos + 1].uuid)
                             setBack(profile.data[postPos - 1].uuid)
-                            setIsLoading(false)
                         } else if (postPos === 0){
                             setNext(profile.data[postPos + 1].uuid)
                             setBack(profile.data[profile.data.length - 1].uuid)
-                            setIsLoading(false)
-                        } else if (postPos === profile.data.length-1){
+                        } else if (postPos === profile.data.length - 1){
                             setNext(profile.data[0].uuid)
                             setBack(profile.data[postPos - 1].uuid)
-                            setIsLoading(false)
                         }
+                        setIsLoading(false)
                     }
-                    /* if(id){
-                        const next = profile.data.filter((post:any) => (console.log(post)))
-                        const back = profile.data.filter((post:any) => (post.graphId === id[0].graphId-1))
-                        console.log(back, next)
-                    } else {
-                        setPage(page+1)
-                    } */
                 } else {
-                    console.log("error", profile)
+                    console.log("error: ", profile)
                 }
             })
             .catch((error) => {
