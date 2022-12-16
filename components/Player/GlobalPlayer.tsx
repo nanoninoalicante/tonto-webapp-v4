@@ -49,6 +49,8 @@ const GlobalPlayer = (props: any) => {
                             const duration: number = data.details.totalduration;
                             setDuration(duration);
                             setCurrentTime(0);
+                            audioPlayer.current.play();
+                            setIsPlaying(true)
                         })
                     });
                 })
@@ -63,6 +65,7 @@ const GlobalPlayer = (props: any) => {
     const togglePlayPause = () => {
         setIsPlaying(!isPlaying);
 
+        console.log(hlsRef.current)
         if (!isPlaying) {
             const play = audioPlayer.current.play();
 
