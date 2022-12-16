@@ -14,7 +14,6 @@ interface Props {
 
 
 const GlobalPlayer = (props: any) => {
-    const router = useRouter()
     // state
     const [isPlaying, setIsPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
@@ -124,7 +123,7 @@ const GlobalPlayer = (props: any) => {
     }
 
     const handleBack = () => {
-        console.log(window.location)
+        window.location.href = `/post/${props.props.data.back}` 
     }
 
     const handleNext = () => {
@@ -154,7 +153,7 @@ const GlobalPlayer = (props: any) => {
             <div className="flex flex-row justify-center items-center w-full my-2">
                 <audio ref={audioPlayer} preload="metadata" />
 
-                <button className="p-3 mx-2 rounded-full" onClick={handleBack}>
+                <button className="p-3 mx-2 rounded-full cursor-pointer" onClick={handleBack}>
                     <Back size={30} />
                 </button>
 
@@ -173,7 +172,7 @@ const GlobalPlayer = (props: any) => {
                     <Next10 size={30} />
                 </button>
 
-                <a className="p-3 mx-2 rounded-full" onClick={handleNext}>
+                <a className="p-3 mx-2 rounded-full cursor-pointer" onClick={handleNext}>
                     <Next size={30} />
                 </a>
             </div>
