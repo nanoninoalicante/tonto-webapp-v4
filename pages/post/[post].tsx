@@ -76,7 +76,6 @@ const Post = (props: any) => {
             .then((response) => response.json())
             .then((profile) => {
                 if (profile?.data) {
-                    console.log(profile.data)
                     let postPos = 0;
                     for (let i = 0; i < profile.data.length; i++) {
                         if (profile.data[i].uuid === props.id) {

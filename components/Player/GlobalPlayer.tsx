@@ -28,7 +28,6 @@ const GlobalPlayer = (props: any) => {
     useEffect(() => {
         const seconds = Math.floor(audioPlayer.current.duration)
         setDuration(seconds)
-        console.log(audioPlayer)
         progressBar.current.max = seconds
 
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
@@ -44,7 +43,6 @@ const GlobalPlayer = (props: any) => {
                 hlsRef.current = new Hls();
                 hlsRef.current.attachMedia(audioPlayer.current);
                 hlsRef.current.on(Hls.Events.MEDIA_ATTACHED, () => {
-                    console.log(props.props.data.data.streamingUrl)
                     hlsRef.current?.loadSource(props.props.data.data?.streamingUrl);
                     hlsRef.current?.on(Hls.Events.MANIFEST_PARSED, () => {
                         hlsRef.current?.on(Hls.Events.LEVEL_LOADED, (_: string, data: any) => {
