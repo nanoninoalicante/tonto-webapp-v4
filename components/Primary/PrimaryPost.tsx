@@ -32,52 +32,52 @@ const PrimaryPost = (props: any) => {
 
     return (
         !props.props.data.isLoading ?
-        <div className="mx-full mt-28 justify-center bg-white rounded-b-xl bottom-10">
-        <div className="flex flex-col justify-center items-center border-b-2">
-          <img
-            className="my-7 rounded-full w-24"
-            src={userData.profileImg}
-            alt="avatar"
-          />
-          <h2 className="mb-4 text-sm font-medium text-coolGray-900">
-            {userData.userName}
-          </h2>
-          <h3 className="mb-4 mx-4 text-xs font-medium text-coolGray-400 line-clamp-10">
-            {props.props.data.data.description}
-          </h3>
-        </div>
-        <div className="flex flex-wrap pt-4 pb-6 m-2 rounded-b ">
-          <div className="p-2 w-1/3">
-            <div className="text-center">
-              <p className="mb-1 text-xs text-coolGray-900 font-semibold">
-                {props.props.data.data.likesCount}
-              </p>
-              <p className="text-xs text-coolGray-400 font-medium">Likes</p>
+            <div className="mx-full mt-20 justify-center bg-white rounded-b-xl bottom-10">
+                <div className="flex flex-col justify-center items-center border-b-2">
+                    <img
+                        className="my-7 rounded-full w-24"
+                        src={userData.profileImg}
+                        alt="avatar"
+                    />
+                    <h2 className="mb-4 text-sm font-medium text-coolGray-900">
+                        {userData.userName}
+                    </h2>
+                    <h3 className="mb-4 mx-4 text-xs font-medium text-coolGray-400 line-clamp-10">
+                        {props.props.data.data.description}
+                    </h3>
+                </div>
+                <div className="flex flex-wrap pt-2 pb-2 m-2 rounded-b ">
+                    <div className="p-2 w-1/3">
+                        <div className="text-center">
+                            <p className="mb-1 text-xs text-coolGray-900 font-semibold">
+                                {props.props.data.data.likesCount}
+                            </p>
+                            <p className="text-xs text-coolGray-400 font-medium">Likes</p>
+                        </div>
+                    </div>
+                    <div className="p-2 w-1/3">
+                        <div className="text-center">
+                            <p className="mb-1 text-xs text-coolGray-900 font-semibold">
+                                {props.props.data.data.commentsCount}
+                            </p>
+                            <p className="text-xs text-coolGray-400 font-medium">
+                                Comments
+                            </p>
+                        </div>
+                    </div>
+                    <div className="p-2 w-1/3">
+                        <div className="text-center">
+                            <p className="mb-1 text-xs text-coolGray-900 font-semibold">
+                                {props.props.data.data.shareCount}
+                            </p>
+                            <p className="text-xs text-coolGray-400 font-medium">
+                                Shared
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div className="p-2 w-1/3">
-            <div className="text-center">
-              <p className="mb-1 text-xs text-coolGray-900 font-semibold">
-                {props.props.data.data.commentsCount}
-              </p>
-              <p className="text-xs text-coolGray-400 font-medium">
-                Comments
-              </p>
-            </div>
-          </div>
-          <div className="p-2 w-1/3">
-            <div className="text-center">
-              <p className="mb-1 text-xs text-coolGray-900 font-semibold">
-                {props.props.data.data.shareCount}
-              </p>
-              <p className="text-xs text-coolGray-400 font-medium">
-                Shared
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      
+
 
             :
             <div className="mx-full mt-28 justify-center bg-white rounded-b-xl">
