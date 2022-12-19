@@ -1,16 +1,20 @@
 /** @type {import('next').NextConfig} */
-const cors = require('cors');
-const nextConnect = require('next-connect');
+const express = require('express')
+const cors = require('cors')
+
+module.exports = {
+  // other configuration options here
+  // ...
+  // Enable CORS
+  serverMiddleware: (app) => {
+    app.use(cors())
+  },
+}
 
 const nextConfig = {
   //reactStrictMode: true,
   swcMinify: true,
 }
-
-module.exports = nextConnect().use(cors({
-  origin: 'origin',
-  optionsSuccessStatus: 200
-}));
 
 module.exports = {
   webpack(config) {
@@ -20,5 +24,5 @@ module.exports = {
       use: ["@svgr/webpack"],
     });
     return config;
-  },
+  }, 
 }
