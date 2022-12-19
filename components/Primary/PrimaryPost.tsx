@@ -22,7 +22,7 @@ const state = {
 }
 
 const PrimaryPost = (props: any) => {
-    const [userData, setUserData] = useState(props.props.data.data.userInfo)
+    const [userData, setUserData] = useState(props.props.user.data.userInfo)
 
     useEffect(() => {
         if (userData.profileImg === "")
@@ -31,7 +31,7 @@ const PrimaryPost = (props: any) => {
 
 
     return (
-        !props.props.data.isLoading ?
+        !props.props.user.isLoading ?
             <div className="mx-full mt-28 justify-center bg-white rounded-b-xl">
                 <div className="flex flex-col justify-center items-center border-b-2">
                     <img
@@ -42,15 +42,15 @@ const PrimaryPost = (props: any) => {
                     <h2 className="mb-4 text-sm font-medium text-coolGray-900">
                         {userData.userName}
                     </h2>
-                    <h3 className="mb-4 mx-4 text-xs font-medium max-h-28 text-coolGray-400 overflow-scroll">
-                        {props.props.data.data.description}
+                    <h3 className="mb-4 mx-4 text-xs font-medium max-h-48 text-coolGray-400 overflow-scroll">
+                        {props.props.user.data.description}
                     </h3>
                 </div>
                 <div className="flex flex-wrap pt-2 pb-2 m-2 rounded-b ">
                     <div className="p-2 w-1/3">
                         <div className="text-center">
                             <p className="mb-1 text-xs text-coolGray-900 font-semibold">
-                                {props.props.data.data.likesCount}
+                                {props.props.user.data.likesCount}
                             </p>
                             <p className="text-xs text-coolGray-400 font-medium">Likes</p>
                         </div>
@@ -58,7 +58,7 @@ const PrimaryPost = (props: any) => {
                     <div className="p-2 w-1/3">
                         <div className="text-center">
                             <p className="mb-1 text-xs text-coolGray-900 font-semibold">
-                                {props.props.data.data.commentsCount}
+                                {props.props.user.data.commentsCount}
                             </p>
                             <p className="text-xs text-coolGray-400 font-medium">
                                 Comments
@@ -68,7 +68,7 @@ const PrimaryPost = (props: any) => {
                     <div className="p-2 w-1/3">
                         <div className="text-center">
                             <p className="mb-1 text-xs text-coolGray-900 font-semibold">
-                                {props.props.data.data.shareCount}
+                                {props.props.user.data.shareCount}
                             </p>
                             <p className="text-xs text-coolGray-400 font-medium">
                                 Shared

@@ -65,29 +65,29 @@ const Post = (props: any) => {
     }, [])
 
     useEffect(() => {
+        console.log(data)
         getUuids();
     }, [data])
 
     function getUuids() {
         const limit = 50;
-        console.log(data.userInfo.id)
         const urlUuid = `https://feed-dev.apis.urloapp.com/feed/${data.userInfo.id}/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7&limit=100&page=${page}`;
         fetch(urlUuid, { method: "GET" })
             .then((response) => response.json())
             .then((profile) => {
                 if (profile?.data) {
                     let postPos = 0;
-                    for (let i = 0; i < profile.data.length; i++) 
+                    for (let i = 0; i < profile.data.length; i++)
                         if (profile.data[i].uuid === props.id) postPos = i;
-                    
+
                     if (postPos >= 0) {
                         if (postPos !== 0 && postPos !== profile.data.length - 1) {
                             setNext(profile.data[postPos + 1].uuid)
                             setBack(profile.data[postPos - 1].uuid)
-                        } else if (postPos === 0){
+                        } else if (postPos === 0) {
                             setNext(profile.data[postPos + 1].uuid)
                             setBack(profile.data[profile.data.length - 1].uuid)
-                        } else if (postPos === profile.data.length - 1){
+                        } else if (postPos === profile.data.length - 1) {
                             setNext(profile.data[0].uuid)
                             setBack(profile.data[postPos - 1].uuid)
                         }
@@ -110,8 +110,11 @@ const Post = (props: any) => {
             <MetaTags />
             <main >
                 <PrimaryHeader />
-                <PrimaryPost props={{ data: { data, isLoading } }} />
-                <GlobalPlayer props={{ data: { data, back, next, isLoading } }} />
+                {data.streamingUrl !== "" &&
+                    <React.Fragment>
+                        <PrimaryPost props={{ user: { data, isLoading } }} />
+                        <GlobalPlayer props={{ data: { data, back, next, isLoading } }} />
+                    </React.Fragment>}
             </main>
         </div>
     )
