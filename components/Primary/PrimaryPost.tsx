@@ -32,7 +32,7 @@ const PrimaryPost = (props: any) => {
 
     return (
         !props.props.data.isLoading ?
-            <div className="mx-full mt-20 justify-center bg-white rounded-b-xl bottom-10">
+            <div className="mx-full mt-28 justify-center bg-white rounded-b-xl">
                 <div className="flex flex-col justify-center items-center border-b-2">
                     <img
                         className="my-7 rounded-full w-24"
@@ -42,7 +42,7 @@ const PrimaryPost = (props: any) => {
                     <h2 className="mb-4 text-sm font-medium text-coolGray-900">
                         {userData.userName}
                     </h2>
-                    <h3 className="mb-4 mx-4 text-xs font-medium text-coolGray-400 line-clamp-10">
+                    <h3 className="mb-4 mx-4 text-xs font-medium text-coolGray-400 overflow-scroll">
                         {props.props.data.data.description}
                     </h3>
                 </div>
