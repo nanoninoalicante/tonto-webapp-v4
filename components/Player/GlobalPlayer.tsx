@@ -149,7 +149,7 @@ const GlobalPlayer = (props: any) => {
     }
 
     return (
-        <div className="fixed bottom-0 z-50 w-full bg-white rounded-t-xl">
+        <div className="fixed bottom-0  w-full bg-white rounded-t-xl">
             <div className="flex flex-row justify-center items-center w-full my-2">
                 <audio ref={audioPlayer} preload="metadata" />
 
