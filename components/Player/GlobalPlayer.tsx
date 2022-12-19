@@ -49,8 +49,6 @@ const GlobalPlayer = (props: any) => {
                             const duration: number = data.details.totalduration;
                             setDuration(duration);
                             setCurrentTime(0);
-                            audioPlayer.current.play();
-                            setIsPlaying(true)
                         })
                     });
                 })
