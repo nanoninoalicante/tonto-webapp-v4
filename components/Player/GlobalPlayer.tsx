@@ -44,11 +44,10 @@ const GlobalPlayer = (props: any) => {
                 hlsRef.current.on(Hls.Events.MEDIA_ATTACHED, () => {
                     hlsRef.current?.loadSource(props.props.data.data?.streamingUrl);
                     hlsRef.current?.on(Hls.Events.MANIFEST_PARSED, () => {
-                        hlsRef.current?.on(Hls.Events.LEVEL_LOADED, (_: string, data: any) => {
-                            const duration: number = data.details.totalduration;
-                            setDuration(duration);
-                            setCurrentTime(0);
-                        })
+                           audioPlayer.current.addEventListener('loadedmetadata', () => {
+                               setDuration(audioPlayer.current.duration);
+                               setCurrentTime(0);
+                           })
                     });
                 })
             }            
