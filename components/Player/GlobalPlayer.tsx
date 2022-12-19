@@ -49,7 +49,7 @@ const GlobalPlayer = (props: any) => {
                             setDuration(duration);
                             setCurrentTime(0);
                         })
-                    });
+                    }); 
                 })
             }            
         } else {
