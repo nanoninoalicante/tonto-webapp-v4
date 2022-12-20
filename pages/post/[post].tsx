@@ -108,11 +108,11 @@ const Post = (props: any) => {
         <div>
             <MetaTags />
             <main >
-                <PrimaryHeader />
-                    <React.Fragment>
-                        <PrimaryPost props={{ user: { data, isLoading } }} /> 
-                        <GlobalPlayer props={{ data: { data, back, next, isLoading } }} />
-                    </React.Fragment>
+                <React.Fragment>
+                    <PrimaryHeader />
+                    <PrimaryPost props={{ user: { data, isLoading } }} />
+                    <GlobalPlayer props={{ data: { data, back, next, isLoading } }} />
+                </React.Fragment>
             </main>
         </div>
     )
