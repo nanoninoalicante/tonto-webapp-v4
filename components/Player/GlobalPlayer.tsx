@@ -38,8 +38,11 @@ const GlobalPlayer = (props: any) => {
             if (hlsRef?.current) {
                 hlsRef.current.destroy()
             }
-            if (audioPlayer?.current) {                
-                hlsRef.current = new Hls();
+            if (audioPlayer?.current) {   
+                const config = {
+                    debug: true
+                }             
+                hlsRef.current = new Hls(config);
                 hlsRef.current.attachMedia(audioPlayer.current);
                 hlsRef.current.on(Hls.Events.MEDIA_ATTACHED, () => {
                     hlsRef.current?.loadSource(props.props.data.data?.streamingUrl);
@@ -152,7 +155,8 @@ const GlobalPlayer = (props: any) => {
             <div className="flex flex-row justify-center items-center w-full my-2">
                 <audio ref={audioPlayer} preload="metadata" />
 
-                <button className="p-3 mx-2 rounded-full cursor-pointer" onClick={handleBack}>
+                {/* BACK AUDIO */}
+                <button className="p-3 mx-2 rounded-full cursor-pointer" onClick={handleBack} >
                     <Back size={30} />
                 </button>
 
@@ -171,9 +175,10 @@ const GlobalPlayer = (props: any) => {
                     <Next10 size={30} />
                 </button>
 
-                <a className="p-3 mx-2 rounded-full cursor-pointer" onClick={handleNext}>
+                {/* NEXT AUDIO */}
+                <button className="p-3 mx-2 rounded-full cursor-pointer" onClick={handleNext}>
                     <Next size={30} />
-                </a>
+                </button>
             </div>
             <div className="flex flex-row justify-center mb-2">
                 {/* SPEED CONTROL */}
