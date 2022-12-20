@@ -69,8 +69,8 @@ const Post = (props: any) => {
     }, [data])
 
     function getUuids() {
-        const limit = 50;
-        const urlUuid = `https://feed-dev.apis.urloapp.com/feed/${data.userInfo.id}/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7&limit=100&page=${page}`;
+        const limit = 150;
+        const urlUuid = `https://feed-dev.apis.urloapp.com/feed/${data.userInfo.id}/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7&limit=${limit}&page=${page}`;
         fetch(urlUuid, { method: "GET" })
             .then((response) => response.json())
             .then((profile) => {
@@ -89,6 +89,7 @@ const Post = (props: any) => {
                         } else if (postPos === profile.data.length - 1) {
                             setNext(profile.data[0].uuid)
                             setBack(profile.data[postPos - 1].uuid)
+                            setPage(page+1)
                         }
                         setIsLoading(false)
                     }
