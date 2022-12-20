@@ -40,7 +40,8 @@ const GlobalPlayer = (props: any) => {
             }
             if (audioPlayer?.current) {   
                 const config = {
-                    debug: true
+                    debug: true,
+                    enableWorker: true
                 }             
                 hlsRef.current = new Hls(config);
                 hlsRef.current.attachMedia(audioPlayer.current);
