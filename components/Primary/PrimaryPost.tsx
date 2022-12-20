@@ -43,11 +43,11 @@ const PrimaryPost = (props: any) => {
                     <h2 className="mb-4 text-sm font-medium text-coolGray-900">
                         {props.props.user.data.userInfo.userName}
                     </h2>
-                    <h3 className="mb-4 mx-4 text-xs font-medium max-h-14 text-coolGray-400 overflow-scroll no-scrollbar">
+                    <h3 className="mb-4 mx-4 text-xs font-medium max-h-20 text-coolGray-400 overflow-scroll no-scrollbar">
                         {props.props.user.data.description}
                     </h3>
                 </div>
-                <div className="flex flex-wrap pt-2 pb-2 m-2 rounded-b ">
+                <div className="flex flex-wrap pt-1 pb-1 rounded-b ">
                     <div className="p-2 w-1/3">
                         <div className="text-center">
                             <p className="mb-1 text-xs text-coolGray-900 font-semibold">
