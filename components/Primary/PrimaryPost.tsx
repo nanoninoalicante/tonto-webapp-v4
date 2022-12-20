@@ -27,7 +27,7 @@ const PrimaryPost = (props: any) => {
     useEffect(() => {
         setUserData(props.props.user.data.userInfo)
         if (props.props.user.data.userInfo.profileImg === "")
-            setUserData({ ...userData, profileImg: "/flex-ui-assets/images/tontoprofile_defualt.png" })
+            props.props.user.data.userInfo.profileImg = "/flex-ui-assets/images/tontoprofile_defualt.png"
     }, [props.props.user.data.userInfo.id])
 
 
@@ -37,11 +37,11 @@ const PrimaryPost = (props: any) => {
                 <div className="flex flex-col justify-center items-center border-b-2">
                     <img
                         className="my-7 rounded-full w-24"
-                        src={userData.profileImg}
+                        src={props.props.user.data.userInfo.profileImg}
                         alt="avatar"
                     />
                     <h2 className="mb-4 text-sm font-medium text-coolGray-900">
-                        {userData.userName}
+                        {props.props.user.data.userInfo.userName}
                     </h2>
                     <h3 className="mb-4 mx-4 text-xs font-medium max-h-48 text-coolGray-400 overflow-scroll no-scrollbar">
                         {props.props.user.data.description}
