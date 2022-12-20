@@ -25,13 +25,14 @@ const PrimaryPost = (props: any) => {
     const [userData, setUserData] = useState(props.props.user.data.userInfo)
 
     useEffect(() => {
+        setUserData(props.props.user.data.userInfo)
         if (userData.profileImg === "")
             setUserData({ ...userData, profileImg: "/flex-ui-assets/images/tontoprofile_defualt.png" })
-    }, [])
+    }, [props.props.user.data.userInfo.id])
 
 
     return (
-        !props.props.user.isLoading ?
+        props.props.user.data.userInfo.id !== "" ?
             <div className="mx-full mt-28 justify-center bg-white rounded-b-xl">
                 <div className="flex flex-col justify-center items-center border-b-2">
                     <img
@@ -82,9 +83,9 @@ const PrimaryPost = (props: any) => {
             :
             <div className="mx-full mt-28 justify-center bg-white rounded-b-xl">
                 <div className="flex flex-col justify-center items-center border-b-2 animate-pulse">
-                    <div className="my-7 rounded-full w-24 h-24 bg-slate-500" />
-                    <div className="mb-2 h-2 w-48 bg-slate-500 rounded" />
-                    <div className="mb-4 h-2 w-32 bg-slate-500 rounded" />
+                    <div className="my-7 rounded-full w-24 h-24 bg-slate-300" />
+                    <div className="mb-2 h-2 w-48 bg-slate-300 rounded" />
+                    <div className="mb-4 h-2 w-32 bg-slate-300 rounded" />
                     <div className="mb-4 mx-4 text-xs font-medium text-coolGray-400">
                     </div>
                 </div>

@@ -65,7 +65,6 @@ const Post = (props: any) => {
     }, [])
 
     useEffect(() => {
-        console.log(data)
         getUuids();
     }, [data])
 
@@ -110,11 +109,10 @@ const Post = (props: any) => {
             <MetaTags />
             <main >
                 <PrimaryHeader />
-                {data.streamingUrl !== "" &&
                     <React.Fragment>
-                        <PrimaryPost props={{ user: { data, isLoading } }} />
+                        <PrimaryPost props={{ user: { data, isLoading } }} /> 
                         <GlobalPlayer props={{ data: { data, back, next, isLoading } }} />
-                    </React.Fragment>}
+                    </React.Fragment>
             </main>
         </div>
     )

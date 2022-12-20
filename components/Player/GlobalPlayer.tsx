@@ -40,7 +40,6 @@ const GlobalPlayer = (props: any) => {
             }
             if (audioPlayer?.current) {   
                 const config = {
-                    debug: true,
                     enableWorker: false
                 }             
                 hlsRef.current = new Hls(config);
@@ -65,8 +64,6 @@ const GlobalPlayer = (props: any) => {
 
     const togglePlayPause = () => {
         setIsPlaying(!isPlaying);
-
-        console.log(hlsRef.current)
         if (!isPlaying) {
             const play = audioPlayer.current.play();
 
