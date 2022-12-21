@@ -69,11 +69,11 @@ const Post = (props: any) => {
     }, [data])
 
     function getUuids() {
-        const limit = 150;
+        const limit = 150
         const urlUuid = `https://feed-dev.apis.urloapp.com/feed/${data.userInfo.id}/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7&limit=${limit}&page=${page}`;
         fetch(urlUuid, { method: "GET" })
             .then((response) => response.json())
-            .then((profile) => {
+            .then((profile) => {                
                 if (profile?.data) {
                     let postPos = 0;
                     for (let i = 0; i < profile.data.length; i++)
