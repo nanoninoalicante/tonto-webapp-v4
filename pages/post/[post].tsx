@@ -70,36 +70,39 @@ const Post = (props: any) => {
 
     function getUuids() {
         const limit = 150
-        const urlUuid = `https://feed-dev.apis.urloapp.com/feed/${data.userInfo.id}/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7&limit=${limit}&page=${page}`;
-        fetch(urlUuid, { method: "GET" })
-            .then((response) => response.json())
-            .then((profile) => {                
-                if (profile?.data) {
-                    let postPos = 0;
-                    for (let i = 0; i < profile.data.length; i++)
-                        if (profile.data[i].uuid === props.id) postPos = i;
+        if (data.userInfo.id !== "") {
+            const urlUuid = `https://feed-dev.apis.urloapp.com/feed/${data.userInfo.id}/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7&limit=${limit}&page=${page}`;
+            fetch(urlUuid, { method: "GET" })
+                .then((response) => response.json())
+                .then((profile) => {
+                    console.log(profile.data)
+                    if (profile?.data) {
+                        let postPos = 0;
+                        for (let i = 0; i < profile.data.length; i++)
+                            if (profile.data[i].uuid === props.id) postPos = i;
 
-                    if (postPos >= 0) {
-                        if (postPos !== 0 && postPos !== profile.data.length - 1) {
-                            setNext(profile.data[postPos + 1].uuid)
-                            setBack(profile.data[postPos - 1].uuid)
-                        } else if (postPos === 0) {
-                            setNext(profile.data[postPos + 1].uuid)
-                            setBack(profile.data[profile.data.length - 1].uuid)
-                        } else if (postPos === profile.data.length - 1) {
-                            setNext(profile.data[0].uuid)
-                            setBack(profile.data[postPos - 1].uuid)
-                            setPage(page+1)
+                        if (postPos >= 0) {
+                            if (postPos !== 0 && postPos !== profile.data.length - 1) {
+                                setNext(profile.data[postPos + 1].uuid)
+                                setBack(profile.data[postPos - 1].uuid)
+                            } else if (postPos === 0) {
+                                setNext(profile.data[postPos + 1].uuid)
+                                setBack(profile.data[profile.data.length - 1].uuid)
+                            } else if (postPos === profile.data.length - 1) {
+                                setNext(profile.data[0].uuid)
+                                setBack(profile.data[postPos - 1].uuid)
+                                setPage(page + 1)
+                            }
+                            setIsLoading(false)
                         }
-                        setIsLoading(false)
+                    } else {
+                        console.log("error: ", profile)
                     }
-                } else {
-                    console.log("error: ", profile)
-                }
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }
     }
     useEffect(() => {
         getUuids();
