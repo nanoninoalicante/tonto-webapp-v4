@@ -33,7 +33,7 @@ const PrimaryPost = (props: any) => {
 
     return (
         props.props.user.data.userInfo.id !== "" ?
-            <div className="lg:mx-3/4 mx-full mt-28 justify-center bg-white rounded-b-xl">
+            <div className="block lg:mx-3/4 mx-full mt-28 justify-center bg-white rounded-b-xl">
                 <div className="flex flex-col justify-center items-center border-b-2">
                     <img
                         className="my-7 rounded-full w-24 h-24"
