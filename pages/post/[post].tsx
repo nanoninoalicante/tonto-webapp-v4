@@ -49,6 +49,7 @@ const Post = (props: any) => {
     const [page, setPage] = useState(1)
     const [back, setBack] = useState(0)
     const [next, setNext] = useState(0)
+    const [existId, setExistsId] = useState(false)
 
     useEffect(() => {
         setIsLoading(true)
@@ -56,9 +57,11 @@ const Post = (props: any) => {
         fetch(url, { method: "GET" })
             .then((response) => response.json())
             .then((data) => {
+                setExistsId(true)
                 setData(data.data[0])
             })
             .catch(error => {
+                setExistsId(false)
                 console.log(error)
             })
 

@@ -127,7 +127,8 @@ const GlobalPlayer = (props: any) => {
     }
 
     const handleNext = () => {
-        window.location.href = `/post/${props.props.data.next}` 
+        if(props.props.data.next)
+            window.location.href = `/post/${props.props.data.next}` 
         //router.push(`/post/${props.props.data.next}`)      
     }
 
