@@ -123,7 +123,8 @@ const GlobalPlayer = (props: any) => {
     }
 
     const handleBack = () => {
-        window.location.href = `/post/${props.props.data.back}` 
+        if(props.props.data.back)
+            window.location.href = `/post/${props.props.data.back}` 
     }
 
     const handleNext = () => {
