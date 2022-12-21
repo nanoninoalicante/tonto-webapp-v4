@@ -5,7 +5,7 @@
     --knobby: white;
     --selectedKnobby: #26c9c3;
 
-    appearance: none;
+    /* appearance: none; */
     background: #99f6e4;
     border-radius: 10px;
     position: relative;
