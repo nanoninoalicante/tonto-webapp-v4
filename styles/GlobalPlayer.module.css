@@ -78,7 +78,7 @@
   
   /* knobby while dragging - chrome and safari */
   .progressBar:active::-webkit-slider-thumb {
-    transform: scale(1.2);
+    transform: scale(2);
     background: var(--selectedKnobby);
   }
   
@@ -97,6 +97,6 @@
   
   /* knobby while dragging - firefox */
   .progressBar:active::-moz-range-thumb {
-    transform: scale(1.2);
+    transform: scale(2);
     background: var(--selectedKnobby);
   }
