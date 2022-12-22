@@ -48,7 +48,7 @@ export const getServerSideProps = async (context: any) => {
         .then((response) => response.json())
         .then((data) => {
             server.existsId = true
-            server.data = data.data[0]
+            server.data = data.data[0] || postData
         })
         .catch(error => {
             server.existsId = false
@@ -60,7 +60,7 @@ export const getServerSideProps = async (context: any) => {
 
     async function getUuids() {
         const limit = 150
-        if (server.data.userInfo.id !== "") {
+        if (server.data?.userInfo.id !== "") {
             const urlUuid = `https://feed-dev.apis.urloapp.com/feed/${server.data.userInfo.id}/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7&limit=${limit}&page=${server.page}`;
             await fetch(urlUuid, { method: "GET" })
                 .then((response) => response.json())
@@ -69,7 +69,6 @@ export const getServerSideProps = async (context: any) => {
                         let postPos = 0;
                         for (let i = 0; i < profile.data.length; i++)
                             if (profile.data[i].uuid === post) postPos = i;
-
                         if (postPos >= 0) {
                             if (postPos !== 0 && postPos !== profile.data.length - 1) {
                                 server.next = profile.data[postPos + 1].uuid
@@ -92,12 +91,10 @@ export const getServerSideProps = async (context: any) => {
                 })
         }
     }
-
     return { props: server }
 };
 
 const Post = (props: any) => {
-    console.log(props.server)
     return (
         <div>
             <MetaTags />
@@ -105,18 +102,18 @@ const Post = (props: any) => {
                 <React.Fragment>
                     <PrimaryHeader />
                     <PrimaryPost 
-                        data={props.server.data} 
-                        page={props.server.page} 
-                        back={props.server.back} 
-                        next={props.server.next}
-                        existsId={props.server.existsId}
+                        data={props.data} 
+                        page={props.page} 
+                        back={props.back} 
+                        next={props.next}
+                        existsId={props.existsId}
                     />
                     <GlobalPlayer 
-                        data={props.server.data} 
-                        page={props.server.page} 
-                        back={props.server.back} 
-                        next={props.server.next}
-                        existsId={props.server.existsId} />
+                        data={props.data} 
+                        page={props.page} 
+                        back={props.back} 
+                        next={props.next}
+                        existsId={props.existsId} />
                 </React.Fragment>
             </main>
         </div>
