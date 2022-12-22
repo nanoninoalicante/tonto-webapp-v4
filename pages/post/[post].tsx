@@ -93,11 +93,7 @@ export const getServerSideProps = async (context: any) => {
         }
     }
 
-    return {
-        props: {
-            server
-        }
-    }
+    return { props: server }
 };
 
 const Post = (props: any) => {

@@ -7,10 +7,6 @@ import Next10 from "../../public/flex-ui-assets/player/next10.svg"
 import Redo10 from "../../public/flex-ui-assets/player/redo10.svg"
 import Next from "../../public/flex-ui-assets/player/next.svg"
 import Back from "../../public/flex-ui-assets/player/back.svg"
-interface Props {
-    postId: string
-}
-
 
 const GlobalPlayer = (props: any) => {
     // state

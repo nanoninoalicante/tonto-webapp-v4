@@ -22,7 +22,6 @@ const state = {
 }
 
 const PrimaryPost = (props: any) => {
-    console.log(props)
     let post = props.data;
     const exists = props.existsId;
     const [userData, setUserData] = useState(props.data.userInfo)
@@ -31,7 +30,7 @@ const PrimaryPost = (props: any) => {
         setUserData(post.userInfo)
         console.log(userData)
         if (userData.profileImg === "")
-            setUserData({...userData, userData: {profileImg: "/flex-ui-assets/images/tontoprofile_defualt.png"}})
+            setUserData({ ...userData, userData: { profileImg: "/flex-ui-assets/images/tontoprofile_defualt.png" } })
     }, [post.id])
 
 
@@ -83,8 +82,6 @@ const PrimaryPost = (props: any) => {
                     </div>
                 </div>
             </div>
-
-
             :
             <div className="mx-full mt-28 justify-center bg-white rounded-b-xl">
                 <div className="flex flex-col justify-center items-center border-b-2 animate-pulse">
