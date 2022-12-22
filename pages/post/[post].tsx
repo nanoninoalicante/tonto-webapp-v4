@@ -3,7 +3,9 @@ import React from "react"
 import PrimaryHeader from '../../components/Primary/PrimaryHeader'
 import PrimaryPost from '../../components/Primary/PrimaryPost'
 import { GlobalPlayer } from '../../components/Player/GlobalPlayer'
-import { Server } from 'http'
+import DefaultErrorPage from 'next/error'
+import Head from 'next/head'
+import PostNotFound from '../../components/PostNotFound'
 
 //santeetji: 62b131b4db1ec8000f04084e
 //begaes: 628e108820eaae000f00a887
@@ -40,15 +42,28 @@ export const getServerSideProps = async (context: any) => {
         page: 1,
         back: 0,
         next: 0,
-        existsId: true
+        existsId: true,
+        randomId: 0
     }
 
     const url = `https://webfeed-dev.apis.gettonto.com/posts/${post}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
     await fetch(url, { method: "GET" })
         .then((response) => response.json())
-        .then((data) => {
+        .then(async (data) => {
             server.existsId = true
             server.data = data.data[0] || postData
+            if (!server.data.uuid) {
+                const urlUuid = `https://feed-dev.apis.urloapp.com/feed//profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7&limit=150&page=1`;
+                await fetch(urlUuid, { method: "GET" })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        let random = Math.floor(Math.random() * data.numberOfItems)
+                        server.randomId = data.data[random].uuid 
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
+            }
         })
         .catch(error => {
             server.existsId = false
@@ -95,29 +110,34 @@ export const getServerSideProps = async (context: any) => {
 };
 
 const Post = (props: any) => {
-    console.log(props.data?.userInfo)
     return (
-        <div>
-            <MetaTags />
-            <main >
-                <React.Fragment>
-                    <PrimaryHeader />
-                    <PrimaryPost 
-                        data={props.data} 
-                        page={props.page} 
-                        back={props.back} 
-                        next={props.next}
-                        existsId={props.existsId}
-                    />
-                    <GlobalPlayer 
-                        data={props.data} 
-                        page={props.page} 
-                        back={props.back} 
-                        next={props.next}
-                        existsId={props.existsId} />
-                </React.Fragment>
-            </main>
-        </div>
+        props.data.uuid ?
+            <div>
+                <MetaTags />
+                <main >
+                    <React.Fragment>
+                        <PrimaryHeader />
+                        <PrimaryPost
+                            data={props.data}
+                            page={props.page}
+                            back={props.back}
+                            next={props.next}
+                            existsId={props.existsId}
+                        />
+                        <GlobalPlayer
+                            data={props.data}
+                            page={props.page}
+                            back={props.back}
+                            next={props.next}
+                            existsId={props.existsId} />
+                    </React.Fragment>
+                </main>
+            </div> : <>
+                <Head>
+                    <meta name="robots" content='noindex' />
+                </Head>
+                <PostNotFound randomId={props.randomId}/>
+            </>
     )
 }
 
