@@ -58,7 +58,7 @@ export const getServerSideProps = async (context: any) => {
                     .then((response) => response.json())
                     .then((data) => {
                         let random = Math.floor(Math.random() * data.numberOfItems)
-                        server.randomId = data.data[random].uuid 
+                        server.randomId = data.data[random]?.uuid 
                     })
                     .catch((error) => {
                         console.log(error)
@@ -111,7 +111,7 @@ export const getServerSideProps = async (context: any) => {
 
 const Post = (props: any) => {
     return (
-        props.data.uuid ?
+        props.data?.uuid ?
             <div>
                 <MetaTags />
                 <main >

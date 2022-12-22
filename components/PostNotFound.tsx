@@ -4,7 +4,7 @@ import { FaRandom } from "react-icons/fa"
 
 const PostNotFound = (props: any) => {
     const handleRandom = () => {
-        window.location.href = `/post/${props.randomId}`
+        window.location.href = `/post/${props?.randomId}`
     }
     return (
         <>
