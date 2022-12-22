@@ -71,7 +71,7 @@ export const getServerSideProps = async (context: any) => {
         })
 
 
-    await getUuids();
+    server.data.uuid && await getUuids();
 
     async function getUuids() {
         const limit = 150
