@@ -45,7 +45,7 @@ const GlobalPlayer = (props: any) => {
                 hlsRef.current = new Hls(config);
                 hlsRef.current.attachMedia(audioPlayer.current);
                 hlsRef.current.on(Hls.Events.MEDIA_ATTACHED, () => {
-                    hlsRef.current?.loadSource(props.props.data.data?.streamingUrl);
+                    hlsRef.current?.loadSource(props.data?.streamingUrl);
                     hlsRef.current?.on(Hls.Events.MANIFEST_PARSED, () => {
                         hlsRef.current?.on(Hls.Events.LEVEL_LOADED, (_: string, data: any) => {
                             const duration: number = data.details.totalduration;
@@ -56,11 +56,11 @@ const GlobalPlayer = (props: any) => {
                 })
             }            
         } else {
-            audioPlayer.current.src = props.props.data.data?.streamingUrl;
+            audioPlayer.current.src = props.data?.streamingUrl;
             setDuration(duration);
             setCurrentTime(0);
         }
-    }, [props.props.data.data])
+    }, [props.data])
 
     const togglePlayPause = () => {
         setIsPlaying(!isPlaying);
@@ -123,13 +123,13 @@ const GlobalPlayer = (props: any) => {
     }
 
     const handleBack = () => {
-        if(props.props.data.back)
-            window.location.href = `/post/${props.props.data.back}` 
+        if(props.back)
+            window.location.href = `/post/${props.back}` 
     }
 
     const handleNext = () => {
-        if(props.props.data.next)
-            window.location.href = `/post/${props.props.data.next}` 
+        if(props.next)
+            window.location.href = `/post/${props.next}` 
         //router.push(`/post/${props.props.data.next}`)      
     }
 
@@ -206,7 +206,7 @@ const GlobalPlayer = (props: any) => {
 
                 {/* duration */}
                 <div className="p-1 relative mx-1 rounded-md">
-                    {duration && props.props.data.data ? calculateTime(duration) : calculateTime(0)}
+                    {duration && props.data ? calculateTime(duration) : calculateTime(0)}
                 </div>
             </div>
         </div>

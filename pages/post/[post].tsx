@@ -1,24 +1,16 @@
 import MetaTags from '../../components/MetaTags'
-import React, { useEffect, useState, useRef } from "react"
+import React from "react"
 import PrimaryHeader from '../../components/Primary/PrimaryHeader'
 import PrimaryPost from '../../components/Primary/PrimaryPost'
-import { useRouter } from 'next/router'
 import { GlobalPlayer } from '../../components/Player/GlobalPlayer'
-import Link from 'next/link'
+import { Server } from 'http'
 
-type Props = {
-    post: string
-}
-
-type State = {
-    post: string
-}
 //santeetji: 62b131b4db1ec8000f04084e
 //begaes: 628e108820eaae000f00a887
 //raul: 6381ce9059b930327afece05
 //const slug = "62b131b4db1ec8000f04084e"
 
-const post = {
+const postData = {
     commentsCount: 0,
     createdAt: "",
     description: "",
@@ -34,69 +26,62 @@ const post = {
     uuid: "",
     visibility: ""
 }
+
+/**
+ * It fetches the data from the API and returns it as props to the component
+ * @param {any} context - This is the context object that Next.js passes to getServerSideProps. It
+ * contains the query object, which is the object that contains the query string parameters.
+ * @returns The server object is being returned.
+ */
 export const getServerSideProps = async (context: any) => {
     const { post } = context.query;
-    return {
-        props: {
-            id: post
-        }
+    let server = {
+        data: postData,
+        page: 1,
+        back: 0,
+        next: 0,
+        existsId: true
     }
-};
 
-const Post = (props: any) => {
-    const [data, setData] = useState(post)
-    const [isLoading, setIsLoading] = useState(false);
-    const [page, setPage] = useState(1)
-    const [back, setBack] = useState(0)
-    const [next, setNext] = useState(0)
-    const [existId, setExistsId] = useState(false)
+    const url = `https://webfeed-dev.apis.gettonto.com/posts/${post}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
+    await fetch(url, { method: "GET" })
+        .then((response) => response.json())
+        .then((data) => {
+            server.existsId = true
+            server.data = data.data[0]
+        })
+        .catch(error => {
+            server.existsId = false
+            console.log(error)
+        })
 
-    useEffect(() => {
-        setIsLoading(true)
-        const url = `https://webfeed-dev.apis.gettonto.com/posts/${props.id}?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7`;
-        fetch(url, { method: "GET" })
-            .then((response) => response.json())
-            .then((data) => {
-                setExistsId(true)
-                setData(data.data[0])
-            })
-            .catch(error => {
-                setExistsId(false)
-                console.log(error)
-            })
 
-    }, [])
+    await getUuids();
 
-    useEffect(() => {
-        getUuids();
-    }, [data])
-
-    function getUuids() {
+    async function getUuids() {
         const limit = 150
-        if (data.userInfo.id !== "") {
-            const urlUuid = `https://feed-dev.apis.urloapp.com/feed/${data.userInfo.id}/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7&limit=${limit}&page=${page}`;
-            fetch(urlUuid, { method: "GET" })
+        if (server.data.userInfo.id !== "") {
+            const urlUuid = `https://feed-dev.apis.urloapp.com/feed/${server.data.userInfo.id}/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7&limit=${limit}&page=${server.page}`;
+            await fetch(urlUuid, { method: "GET" })
                 .then((response) => response.json())
                 .then((profile) => {
-                    console.log(profile.data)
                     if (profile?.data) {
                         let postPos = 0;
                         for (let i = 0; i < profile.data.length; i++)
-                            if (profile.data[i].uuid === props.id) postPos = i;
+                            if (profile.data[i].uuid === post) postPos = i;
 
                         if (postPos >= 0) {
                             if (postPos !== 0 && postPos !== profile.data.length - 1) {
-                                setNext(profile.data[postPos + 1].uuid)
-                                setBack(profile.data[postPos - 1].uuid)
+                                server.next = profile.data[postPos + 1].uuid
+                                server.back = profile.data[postPos - 1].uuid
                             } else if (postPos === 0) {
-                                setNext(profile.data[postPos + 1].uuid)
-                                setBack(profile.data[profile.data.length - 1].uuid)
+                                server.next = profile.data[postPos + 1].uuid
+                                server.back = profile.data[profile.data.length - 1].uuid
                             } else if (postPos === profile.data.length - 1) {
-                                setNext(profile.data[0].uuid)
-                                setBack(profile.data[postPos - 1].uuid)
-                                setPage(page + 1)
+                                server.next = profile.data[0].uuid
+                                server.back = profile.data[postPos - 1].uuid
+                                server.page = server.page + 1
                             }
-                            setIsLoading(false)
                         }
                     } else {
                         console.log("error: ", profile)
@@ -107,18 +92,35 @@ const Post = (props: any) => {
                 })
         }
     }
-    useEffect(() => {
-        getUuids();
-    }, [page])
 
+    return {
+        props: {
+            server
+        }
+    }
+};
+
+const Post = (props: any) => {
+    console.log(props.server)
     return (
         <div>
             <MetaTags />
             <main >
                 <React.Fragment>
                     <PrimaryHeader />
-                    <PrimaryPost props={{ user: { data, isLoading } }} />
-                    <GlobalPlayer props={{ data: { data, back, next, isLoading } }} />
+                    <PrimaryPost 
+                        data={props.server.data} 
+                        page={props.server.page} 
+                        back={props.server.back} 
+                        next={props.server.next}
+                        existsId={props.server.existsId}
+                    />
+                    <GlobalPlayer 
+                        data={props.server.data} 
+                        page={props.server.page} 
+                        back={props.server.back} 
+                        next={props.server.next}
+                        existsId={props.server.existsId} />
                 </React.Fragment>
             </main>
         </div>
