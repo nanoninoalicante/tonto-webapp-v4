@@ -21,41 +21,43 @@ const state = {
     visibility: ""
 }
 
+export const getServerSideProps = (props: any) => {
+    return {props: props}
+}
 const PrimaryPost = (props: any) => {
     let post = props.data;
     const exists = props.existsId;
-    const [userData, setUserData] = useState(props.data.userInfo)
+    const [userData, setUserData] = useState(post?.userInfo)
 
     useEffect(() => {
-        setUserData(post.userInfo)
-        console.log(userData)
+        setUserData(post?.userInfo)
+        //console.log(userData)
         if (userData.profileImg === "")
             setUserData({ ...userData, userData: { profileImg: "/flex-ui-assets/images/tontoprofile_defualt.png" } })
-    }, [post.id])
+    }, [post?.id])
 
 
     return (
-
-        post.id !== "" ?
+        post?.id !== "" ?
             <div className="fixed w-full mt-28 justify-center bg-white rounded-b-xl">
                 <div className="flex flex-col justify-center items-center border-b-2">
                     <img
                         className="my-7 rounded-full w-24 h-24"
-                        src={userData.profileImg}
+                        src={userData?.profileImg}
                         alt="avatar"
                     />
                     <h2 className="mb-4 text-sm font-medium text-coolGray-900">
-                        {userData.userName}
+                        {userData?.userName}
                     </h2>
                     <h3 className="static mb-4 mx-4 text-xs font-medium max-h-20 text-coolGray-400 overflow-scroll no-scrollbar">
-                        {post.description}
+                        {post?.description}
                     </h3>
                 </div>
                 <div className="flex flex-wrap pt-1 pb-1 rounded-b ">
                     <div className="p-2 w-1/3">
                         <div className="text-center">
                             <p className="mb-1 text-xs text-coolGray-900 font-semibold">
-                                {post.likesCount}
+                                {post?.likesCount}
                             </p>
                             <p className="text-xs text-coolGray-400 font-medium">Likes</p>
                         </div>
@@ -63,7 +65,7 @@ const PrimaryPost = (props: any) => {
                     <div className="p-2 w-1/3">
                         <div className="text-center">
                             <p className="mb-1 text-xs text-coolGray-900 font-semibold">
-                                {post.commentsCount}
+                                {post?.commentsCount}
                             </p>
                             <p className="text-xs text-coolGray-400 font-medium">
                                 Comments
@@ -73,7 +75,7 @@ const PrimaryPost = (props: any) => {
                     <div className="p-2 w-1/3">
                         <div className="text-center">
                             <p className="mb-1 text-xs text-coolGray-900 font-semibold">
-                                {post.shareCount}
+                                {post?.shareCount}
                             </p>
                             <p className="text-xs text-coolGray-400 font-medium">
                                 Shared
