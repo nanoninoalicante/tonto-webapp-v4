@@ -117,7 +117,7 @@ export const getServerSideProps = async (context: any) => {
 
 const Post = (props: any) => {
     return (
-        props.data?.uuid ?
+        props.data?.uuid !== "" ?
             <div>
                 <MetaTags />
                 <main >
