@@ -116,6 +116,7 @@ export const getServerSideProps = async (context: any) => {
 };
 
 const Post = (props: any) => {
+    console.log(props.data)
     return (
         props.data?.uuid !== "" ?
             <div>
