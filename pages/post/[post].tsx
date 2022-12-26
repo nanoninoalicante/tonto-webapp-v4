@@ -50,9 +50,9 @@ export const getServerSideProps = async (context: any) => {
     await fetch(url, { method: "GET" })
         .then((response) => response.json())
         .then(async (data) => {
-            server.existsId = true
             server.data = data.data[0] || postData
             if (!server.data.uuid) {
+                server.existsId = false
                 const urlUuid = `https://feed-dev.apis.urloapp.com/feed//profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7&limit=150&page=1`;
                 await fetch(urlUuid, { method: "GET" })
                     .then((response) => response.json())
@@ -63,10 +63,11 @@ export const getServerSideProps = async (context: any) => {
                     .catch((error) => {
                         console.log(error)
                     })
+            } else {
+                server.existsId = true;
             }
         })
         .catch(error => {
-            server.existsId = false
             console.log(error)
         })
 
@@ -110,7 +111,6 @@ export const getServerSideProps = async (context: any) => {
 };
 
 const Post = (props: any) => {
-    console.log(props.data?.uuid)
     return (
         props.data?.uuid ?
             <div>
@@ -133,7 +133,8 @@ const Post = (props: any) => {
                             existsId={props.existsId} />
                     </React.Fragment>
                 </main>
-            </div> : <>
+            </div> : 
+            <>
                 <Head>
                     <meta name="robots" content='noindex' />
                 </Head>
