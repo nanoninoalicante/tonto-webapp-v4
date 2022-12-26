@@ -74,8 +74,12 @@ export const getServerSideProps = async (context: any) => {
 
     server.data.uuid && await getUuids();
 
+    /**
+     * It gets the next and back post uuid from the server
+     */
     async function getUuids() {
         const limit = 150
+        console.log(server.data?.userInfo)
         if (server.data?.userInfo.id !== "") {
             const urlUuid = `https://feed-dev.apis.urloapp.com/feed/${server.data.userInfo.id}/profile?api_key=16dea2a1-35e8-4332-8cd6-e534300d16b7&limit=${limit}&page=${server.page}`;
             await fetch(urlUuid, { method: "GET" })
@@ -85,6 +89,7 @@ export const getServerSideProps = async (context: any) => {
                         let postPos = 0;
                         for (let i = 0; i < profile.data.length; i++)
                             if (profile.data[i].uuid === post) postPos = i;
+                        /* Getting the next and back post uuid. */
                         if (postPos >= 0) {
                             if (postPos !== 0 && postPos !== profile.data.length - 1) {
                                 server.next = profile.data[postPos + 1].uuid
