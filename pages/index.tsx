@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import {GlobalPlayer} from '../components/Player/GlobalPlayer'
 import Link from 'next/link'
 import Post from './post/[post]'
+import { ErrorBoundary } from '../components/ErrorBoundary'
 
 type Props = {
   post: string
@@ -16,7 +17,10 @@ type State = {
 //begaes: 628e108820eaae000f00a887
 function Home() {
     return (
-      <Post />
+      <ErrorBoundary>
+
+        <Post />
+      </ErrorBoundary>
     )
 }
 export default Home;
