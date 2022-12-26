@@ -17,10 +17,7 @@ type State = {
 //begaes: 628e108820eaae000f00a887
 function Home() {
     return (
-      <ErrorBoundary>
-
         <Post />
-      </ErrorBoundary>
     )
 }
 export default Home;

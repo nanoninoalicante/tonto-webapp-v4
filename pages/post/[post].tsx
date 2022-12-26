@@ -6,6 +6,7 @@ import { GlobalPlayer } from '../../components/Player/GlobalPlayer'
 import DefaultErrorPage from 'next/error'
 import Head from 'next/head'
 import PostNotFound from '../../components/PostNotFound'
+import { ErrorBoundary } from '../../components/ErrorBoundary'
 
 //santeetji: 62b131b4db1ec8000f04084e
 //begaes: 628e108820eaae000f00a887
@@ -118,34 +119,36 @@ export const getServerSideProps = async (context: any) => {
 const Post = (props: any) => {
     console.log(props.data)
     return (
-        props.data?.uuid !== "" ?
-            <div>
-                <MetaTags />
-                <main >
-                    <React.Fragment>
-                        <PrimaryHeader />
-                        <PrimaryPost
-                            data={props.data}
-                            page={props.page}
-                            back={props.back}
-                            next={props.next}
-                            existsId={props.existsId}
-                        />
-                        <GlobalPlayer
-                            data={props.data}
-                            page={props.page}
-                            back={props.back}
-                            next={props.next}
-                            existsId={props.existsId} />
-                    </React.Fragment>
-                </main>
-            </div> : 
-            <>
-                <Head>
-                    <meta name="robots" content='noindex' />
-                </Head>
-                <PostNotFound randomId={props.randomId}/>
-            </>
+        <ErrorBoundary>
+            {props.data?.uuid !== "" ?
+                <div>
+                    <MetaTags />
+                    <main >
+                        <React.Fragment>
+                            <PrimaryHeader />
+                            <PrimaryPost
+                                data={props.data}
+                                page={props.page}
+                                back={props.back}
+                                next={props.next}
+                                existsId={props.existsId}
+                            />
+                            <GlobalPlayer
+                                data={props.data}
+                                page={props.page}
+                                back={props.back}
+                                next={props.next}
+                                existsId={props.existsId} />
+                        </React.Fragment>
+                    </main>
+                </div> : 
+                <>
+                    <Head>
+                        <meta name="robots" content='noindex' />
+                    </Head>
+                    <PostNotFound randomId={props.randomId}/>
+                </>}
+        </ErrorBoundary>
     )
 }
 
