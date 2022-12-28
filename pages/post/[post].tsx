@@ -142,10 +142,12 @@ const Post = (props: any) => {
                     </main>
                 </div> :
                 <>
-                    <Head>
-                        <meta name="robots" content='noindex' />
-                    </Head>
-                    <PostNotFound randomId={props.randomId} />
+                    <div className='flex justify-center'>
+                        <Head>
+                            <meta name="robots" content='noindex' />
+                        </Head>
+                        <PostNotFound randomId={props.randomId} />
+                    </div>
                 </>}
         </>
     )

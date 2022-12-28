@@ -9,7 +9,7 @@ const PostNotFound = (props: any) => {
     return (
         <>
             <PrimaryHeader />
-            <div className="mx-full mt-28 justify-center bg-white rounded-b-xl">
+            <div className="fixed md:w-[50%] w-full mt-28 bg-white rounded-b-xl">
                 <div className="flex flex-col justify-center items-center">
                     <img src="/flex-ui-assets/images/tontoprofile_defualt.png" className="my-7 rounded-full w-24 h-24 bg-slate-300" />
                     <div className="">Audio not found</div>
