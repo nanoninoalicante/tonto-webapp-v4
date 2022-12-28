@@ -7,6 +7,7 @@ import Next10 from "../../public/flex-ui-assets/player/next10.svg"
 import Redo10 from "../../public/flex-ui-assets/player/redo10.svg"
 import Next from "../../public/flex-ui-assets/player/next.svg"
 import Back from "../../public/flex-ui-assets/player/back.svg"
+import { FaVolumeUp } from "react-icons/fa"
 
 const GlobalPlayer = (props: any) => {
     // state
@@ -14,6 +15,7 @@ const GlobalPlayer = (props: any) => {
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [speed, setSpeed] = useState(1);
+    const [volume, setVolume] = useState(false)
     // references
     const audioPlayer: any = useRef(null);
     const hlsRef: any = useRef()
@@ -30,14 +32,14 @@ const GlobalPlayer = (props: any) => {
 
 
     useEffect(() => {
-        if(Hls.isSupported()){
+        if (Hls.isSupported()) {
             if (hlsRef?.current) {
                 hlsRef.current.destroy()
             }
-            if (audioPlayer?.current) {   
+            if (audioPlayer?.current) {
                 const config = {
                     enableWorker: false
-                }             
+                }
                 hlsRef.current = new Hls(config);
                 hlsRef.current.attachMedia(audioPlayer.current);
                 hlsRef.current.on(Hls.Events.MEDIA_ATTACHED, () => {
@@ -48,9 +50,9 @@ const GlobalPlayer = (props: any) => {
                             setDuration(duration);
                             setCurrentTime(0);
                         })
-                    }); 
+                    });
                 })
-            }            
+            }
         } else {
             audioPlayer.current.src = props.data?.streamingUrl;
             setDuration(duration);
@@ -119,14 +121,22 @@ const GlobalPlayer = (props: any) => {
     }
 
     const handleBack = () => {
-        if(props.back)
-            window.location.href = `/post/${props.back}` 
+        if (props.back)
+            window.location.href = `/post/${props.back}`
     }
 
     const handleNext = () => {
-        if(props.next)
-            window.location.href = `/post/${props.next}` 
+        if (props.next)
+            window.location.href = `/post/${props.next}`
         //router.push(`/post/${props.props.data.next}`)      
+    }
+
+    const toggleVolume = () => {
+        setVolume(!volume)
+    }
+
+    const handleVolume = () => {
+        return <progress />
     }
 
     const handleSpeed = () => {
@@ -176,7 +186,7 @@ const GlobalPlayer = (props: any) => {
                     <Next size={30} />
                 </button>
             </div>
-            <div className="flex flex-row justify-center mb-2">
+            <div className="flex flex-row justify-center items-center mb-2 gap-4">
                 {/* SPEED CONTROL */}
                 <button onClick={handleSpeed} className="w-14 border-2 border-gray-600 rounded-full">
                     {
@@ -187,6 +197,14 @@ const GlobalPlayer = (props: any) => {
                         }[speed]
                     }
                 </button>
+                <div className="flex flex-row justify-center items-center gap-2 border hover:border-teal-500 rounded-xl p-2">
+                    <button onClick={toggleVolume} className=" ">
+                        <FaVolumeUp />
+                    </button>
+                    <>
+                        {volume && <progress className="flex items-center" />}
+                    </>
+                </div>
             </div>
             <div className="flex flex-row justify-center font-mono items-center w-full py-0 px-0 mb-2">
 
