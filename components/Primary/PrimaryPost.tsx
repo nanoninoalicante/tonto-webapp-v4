@@ -27,20 +27,18 @@ export const getServerSideProps = (props: any) => {
 }
 const PrimaryPost = (props: any) => {
     let post = props.data;
-    const exists = props.existsId;
     const [userData, setUserData] = useState(post?.userInfo)
 
-    /* useEffect(() => {
-        setUserData(post?.userInfo)
+    useEffect(() => {
         console.log(userData)
         if (userData.profileImg === "")
-            setUserData({ ...post, user: { profileImg: "/flex-ui-assets/images/tontoprofile_defualt.png" } })
-    }, [userData?.id]) */
+            setUserData({ ...userData,profileImg: "/flex-ui-assets/images/tontoprofile_defualt.png" })
+    }, [])
 
 
     return (
             userData?.id !== "" ?
-                <div className="fixed w-full mt-28 justify-center bg-white rounded-b-xl">
+                <div className="fixed md:w-[50%] w-full md:relative mt-28 grid justify-self-center bg-white rounded-b-xl">
                     <div className="flex flex-col justify-center items-center border-b-2">
                         <img
                             className="my-7 rounded-full w-24 h-24"

@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import {GlobalPlayer} from '../components/Player/GlobalPlayer'
 import Link from 'next/link'
 import Post from './post/[post]'
-import { ErrorBoundary } from '../components/ErrorBoundary'
 
 type Props = {
   post: string

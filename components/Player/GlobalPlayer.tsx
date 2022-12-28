@@ -157,7 +157,7 @@ const GlobalPlayer = (props: any) => {
     }
 
     return (
-        <div className="fixed bottom-0 z-50 w-full bg-white rounded-t-xl">
+        <div className="fixed bottom-0 z-50 w-full md:w-[50%] bg-white rounded-t-xl">
             <div className="flex flex-row justify-center items-center w-full my-2">
                 <audio ref={audioPlayer} preload="metadata" />
 
@@ -197,14 +197,14 @@ const GlobalPlayer = (props: any) => {
                         }[speed]
                     }
                 </button>
-                <div className="flex flex-row justify-center items-center gap-2 border hover:border-teal-500 rounded-xl p-2">
+                {/* <div className="static flex flex-row justify-center items-center gap-2 border hover:border-teal-500 rounded-xl p-2">
                     <button onClick={toggleVolume} className=" ">
                         <FaVolumeUp />
                     </button>
                     <>
-                        {volume && <progress className="flex items-center" />}
+                        <progress className="rounded-lg border" />
                     </>
-                </div>
+                </div> */}
             </div>
             <div className="flex flex-row justify-center font-mono items-center w-full py-0 px-0 mb-2">
 

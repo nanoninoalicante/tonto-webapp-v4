@@ -122,7 +122,7 @@ const Post = (props: any) => {
             {props.data?.uuid !== "" ?
                 <div>
                     <MetaTags />
-                    <main >
+                    <main className='flex justify-center'>
                         <React.Fragment>
                             <PrimaryHeader />
                             <PrimaryPost
