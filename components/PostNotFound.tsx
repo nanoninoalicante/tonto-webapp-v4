@@ -6,12 +6,7 @@ const PostNotFound = (props: any) => {
     const handleRandom = () => {
         window.location.href = `/post/${props?.randomId}`
     }
-
-    const handleClick = (uuid) => {
-        window.location.href = `/post/${uuid}`
-    }
-
-    console.log(props)
+    
     return (
         <>
             <PrimaryHeader />

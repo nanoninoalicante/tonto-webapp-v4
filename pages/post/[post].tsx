@@ -51,7 +51,6 @@ export const getServerSideProps = async (context: any) => {
     await fetch(url, { method: "GET" })
         .then((response) => response.json())
         .then(async (data) => {
-            console.log(data)
             server.data = data.data[0] || postData
             if (!server.data.uuid) {
                 server.existsId = false
@@ -116,7 +115,6 @@ export const getServerSideProps = async (context: any) => {
 };
 
 const Post = (props: any) => {
-    console.log(props)
     return (
         <>
             {props.data?.uuid !== "" ?
