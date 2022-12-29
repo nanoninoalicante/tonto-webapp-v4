@@ -43,13 +43,15 @@ export const getServerSideProps = async (context: any) => {
         back: 0,
         next: 0,
         existsId: true,
-        randomId: 0
+        randomId: 0,
+        posts: []
     }
 
     const url = `${process.env.WEBFEED_DEV_BASE}${post}${process.env.API_END}`;
     await fetch(url, { method: "GET" })
         .then((response) => response.json())
         .then(async (data) => {
+            console.log(data)
             server.data = data.data[0] || postData
             if (!server.data.uuid) {
                 server.existsId = false
@@ -57,8 +59,7 @@ export const getServerSideProps = async (context: any) => {
                 await fetch(urlUuid, { method: "GET" })
                     .then((response) => response.json())
                     .then((data) => {
-                        let random = Math.floor(Math.random() * data.numberOfItems)
-                        server.randomId = data.data[random]?.uuid
+                        server.posts = data.data
                     })
                     .catch((error) => {
                         console.log(error)
@@ -79,7 +80,6 @@ export const getServerSideProps = async (context: any) => {
      */
     async function getUuids() {
         const limit = 150
-        console.log(server.data?.userInfo)
         if (server.data?.userInfo.id !== "") {
             const urlUuid = `${process.env.FEED_DEV_BASE}${server.data.userInfo.id}/profile${process.env.API_END}&limit=${limit}&page=${server.page}`;
             await fetch(urlUuid, { method: "GET" })
@@ -116,7 +116,7 @@ export const getServerSideProps = async (context: any) => {
 };
 
 const Post = (props: any) => {
-    console.log(props.data)
+    console.log(props)
     return (
         <>
             {props.data?.uuid !== "" ?
@@ -146,7 +146,7 @@ const Post = (props: any) => {
                         <Head>
                             <meta name="robots" content='noindex' />
                         </Head>
-                        <PostNotFound randomId={props.randomId} />
+                        <PostNotFound randomId={props.randomId} posts={props.posts}/>
                     </div>
                 </>}
         </>
