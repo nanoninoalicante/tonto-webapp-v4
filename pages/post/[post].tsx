@@ -72,7 +72,7 @@ export const getServerSideProps = async (context: any) => {
         })
 
 
-    server.data.uuid && await getUuids();
+    server.data.uuid && await getUuids()
 
     /**
      * It gets the next and back post uuid from the server
