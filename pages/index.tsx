@@ -1,8 +1,5 @@
 
 import React from 'react'
-import { useRouter } from 'next/router'
-import {GlobalPlayer} from '../components/Player/GlobalPlayer'
-import Link from 'next/link'
 import Post from './post/[post]'
 
 type Props = {
