@@ -30,7 +30,6 @@ const PrimaryPost = (props: any) => {
     const [userData, setUserData] = useState(post?.userInfo)
 
     useEffect(() => {
-        console.log(userData)
         if (userData?.profileImg === "")
             setUserData({ ...userData,profileImg: "/flex-ui-assets/images/tontoprofile_defualt.png" })
     }, [])
