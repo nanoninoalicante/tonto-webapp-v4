@@ -1,6 +1,7 @@
 import PrimaryHeader from "./Primary/PrimaryHeader";
 import { FaRandom } from "react-icons/fa"
 import Link from "next/link";
+import PostsList from "./PostsList";
 
 const PostNotFound = (props: any) => {
     const handleRandom = () => {
@@ -23,18 +24,7 @@ const PostNotFound = (props: any) => {
             <div className="fixed md:bottom-[50%] bottom-[20em] md:w-[50%] w-full max-h-[5em]">
                 <div className="bg-teal-500 rounded-t-xl text-white font-bold text-lg px-3">Posts</div>
                 <ul className="divide-y divide-slate-200 md:max-h-[25em] max-h-[15em] shadow-lg overflow-scroll no-scrollbar bg-white rounded-b-xl">
-                    {props.posts.map((post, i) => {
-                        if (post.userInfo.profileImg === "") post.userInfo.profileImg = "/flex-ui-assets/images/tontoprofile_defualt.png"
-                        return (
-                            <Link href={`/post/${post.uuid}`} key={i} className="flex flex-row p-3 hover:bg-teal-50" >
-                                <img className="rounded-full" width={75} height={75} src={post.userInfo.profileImg}></img>
-                                <div className="ml-3">
-                                    <div className="underline">{post.userInfo.userName}</div>
-                                    <div className="max-h-10 text-xs my-2 text-gray-500 truncate">{post.description}</div>
-                                </div>
-                            </Link>
-                        )
-                    })}
+                    <PostsList props={props.post} />
                 </ul>
             </div>
         </>
