@@ -197,14 +197,6 @@ const GlobalPlayer = (props: any) => {
                         }[speed]
                     }
                 </button>
-                {/* <div className="static flex flex-row justify-center items-center gap-2 border hover:border-teal-500 rounded-xl p-2">
-                    <button onClick={toggleVolume} className=" ">
-                        <FaVolumeUp />
-                    </button>
-                    <>
-                        <progress className="rounded-lg border" />
-                    </>
-                </div> */}
             </div>
             <div className="flex flex-row justify-center font-mono items-center w-full py-0 px-0 mb-2">
 
