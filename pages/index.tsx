@@ -48,7 +48,6 @@ function Home() {
                     <div className="p-2 w-1/3">
                         <div className="text-center">
                             <p className="mb-1 text-xs text-coolGray-900 font-semibold">
-
                             </p>
                             <p className="text-xs text-coolGray-400 font-medium">
                                 Shared
