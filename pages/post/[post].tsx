@@ -120,7 +120,7 @@ const Post = (props: any) => {
         <>
             {props.data?.uuid !== "" ?
                 <div>
-                    <MetaTags data={props.data}/>
+                    <MetaTags data={props.data} />
                     <main className='flex justify-center'>
                         <React.Fragment>
                             <PrimaryHeader />
@@ -145,7 +145,7 @@ const Post = (props: any) => {
                         <Head>
                             <meta name="robots" content='noindex' />
                         </Head>
-                        <PostNotFound randomId={props.randomId} posts={props.posts}/>
+                        <PostNotFound randomId={props.randomId} posts={props.posts} />
                     </div>
                 </>}
         </>
