@@ -47,14 +47,15 @@ export const getServerSideProps = async (context: any) => {
         posts: []
     }
 
-    const url = `${process.env.WEBFEED_DEV_BASE}${post}${process.env.API_END}`;
+    const url = `${process.env.WEBFEED_BASE}${post}${process.env.API_END}`;
+    console.log(url)
     await fetch(url, { method: "GET" })
         .then((response) => response.json())
         .then(async (data) => {
             server.data = data.data[0] || postData
             if (!server.data.uuid) {
                 server.existsId = false
-                const urlUuid = `${process.env.FEED_DEV_BASE}/profile${process.env.API_END}&limit=150&page=1`;
+                const urlUuid = `${process.env.FEED_BASE}/profile${process.env.API_END}&limit=150&page=1`;
                 await fetch(urlUuid, { method: "GET" })
                     .then((response) => response.json())
                     .then((data) => {
@@ -80,7 +81,7 @@ export const getServerSideProps = async (context: any) => {
     async function getUuids() {
         const limit = 150
         if (server.data?.userInfo.id !== "") {
-            const urlUuid = `${process.env.FEED_DEV_BASE}${server.data.userInfo.id}/profile${process.env.API_END}&limit=${limit}&page=${server.page}`;
+            const urlUuid = `${process.env.FEED_BASE}${server.data.userInfo.id}/profile${process.env.API_END}&limit=${limit}&page=${server.page}`;
             await fetch(urlUuid, { method: "GET" })
                 .then((response) => response.json())
                 .then((profile) => {
