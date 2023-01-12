@@ -3,7 +3,8 @@ import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key } 
 
 
 const PostsList = (props: any) => {
-    return(
+    return (
+        props?.posts &&
         props?.posts.map((post: any, i: number) => {
             if (post.userInfo.profileImg === "") post.userInfo.profileImg = "/flex-ui-assets/images/tontoprofile_defualt.png"
             return (

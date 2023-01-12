@@ -48,7 +48,6 @@ export const getServerSideProps = async (context: any) => {
     }
 
     const url = `${process.env.WEBFEED_BASE}${post}${process.env.API_END}`;
-    console.log(url)
     await fetch(url, { method: "GET" })
         .then((response) => response.json())
         .then(async (data) => {
