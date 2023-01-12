@@ -37,7 +37,7 @@ const PrimaryPost = (props: any) => {
 
     return (
             userData?.id !== "" ?
-                <div className="fixed md:w-[50%] w-full mt-28  bg-white rounded-b-xl">
+                <div className="fixed md:w-[50%] w-full mt-28  bg-white dark:bg-gray-800 rounded-b-xl">
                     <div className="flex flex-col justify-center items-center border-b-2">
                         <img
                             className="my-7 rounded-full w-24 h-24"
@@ -51,7 +51,7 @@ const PrimaryPost = (props: any) => {
                             {post?.description}
                         </h3>
                     </div>
-                    <div className="flex  pt-1 pb-1 rounded-b">
+                    <div className="flex pt-1 pb-1 rounded-b">
                         <div className="p-2 w-1/3">
                             <div className="text-center">
                                 <p className="mb-1 text-xs text-coolGray-900 font-semibold">

@@ -24,4 +24,6 @@ module.exports = {
     require('@material-tailwind/react'),
     require('@tailwindcss/line-clamp'),
   ],
+  darkMode: "class"
+
 }
