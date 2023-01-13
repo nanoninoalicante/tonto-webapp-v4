@@ -1,6 +1,7 @@
 import { redirect } from "next/dist/server/api-utils";
 import React, { Component } from "react";
 import { useEffect, useState } from "react";
+import Heart from "../../public/flex-ui-assets/heart.svg"
 
 interface Props {
     postId: string;
@@ -37,8 +38,8 @@ const PrimaryPost = (props: any) => {
 
     return (
             userData?.id !== "" ?
-                <div className="fixed md:w-[50%] w-full mt-28 bg-white rounded-b-xl">
-                    <div className="flex flex-col justify-center items-center border-b-2">
+                <div className="fixed md:w-[50%] w-full mt-28 bg-white rounded-b-lg">
+                    <div className="flex flex-col justify-center items-center">
                         <img
                             className="my-7 rounded-full w-24 h-24"
                             src={userData?.profileImg}
@@ -51,16 +52,14 @@ const PrimaryPost = (props: any) => {
                             {post?.description}
                         </h3>
                     </div>
-                    <div className="flex pt-1 pb-1 rounded-b">
-                        <div className="p-2 w-1/3">
-                            <div className="text-center">
+                    <div className="flex text-white rounded-lg">
+                        <div className="p-2 w-1/3 bg-[#ff3a73] rounded-l-lg flex flex-row justify-center items-center">
+                                <Heart className="h-10 w-10"/>
                                 <p className="mb-1 text-xs text-coolGray-900 font-semibold">
                                     {post?.likesCount}
                                 </p>
-                                <p className="text-xs text-coolGray-400 font-medium">Likes</p>
-                            </div>
                         </div>
-                        <div className="p-2 w-1/3">
+                        <div className="p-2 w-1/3 bg-[#019f91]">
                             <div className="text-center">
                                 <p className="mb-1 text-xs text-coolGray-900 font-semibold">
                                     {post?.commentsCount}
@@ -70,7 +69,7 @@ const PrimaryPost = (props: any) => {
                                 </p>
                             </div>
                         </div>
-                        <div className="p-2 w-1/3">
+                        <div className="p-2 w-1/3 bg-[#ffbf01] rounded-r-lg">
                             <div className="text-center">
                                 <p className="mb-1 text-xs text-coolGray-900 font-semibold">
                                     {post?.shareCount}
