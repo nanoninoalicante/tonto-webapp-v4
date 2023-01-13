@@ -6,6 +6,10 @@ import { GlobalPlayer } from '../../components/Player/GlobalPlayer'
 import DefaultErrorPage from 'next/error'
 import Head from 'next/head'
 import PostNotFound from '../../components/PostNotFound'
+import Sun from '../../public/flex-ui-assets/sun.svg'
+import Moon from '../../public/flex-ui-assets/moon.svg'
+import Floot from '../../public/flex-ui-assets/floating.svg'
+
 
 //santeetji: 62b131b4db1ec8000f04084e
 //begaes: 628e108820eaae000f00a887
@@ -136,6 +140,10 @@ const Post = (props: any) => {
                                 back={props.back}
                                 next={props.next}
                                 existsId={props.existsId} />
+                            <div className="text-white sm:hidden flex flex-row items-center text-sm absolute bottom-0 z-50 px-4 w-full h-10 bg-black opacity-70 shadow-lg mouse transition ease-in duration-200 focus:outline-none">
+                                <span className='flex-col'>Get the full experience on the app</span>
+                                <button className='flex-col ml-auto bg-teal-500 px-2 py-1 rounded-md'>Open</button>
+                            </div>
                         </React.Fragment>
                     </main>
                 </div> :
