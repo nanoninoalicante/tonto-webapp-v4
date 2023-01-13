@@ -3,13 +3,13 @@ import React from "react"
 import PrimaryHeader from '../../components/Primary/PrimaryHeader'
 import PrimaryPost from '../../components/Primary/PrimaryPost'
 import { GlobalPlayer } from '../../components/Player/GlobalPlayer'
-import DefaultErrorPage from 'next/error'
 import Head from 'next/head'
 import PostNotFound from '../../components/PostNotFound'
 import Sun from '../../public/flex-ui-assets/sun.svg'
 import Moon from '../../public/flex-ui-assets/moon.svg'
 import Floot from '../../public/flex-ui-assets/floating.svg'
 import Link from 'next/link'
+import Comments from '../../components/Comments'
 
 
 //santeetji: 62b131b4db1ec8000f04084e
@@ -59,30 +59,23 @@ export const getServerSideProps = async (context: any) => {
             server.data = data.data[0] || postData
             if (!server.data.uuid) {
                 server.existsId = false
-                const urlUuid = `${process.env.FEED_BASE}/profile${process.env.API_END}&limit=150&page=1`;
-                await fetch(urlUuid, { method: "GET" })
+                await fetch(`${process.env.FEED_BASE}/profile${process.env.API_END}&limit=150&page=1`, { method: "GET" })
                     .then((response) => response.json())
-                    .then((data) => {
-                        server.posts = data.data
-                    })
-                    .catch((error) => {
-                        console.log(error)
-                    })
+                    .then((data) => { server.posts = data.data })
+                    .catch((error) => { console.log(error) })
             } else {
                 server.existsId = true;
             }
         })
-        .catch(error => {
-            console.log(error)
-        })
+        .catch(error => { console.log(error) })
 
-
-    server.data.uuid && await getUuids()
-
-    /**
-     * It gets the next and back post uuid from the server
-     */
-    async function getUuids() {
+        server.data.uuid && await getUuids()
+        
+        /**
+         * It gets the next and back post uuid from the server
+        */
+       async function getUuids() {
+        console.log(server.data)
         const limit = 150
         if (server.data?.userInfo.id !== "") {
             const urlUuid = `${process.env.FEED_BASE}${server.data.userInfo.id}/profile${process.env.API_END}&limit=${limit}&page=${server.page}`;
@@ -111,9 +104,7 @@ export const getServerSideProps = async (context: any) => {
                         console.log("error: ", profile)
                     }
                 })
-                .catch((error) => {
-                    console.log(error)
-                })
+                .catch((error) => { console.log(error) })
         }
     }
     return { props: server }
@@ -135,6 +126,7 @@ const Post = (props: any) => {
                                 next={props.next}
                                 existsId={props.existsId}
                             />
+                            <Comments />
                             <GlobalPlayer
                                 data={props.data}
                                 page={props.page}
