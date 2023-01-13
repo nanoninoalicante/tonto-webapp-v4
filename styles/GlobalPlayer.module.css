@@ -16,7 +16,7 @@
   
   /* progress bar - safari */
   .progressBar::-webkit-slider-runnable-track {
-    background: var(--bar-bg);;
+    background: var(--bar-bg);
     border-radius: 10px;
     position: relative;
     width: 15em;
@@ -26,7 +26,7 @@
   
   /* progress bar - firefox */
   .progressBar::-moz-range-track {
-    background: var(--bar-bg);;
+    background: var(--bar-bg);
     border-radius: 10px;
     position: relative;
     width: 15em;
@@ -78,7 +78,7 @@
   
   /* knobby while dragging - chrome and safari */
   .progressBar:active::-webkit-slider-thumb {
-    transform: scale(2);
+    transform: scale(1.4);
     background: var(--selectedKnobby);
   }
   
@@ -97,6 +97,6 @@
   
   /* knobby while dragging - firefox */
   .progressBar:active::-moz-range-thumb {
-    transform: scale(2);
+    transform: scale(1.4);
     background: var(--selectedKnobby);
   }

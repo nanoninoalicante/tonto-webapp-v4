@@ -15,10 +15,10 @@ const GlobalPlayer = (props: any) => {
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [speed, setSpeed] = useState(1);
-    const [volume, setVolume] = useState(false)
+    const [volume, setVolume] = useState(false);
     // references
     const audioPlayer: any = useRef(null);
-    const hlsRef: any = useRef()
+    const hlsRef: any = useRef();
     const progressBar: any = useRef();
     const animationRef: any = useRef();
 
@@ -26,10 +26,7 @@ const GlobalPlayer = (props: any) => {
         const seconds = Math.floor(audioPlayer.current.duration)
         setDuration(seconds)
         progressBar.current.max = seconds
-
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
-
-
 
     useEffect(() => {
         if (Hls.isSupported()) {
@@ -67,6 +64,7 @@ const GlobalPlayer = (props: any) => {
 
             if (play !== undefined) {
                 play.then(() => {
+                    progressBar.current.value = audioPlayer.current.currentTime
                     animationRef.current = requestAnimationFrame(whilePlaying)
                 }).catch((error: any) => {
                     console.log(error)
@@ -86,8 +84,8 @@ const GlobalPlayer = (props: any) => {
 
     const whilePlaying = () => {
         progressBar.current.value = audioPlayer.current.currentTime
-        changePlayerCurrentTime();
         animationRef.current = requestAnimationFrame(whilePlaying)
+        changePlayerCurrentTime();
     }
 
     const calculateTime = (secs: number) => {
@@ -127,8 +125,7 @@ const GlobalPlayer = (props: any) => {
 
     const handleNext = () => {
         if (props.next)
-            window.location.href = `/post/${props.next}`
-        //router.push(`/post/${props.props.data.next}`)      
+            window.location.href = `/post/${props.next}` 
     }
 
     const toggleVolume = () => {
