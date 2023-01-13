@@ -141,9 +141,10 @@ const Post = (props: any) => {
                                 back={props.back}
                                 next={props.next}
                                 existsId={props.existsId} />
-                            <Link href={"https://gettonto.com"} className="text-white sm:hidden flex flex-row items-center text-lg absolute bottom-0 z-50 px-4 w-full h-14 bg-black opacity-70 shadow-lg mouse transition ease-in duration-200 focus:outline-none">
+                            <div className="text-white sm:hidden flex flex-row items-center text-lg absolute bottom-0 z-50 px-4 w-full h-[4rem] bg-black opacity-70 shadow-lg mouse transition ease-in duration-200 focus:outline-none">
                                 <span className='flex-col'>Get the full experience...</span>
-                            </Link>
+                                <Link href={"https://gettonto.com"} className='flex-col ml-auto bg-teal-500 px-4 py-2 rounded-md'>Open</Link>
+                            </div>
                         </React.Fragment>
                     </main>
                 </div> :
