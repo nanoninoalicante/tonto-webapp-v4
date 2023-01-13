@@ -6,9 +6,6 @@ export default function PrimaryHeader() {
             <img loading="lazy" className="h-8"
                 src="/flex-ui-assets/logos/tonto_logotipo_horizontal_white@2x.png"
                 alt="tonto_logo" />
-            <Link href={"https://gettonto.com"} className="absolute bg-white rounded-xl mr-5 p-2 text-teal-500 justify-self-end justify-items-center border-2 border-teal-600 hover:">
-                Get Tonto
-            </Link>
         </div>
     )
 }
