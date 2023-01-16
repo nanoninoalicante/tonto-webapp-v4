@@ -7,7 +7,6 @@ import Next10 from "../../public/flex-ui-assets/player/next10.svg"
 import Redo10 from "../../public/flex-ui-assets/player/redo10.svg"
 import Next from "../../public/flex-ui-assets/player/next.svg"
 import Back from "../../public/flex-ui-assets/player/back.svg"
-import { FaVolumeUp } from "react-icons/fa"
 
 const GlobalPlayer = (props: any) => {
     // state
@@ -154,7 +153,7 @@ const GlobalPlayer = (props: any) => {
     }
 
     return (
-        <div className="fixed bottom-[4rem] sm:bottom-0 z-50 w-full md:w-[50%] bg-white rounded-t-xl">
+        <div className="fixed bottom-[4rem] sm:bottom-0 z-50 w-full md:w-[50%] bg-white dark:bg-[#5f5f5f] rounded-t-xl">
             <div className="flex flex-row justify-center items-center w-full my-2">
                 <audio ref={audioPlayer} preload="metadata" />
 

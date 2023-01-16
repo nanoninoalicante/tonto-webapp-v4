@@ -6,8 +6,6 @@ import { GlobalPlayer } from '../../components/Player/GlobalPlayer'
 import DefaultErrorPage from 'next/error'
 import Head from 'next/head'
 import PostNotFound from '../../components/PostNotFound'
-import Sun from '../../public/flex-ui-assets/sun.svg'
-import Moon from '../../public/flex-ui-assets/moon.svg'
 import Floot from '../../public/flex-ui-assets/floating.svg'
 import Link from 'next/link'
 

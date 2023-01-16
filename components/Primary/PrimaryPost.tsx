@@ -38,7 +38,7 @@ const PrimaryPost = (props: any) => {
 
     return (
             userData?.id !== "" ?
-                <div className="fixed md:w-[50%] w-full mt-28 bg-white rounded-b-lg">
+                <div className="fixed md:w-[50%] w-full mt-28 rounded-b-lg bg-white dark:bg-[#5f5f5f]">
                     <div className="flex flex-col justify-center items-center">
                         <img
                             className="my-7 rounded-full w-24 h-24"
@@ -53,9 +53,9 @@ const PrimaryPost = (props: any) => {
                         </h3>
                     </div>
                     <div className="flex text-white rounded-lg">
-                        <div className="p-2 w-1/3 bg-[#ff3a73] rounded-l-lg flex flex-row justify-center items-center">
-                                <Heart className="h-10 w-10"/>
-                                <p className="mb-1 text-xs text-coolGray-900 font-semibold">
+                        <div className="p-2 w-1/3 bg-[#ff3a73] rounded-l-lg flex flex-row justify-center items-center gap-2">
+                                <Heart className="h-8 w-8"/>
+                                <p className="mb-1 mt-1 text-xs text-coolGray-900 font-semibold">
                                     {post?.likesCount}
                                 </p>
                         </div>
