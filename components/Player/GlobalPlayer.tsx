@@ -1,20 +1,25 @@
 import React, { useEffect, useState, useRef } from "react"
 import style from "../../styles/GlobalPlayer.module.css"
 import Hls from "hls.js"
-import Play from "../../public/flex-ui-assets/player/play.svg"
-import Pause from "../../public/flex-ui-assets/player/pause.svg"
-import Next10 from "../../public/flex-ui-assets/player/next10.svg"
-import Redo10 from "../../public/flex-ui-assets/player/redo10.svg"
-import Next from "../../public/flex-ui-assets/player/next.svg"
-import Back from "../../public/flex-ui-assets/player/back.svg"
+import Play from "../../public/flex-ui-assets/player/play"
+import Pause from "../../public/flex-ui-assets/player/pause"
+import Next10 from "../../public/flex-ui-assets/player/next10"
+import Redo10 from "../../public/flex-ui-assets/player/redo10"
+import Next from "../../public/flex-ui-assets/player/next"
+import Back from "../../public/flex-ui-assets/player/back"
+import { useTheme } from 'next-themes'
+
+
 
 const GlobalPlayer = (props: any) => {
+    const { theme, systemTheme } = useTheme();
+    const currentTheme = theme === "system" ? systemTheme : theme;
     // state
     const [isPlaying, setIsPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [speed, setSpeed] = useState(1);
-    const [volume, setVolume] = useState(false);
+    
     // references
     const audioPlayer: any = useRef(null);
     const hlsRef: any = useRef();
@@ -27,6 +32,7 @@ const GlobalPlayer = (props: any) => {
         progressBar.current.max = seconds
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
+    console.log(currentTheme)
     useEffect(() => {
         if (Hls.isSupported()) {
             if (hlsRef?.current) {
@@ -127,14 +133,6 @@ const GlobalPlayer = (props: any) => {
             window.location.href = `/post/${props.next}` 
     }
 
-    const toggleVolume = () => {
-        setVolume(!volume)
-    }
-
-    const handleVolume = () => {
-        return <progress />
-    }
-
     const handleSpeed = () => {
         switch (speed) {
             case 1:
@@ -159,27 +157,27 @@ const GlobalPlayer = (props: any) => {
 
                 {/* BACK AUDIO */}
                 <button className="p-3 mx-2 rounded-full cursor-pointer" onClick={handleBack} >
-                    <Back size={30} />
+                    <Back  size={30} />
                 </button>
 
                 {/* REDO 10*/}
                 <button className="p-3 mx-2 rounded-full" onClick={handleRedo}>
-                    <Redo10 size={30} />
+                    <Redo10  size={30} />
                 </button>
 
                 {/* PLAY / PAUSE */}
                 <button onClick={togglePlayPause} className="p-3 mx-2 rounded-full">
-                    {isPlaying ? <Pause size={30} /> : <Play size={30} />}
+                    {isPlaying ? <Pause  size={30} /> : <Play  size={30} />}
                 </button>
 
                 {/* NEXT 10 */}
                 <button className="p-3 mx-2 rounded-full" onClick={handleNext10}>
-                    <Next10 size={30} />
+                    <Next10  size={30} />
                 </button>
 
                 {/* NEXT AUDIO */}
                 <button className="p-3 mx-2 rounded-full cursor-pointer" onClick={handleNext}>
-                    <Next size={30} />
+                    <Next  size={30} />
                 </button>
             </div>
             <div className="flex flex-row justify-center items-center mb-2 gap-4">
