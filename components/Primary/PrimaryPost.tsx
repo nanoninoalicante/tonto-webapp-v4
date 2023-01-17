@@ -2,6 +2,8 @@ import { redirect } from "next/dist/server/api-utils";
 import React, { Component } from "react";
 import { useEffect, useState } from "react";
 import Heart from "../../public/flex-ui-assets/heart.svg"
+import Comment from "../../public/flex-ui-assets/comment.svg"
+import Share from "../../public/flex-ui-assets/share.svg"
 
 interface Props {
     postId: string;
@@ -55,29 +57,21 @@ const PrimaryPost = (props: any) => {
                     <div className="flex text-white rounded-lg">
                         <div className="p-2 w-1/3 bg-[#ff3a73] rounded-l-lg flex flex-row justify-center items-center gap-2">
                                 <Heart className="h-8 w-8"/>
-                                <p className="mb-1 mt-1 text-xs text-coolGray-900 font-semibold">
+                                <p className="my-1 text-xs text-coolGray-900 font-semibold">
                                     {post?.likesCount}
                                 </p>
                         </div>
-                        <div className="p-2 w-1/3 bg-[#019f91]">
-                            <div className="text-center">
-                                <p className="mb-1 text-xs text-coolGray-900 font-semibold">
+                        <div className="p-2 w-1/3 bg-[#019f91] flex flex-row justify-center items-center gap-2">
+                                <Comment className="h-8 w-8"/>
+                                <p className="my-1 text-xs text-coolGray-900 font-semibold">
                                     {post?.commentsCount}
                                 </p>
-                                <p className="text-xs text-coolGray-400 font-medium">
-                                    Comments
-                                </p>
-                            </div>
                         </div>
-                        <div className="p-2 w-1/3 bg-[#ffbf01] rounded-r-lg">
-                            <div className="text-center">
-                                <p className="mb-1 text-xs text-coolGray-900 font-semibold">
+                        <div className="p-2 w-1/3 bg-[#ffbf01] rounded-r-lg flex flex-row justify-center items-center gap-2">
+                                <Share className="h-6 w-6"/>
+                                <p className="my-1 text-xs text-coolGray-900 font-semibold">
                                     {post?.shareCount}
                                 </p>
-                                <p className="text-xs text-coolGray-400 font-medium">
-                                    Shared
-                                </p>
-                            </div>
                         </div>
                     </div>
                 </div>

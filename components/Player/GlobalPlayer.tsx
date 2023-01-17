@@ -32,7 +32,6 @@ const GlobalPlayer = (props: any) => {
         progressBar.current.max = seconds
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
-    console.log(currentTheme)
     useEffect(() => {
         if (Hls.isSupported()) {
             if (hlsRef?.current) {

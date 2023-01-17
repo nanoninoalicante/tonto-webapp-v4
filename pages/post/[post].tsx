@@ -3,10 +3,8 @@ import React from "react"
 import PrimaryHeader from '../../components/Primary/PrimaryHeader'
 import PrimaryPost from '../../components/Primary/PrimaryPost'
 import { GlobalPlayer } from '../../components/Player/GlobalPlayer'
-import DefaultErrorPage from 'next/error'
 import Head from 'next/head'
 import PostNotFound from '../../components/PostNotFound'
-import Floot from '../../public/flex-ui-assets/floating.svg'
 import Link from 'next/link'
 
 
