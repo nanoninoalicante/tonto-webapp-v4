@@ -37,42 +37,56 @@ const PrimaryPost = (props: any) => {
             setUserData({ ...userData,profileImg: "/flex-ui-assets/images/tontoprofile_defualt.png" })
     }, [])
 
-
+    console.log(post)
     return (
             userData?.id !== "" ?
-                <div className="fixed md:w-[50%] w-full mt-28 rounded-b-lg bg-white dark:bg-[#5f5f5f]">
-                    <div className="flex flex-col justify-center items-center">
-                        <img
-                            className="my-7 rounded-full w-24 h-24"
-                            src={userData?.profileImg}
-                            alt="avatar"
-                        />
-                        <h2 className="mb-4 text-sm font-medium text-coolGray-900">
-                            {userData?.userName}
-                        </h2>
-                        <h3 className="static mb-4 mx-4 text-xs font-medium max-h-20 text-coolGray-400 overflow-scroll no-scrollbar">
-                            {post?.description}
-                        </h3>
+                <div className="fixed md:w-[50%] w-full mt-28 rounded-t-lg bg-white dark:bg-[#5f5f5f]">
+                    <div className="flex flex-row">
+                        <div className="flex flex-col ml-5">
+                            <img
+                                className="mt-7 mb-4 rounded-full w-24 h-24"
+                                src={userData?.profileImg}
+                                alt="avatar"
+                            />
+                            <h2 className="mb-1 text-medium font-medium text-[#222222]">
+                                @{userData?.userName}
+                            </h2>
+                            <h3 className="text-sm text-[#5F5F5F]">
+                                X followers · X posts
+                            </h3>
+                            <button className="bg-[#109C90] rounded-[4px] text-white text-[14px] w-[64px] py-0.5 mt-1">
+                                follow
+                            </button>
+                        </div>
+                        <div className="flex flex-col justify-around ml-auto mr-5 text-center text-[14px] py-4 gap-2">
+                            <div className="text-[#F54F74]">
+                                <Heart />
+                                {post?.likesCount}
+                            </div>
+                            <div className="text-[#009D9D]">
+                                <Comment />
+                                {post?.commentsCount}
+                            </div>
+                            <div className="text-[#F6C116]">
+                                <Share />
+                                {post?.shareCount}
+                            </div>
+                        </div>
                     </div>
-                    <div className="flex text-white rounded-lg">
-                        <div className="p-2 w-1/3 bg-[#ff3a73] rounded-l-lg flex flex-row justify-center items-center gap-2">
-                                <Heart className="h-8 w-8"/>
-                                <p className="my-1 text-xs text-coolGray-900 font-semibold">
-                                    {post?.likesCount}
-                                </p>
+                    <div className="flex justify-center">
+                        AUDIO BAR
+                    </div>
+                    <div className="w-full relative px-2">
+                        <div className="bg-[#D7D7D7] rounded-[4px] px-2 py-3">
+                            INTERESTS
                         </div>
-                        <div className="p-2 w-1/3 bg-[#019f91] flex flex-row justify-center items-center gap-2">
-                                <Comment className="h-8 w-8"/>
-                                <p className="my-1 text-xs text-coolGray-900 font-semibold">
-                                    {post?.commentsCount}
-                                </p>
-                        </div>
-                        <div className="p-2 w-1/3 bg-[#ffbf01] rounded-r-lg flex flex-row justify-center items-center gap-2">
-                                <Share className="h-6 w-6"/>
-                                <p className="my-1 text-xs text-coolGray-900 font-semibold">
-                                    {post?.shareCount}
-                                </p>
-                        </div>
+                        {/* HERE WILL BE A MAP */}
+                    </div>
+                    <div className="max-h-24 overflow-scroll px-4 text-[14px] text-[#5F5F5F] leading-4 mt-2">
+                        {post.description}
+                    </div>
+                    <div className="px-4 mt-2 text-[12px] text-[#109C90] leading-[14px]">
+                        2 min ago · 12M plays
                     </div>
                 </div>
                 :

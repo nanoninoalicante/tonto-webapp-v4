@@ -1,48 +1,35 @@
 const Play = (props) => {
     return (
         <svg
-            width={50}
-            height={50}
-            viewBox="0 0 50 50"
+            width={59}
+            height={59}
+            viewBox="0 0 59 59"
             xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
+            {...props}
         >
             <defs>
-                <filter
-                    x="-12.5%"
-                    y="-11.2%"
-                    width="125%"
-                    height="122.5%"
-                    filterUnits="objectBoundingBox"
-                    id="a"
-                >
-                    <feOffset in="SourceAlpha" result="shadowOffsetOuter1" />
-                    <feGaussianBlur
-                        stdDeviation={1}
-                        in="shadowOffsetOuter1"
-                        result="shadowBlurOuter1"
-                    />
-                    <feColorMatrix
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
-                        in="shadowBlurOuter1"
-                    />
-                </filter>
-                <path
-                    d="M25.002 2.946 4.894 14.492c-1.19.683-1.193 2.236-.006 2.922l20.108 11.637c1.295.75 3.004-.081 3.004-1.46V4.409c0-1.375-1.703-2.206-2.998-1.462Z"
-                    id="b"
-                />
+                <clipPath id="a">
+                    <path d="M1920 0v1080H0V0h1920Z" />
+                </clipPath>
+                <clipPath id="b">
+                    <path d="M29.5 0C45.792 0 59 13.208 59 29.5S45.792 59 29.5 59 0 45.792 0 29.5 13.208 0 29.5 0Z" />
+                </clipPath>
+                <clipPath id="c">
+                    <path d="m0 0 2.144 1.4L23.58 15.181 2.144 28.962 0 30.362V0Z" />
+                </clipPath>
             </defs>
-            <g fill="none" fillRule="evenodd">
-                <path
-                    d="M25 0c13.807 0 25 11.193 25 25S38.807 50 25 50 0 38.807 0 25 11.193 0 25 0Zm0 2C12.297 2 2 12.297 2 25s10.297 23 23 23 23-10.297 23-23S37.703 2 25 2Z"
-                    fill="#4A4A4A"
-                />
-                <g transform="rotate(180 22 20.5)">
-                    <use fill="#000" filter="url(#a)" xlinkHref="#b" />
-                    <use fill="#4A4A4A" xlinkHref="#b" />
+            <g clipPath="url(#a)" transform="translate(-173 -190)">
+                <g clipPath="url(#b)" transform="translate(173 190)">
+                    <path fill="#3C3C3C" d="M0 0h59v59H0V0z" />
+                </g>
+                <g clipPath="url(#c)" transform="translate(190.8 204.819)">
+                    <path fill="#F7F7F7" d="M0 0h23.581v30.363H0V0z" />
                 </g>
             </g>
         </svg>
+
     )
 }
 export default Play
+
+

@@ -1,5 +1,4 @@
 const Next10 = (props) => {
-  console.log(props)
   return (
     <svg
       className=""

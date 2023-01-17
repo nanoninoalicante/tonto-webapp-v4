@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useRef } from "react"
 import style from "../../styles/GlobalPlayer.module.css"
 import Hls from "hls.js"
-import Play from "../../public/flex-ui-assets/player/play"
-import Pause from "../../public/flex-ui-assets/player/pause"
-import Next10 from "../../public/flex-ui-assets/player/next10"
-import Redo10 from "../../public/flex-ui-assets/player/redo10"
-import Next from "../../public/flex-ui-assets/player/next"
-import Back from "../../public/flex-ui-assets/player/back"
+import Play from "../../public/flex-ui-assets/player/play.svg"
+import Pause from "../../public/flex-ui-assets/player/pause.svg"
+import Next10 from "../../public/flex-ui-assets/player/next10.svg"
+import Redo10 from "../../public/flex-ui-assets/player/redo10.svg"
+import Next from "../../public/flex-ui-assets/player/next.svg"
+import Back from "../../public/flex-ui-assets/player/back.svg"
+import Options from "../../public/flex-ui-assets/player/options.svg"
 import { useTheme } from 'next-themes'
 
 
@@ -19,7 +20,7 @@ const GlobalPlayer = (props: any) => {
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [speed, setSpeed] = useState(1);
-    
+
     // references
     const audioPlayer: any = useRef(null);
     const hlsRef: any = useRef();
@@ -129,7 +130,7 @@ const GlobalPlayer = (props: any) => {
 
     const handleNext = () => {
         if (props.next)
-            window.location.href = `/post/${props.next}` 
+            window.location.href = `/post/${props.next}`
     }
 
     const handleSpeed = () => {
@@ -150,38 +151,12 @@ const GlobalPlayer = (props: any) => {
     }
 
     return (
-        <div className="fixed bottom-[4rem] sm:bottom-0 z-50 w-full md:w-[50%] bg-white dark:bg-[#5f5f5f] rounded-t-xl">
-            <div className="flex flex-row justify-center items-center w-full my-2">
+        <div className="relative sm:bottom-0 z-50 w-full md:w-[50%] bg-white rounded-b-lg dark:bg-[#5f5f5f] rounded-t-xl">
+            <div className="flex flex-row justify-center items-center w-full gap-2">
                 <audio ref={audioPlayer} preload="metadata" />
 
-                {/* BACK AUDIO */}
-                <button className="p-3 mx-2 rounded-full cursor-pointer" onClick={handleBack} >
-                    <Back  size={30} />
-                </button>
-
-                {/* REDO 10*/}
-                <button className="p-3 mx-2 rounded-full" onClick={handleRedo}>
-                    <Redo10  size={30} />
-                </button>
-
-                {/* PLAY / PAUSE */}
-                <button onClick={togglePlayPause} className="p-3 mx-2 rounded-full">
-                    {isPlaying ? <Pause  size={30} /> : <Play  size={30} />}
-                </button>
-
-                {/* NEXT 10 */}
-                <button className="p-3 mx-2 rounded-full" onClick={handleNext10}>
-                    <Next10  size={30} />
-                </button>
-
-                {/* NEXT AUDIO */}
-                <button className="p-3 mx-2 rounded-full cursor-pointer" onClick={handleNext}>
-                    <Next  size={30} />
-                </button>
-            </div>
-            <div className="flex flex-row justify-center items-center mb-2 gap-4">
                 {/* SPEED CONTROL */}
-                <button onClick={handleSpeed} className="w-14 border-2 border-gray-600 rounded-full">
+                <button onClick={handleSpeed} className="p-3">
                     {
                         {
                             1: "1x",
@@ -190,8 +165,38 @@ const GlobalPlayer = (props: any) => {
                         }[speed]
                     }
                 </button>
-            </div>
-            <div className="flex flex-row justify-center font-mono items-center w-full py-0 px-0 mb-2">
+
+                {/* BACK AUDIO */}
+                <button className="p-3 cursor-pointer" onClick={handleBack} >
+                    <Back className="fill-white" size={30} />
+                </button>
+
+                {/* REDO 10*/}
+                <button className="p-3" onClick={handleRedo}>
+                    <Redo10 size={30} />
+                </button>
+
+                {/* PLAY / PAUSE */}
+                <button onClick={togglePlayPause} className="p-3">
+                    {isPlaying ? <Pause size={50} /> : <Play size={100} />}
+                </button>
+
+                {/* NEXT 10 */}
+                <button className="p-3" onClick={handleNext10}>
+                    <Next10 size={30} />
+                </button>
+
+                {/* NEXT AUDIO */}
+                <button className="p-3 cursor-pointer" onClick={handleNext}>
+                    <Next size={30} />
+                </button>
+
+                {/* OPTIONS */}
+                <button>
+                    <Options />
+                </button>
+            </div>                
+            <div className="hidden flex flex-row justify-center font-mono items-center w-full py-0 px-0 mb-2">
 
                 {/* current time */}
                 <div className="p-1 mx-1 rounded-md">
