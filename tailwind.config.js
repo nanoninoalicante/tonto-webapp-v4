@@ -19,10 +19,8 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
     require('@material-tailwind/react'),
-    require('@tailwindcss/line-clamp'),
   ],
   darkMode: "class"
 
