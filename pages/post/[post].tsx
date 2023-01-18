@@ -121,24 +121,26 @@ const Post = (props: any) => {
             {props.data?.uuid !== "" ?
                 <div>
                     <MetaTags data={props.data} />
-                    <main className='grid gris-cols-3 mr-8 justify-center'>
+                    <main className='fixed grid gris-cols-3 justify-center'>
                         <PrimaryHeader />
-                        <PrimaryPost
-                            data={props.data}
-                            page={props.page}
-                            back={props.back}
-                            next={props.next}
-                            existsId={props.existsId}
-                        />
-                        <GlobalPlayer
-                            data={props.data}
-                            page={props.page}
-                            back={props.back}
-                            next={props.next}
-                            existsId={props.existsId} />
-                        <div className="text-white hidden flex flex-row items-center text-lg fixed bottom-0 z-50 px-4 w-full h-[4rem] bg-black opacity-70 shadow-lg mouse transition ease-in duration-200 focus:outline-none">
-                            <span className='flex-col'>Get the full experience...</span>
-                            <Link href={"https://gettonto.com"} className='flex-col ml-auto bg-teal-500 px-4 py-2 rounded-md'>Open</Link>
+                        <div className=''>
+                            <PrimaryPost
+                                data={props.data}
+                                page={props.page}
+                                back={props.back}
+                                next={props.next}
+                                existsId={props.existsId}
+                            />
+                            <GlobalPlayer
+                                data={props.data}
+                                page={props.page}
+                                back={props.back}
+                                next={props.next}
+                                existsId={props.existsId} />
+                            <div className="text-white hidden flex flex-row items-center text-lg fixed bottom-0 z-50 px-4 w-full h-[4rem] bg-black opacity-70 shadow-lg mouse transition ease-in duration-200 focus:outline-none">
+                                <span className='flex-col'>Get the full experience...</span>
+                                <Link href={"https://gettonto.com"} className='flex-col ml-auto bg-teal-500 px-4 py-2 rounded-md'>Open</Link>
+                            </div>
                         </div>
                     </main>
                 </div> :
