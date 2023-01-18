@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply bg-gray-300 dark:bg-[#404140]
+        @apply bg-white  dark:bg-[#3C3C3C]
     }
 }
 

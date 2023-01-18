@@ -17,7 +17,6 @@ export default function PrimaryHeader() {
         if (!mounted) return null
 
         const currentTheme = theme === "system" ? systemTheme : theme;
-        console.log(currentTheme, theme)
         return (
             currentTheme == "dark" ?
                 <Sun onClick={() => { setTheme("light") }} className="absolute mr-3 cursor-pointer bg-white rounded-lg text-teal-500 h-8 w-8 justify-self-end justify-items-center" />
@@ -27,8 +26,9 @@ export default function PrimaryHeader() {
         )
     }
     return (
-        <div className="fixed grid justify-items-start items-center top-10 w-full md:w-[50%] py-5 px-4">
-            <LogoLight />
+        <div className="fixed grid justify-items-start items-center top-0 w-full md:w-[50%] pt-16 px-4 dark:bg-gradient-to-b from-[#6F6F6F] to-[#3C3C3C]">
+            {theme === "dark" ? <LogoDark />:
+                <LogoLight />}
             {renderThemeChanger()}
         </div>
     )

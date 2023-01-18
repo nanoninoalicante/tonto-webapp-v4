@@ -1,1 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?><svg version="1.1" width="25px" height="32px" viewBox="0 0 25.0 32.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><clipPath id="i0"><path d="M1920,0 L1920,1080 L0,1080 L0,0 L1920,0 Z"></path></clipPath><clipPath id="i1"><path d="M2.8,0 L2.8,14.7 L3.4125,14.2625 L21.6125,1.6625 L23.8,0.13125 L23.8,30.66875 L21.6125,29.1375 L3.4125,16.5375 L2.8,16.1 L2.8,30.8 L0,30.8 L0,0 L2.8,0 Z M21,5.46875 L6.65,15.4 L21,25.33125 L21,5.46875 Z"></path></clipPath></defs><g transform="translate(-258.0 -126.0)"><g clip-path="url(#i0)"><g transform="translate(249.0 121.0)"><g transform="translate(33.599999999999994 5.600000000000001) scale(-1.0 1.0)"><g clip-path="url(#i1)"><polygon points="0,0 23.8,0 23.8,30.8 0,30.8 0,0" stroke="none" fill="#3C3C3C"></polygon></g></g></g></g></g></svg>
+<svg width="25" height="32" viewBox="0 0 25 32" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="a">
+      <path d="M1920 0v1080H0V0h1920Z"/>
+    </clipPath>
+    <clipPath id="b">
+      <path d="M2.8 0v14.7l.613-.438 18.2-12.6L23.8.132v30.537l-2.188-1.532-18.2-12.6L2.8 16.1v14.7H0V0h2.8ZM21 5.469 6.65 15.4 21 25.331V5.47Z"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#a)" transform="translate(-258 -126)">
+    <g clip-path="url(#b)" transform="matrix(-1 0 0 1 282.6 126.6)">
+      <path fill="#3C3C3C" d="M0 0h23.8v30.8H0V0z"/>
+    </g>
+  </g>
+</svg>

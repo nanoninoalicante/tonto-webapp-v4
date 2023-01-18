@@ -8,6 +8,13 @@ import Redo10 from "../../public/flex-ui-assets/player/redo10.svg"
 import Next from "../../public/flex-ui-assets/player/next.svg"
 import Back from "../../public/flex-ui-assets/player/back.svg"
 import Options from "../../public/flex-ui-assets/player/options.svg"
+import PlayDark from "../../public/flex-ui-assets/player/play_dark.svg"
+import PauseDark from "../../public/flex-ui-assets/player/pause_dark.svg"
+import Next10Dark from "../../public/flex-ui-assets/player/next10_dark.svg"
+import Redo10Dark from "../../public/flex-ui-assets/player/redo10_dark.svg"
+import NextDark from "../../public/flex-ui-assets/player/next_dark.svg"
+import BackDark from "../../public/flex-ui-assets/player/back_dark.svg"
+import OptionsDark from "../../public/flex-ui-assets/player/options_dark.svg"
 import { useTheme } from 'next-themes'
 
 
@@ -15,6 +22,7 @@ import { useTheme } from 'next-themes'
 const GlobalPlayer = (props: any) => {
     const { theme, systemTheme } = useTheme();
     const currentTheme = theme === "system" ? systemTheme : theme;
+    console.log(theme)
     // state
     const [isPlaying, setIsPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
@@ -151,12 +159,12 @@ const GlobalPlayer = (props: any) => {
     }
 
     return (
-        <div className="relative sm:bottom-0 z-50 w-full md:w-[50%] bg-white rounded-b-lg dark:bg-[#5f5f5f] rounded-t-xl">
+        <div className="relative mx-4 sm:bottom-0 z-50 w-full md:w-[50%] bg-[#EAEAEA] rounded-b-lg dark:bg-[#5f5f5f]">
             <div className="flex flex-row justify-center items-center w-full gap-2">
                 <audio ref={audioPlayer} preload="metadata" />
 
                 {/* SPEED CONTROL */}
-                <button onClick={handleSpeed} className="p-3">
+                <button onClick={handleSpeed} className="p-3 text-[#109C90] dark:text-[#00eedc]">
                     {
                         {
                             1: "1x",
@@ -166,36 +174,56 @@ const GlobalPlayer = (props: any) => {
                     }
                 </button>
 
-                {/* BACK AUDIO */}
-                <button className="p-3 cursor-pointer" onClick={handleBack} >
-                    <Back className="fill-white" size={30} />
-                </button>
-
                 {/* REDO 10*/}
                 <button className="p-3" onClick={handleRedo}>
-                    <Redo10 size={30} />
+                    {theme === "dark" ?
+                        <Redo10Dark /> :
+                        <Redo10 size={30} />
+                    }
+                </button>
+
+                {/* BACK AUDIO */}
+                <button className="p-3 cursor-pointer" onClick={handleBack} >
+                    {theme === "dark" ?
+                        <BackDark /> :
+                        <Back size={30} />
+                    }
                 </button>
 
                 {/* PLAY / PAUSE */}
                 <button onClick={togglePlayPause} className="p-3">
-                    {isPlaying ? <Pause size={50} /> : <Play size={100} />}
-                </button>
+                    {theme === "dark" ?
+                        isPlaying ? <PauseDark size={50} /> : <PlayDark size={100} /> :
+                        isPlaying ? <Pause size={50} /> : <Play size={100} />
+                    }
 
-                {/* NEXT 10 */}
-                <button className="p-3" onClick={handleNext10}>
-                    <Next10 size={30} />
                 </button>
 
                 {/* NEXT AUDIO */}
                 <button className="p-3 cursor-pointer" onClick={handleNext}>
-                    <Next size={30} />
+                    {theme === "dark" ?
+                        <NextDark /> :
+                        <Next size={30} />
+                    }
                 </button>
+
+                {/* NEXT 10 */}
+                <button className="p-3" onClick={handleNext10}>
+                    {theme === "dark" ?
+                        <Next10Dark /> :
+                        <Next10 size={30} />
+                    }
+                </button>
+
 
                 {/* OPTIONS */}
                 <button>
-                    <Options />
+                    {theme === "dark" ?
+                        <OptionsDark /> :
+                        <Options size={30} />
+                    }
                 </button>
-            </div>                
+            </div>
             <div className="hidden flex flex-row justify-center font-mono items-center w-full py-0 px-0 mb-2">
 
                 {/* current time */}
