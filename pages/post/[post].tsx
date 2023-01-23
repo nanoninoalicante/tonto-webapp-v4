@@ -48,17 +48,19 @@ export const getServerSideProps = async (context: any) => {
         posts: []
     }
 
-    const url = `${process.env.WEBFEED_BASE}${post}${process.env.API_END}`;
+    const url = `${process.env.FEED_API}${post}${process.env.API_END}`;
     await fetch(url, { method: "GET" })
         .then((response) => response.json())
         .then(async (data) => {
-            server.data = data.data[0] || postData
+            console.log(data)
+            server.data = data?.data[0] || postData
             if (!server.data.uuid) {
                 server.existsId = false
-                const urlUuid = `${process.env.FEED_BASE}/profile${process.env.API_END}&limit=150&page=1`;
+                const urlUuid = `${process.env.FEED_API}/profile${process.env.API_END}&limit=150&page=1`;
                 await fetch(urlUuid, { method: "GET" })
                     .then((response) => response.json())
                     .then((data) => {
+                        console.log(data)
                         server.posts = data.data
                     })
                     .catch((error) => {
@@ -71,47 +73,6 @@ export const getServerSideProps = async (context: any) => {
         .catch(error => {
             console.log(error)
         })
-
-
-    server.data.uuid && await getUuids()
-
-    /**
-     * It gets the next and back post uuid from the server
-     */
-    async function getUuids() {
-        const limit = 150
-        if (server.data?.userInfo.id !== "") {
-            const urlUuid = `${process.env.FEED_BASE}${server.data.userInfo.id}/profile${process.env.API_END}&limit=${limit}&page=${server.page}`;
-            await fetch(urlUuid, { method: "GET" })
-                .then((response) => response.json())
-                .then((profile) => {
-                    if (profile?.data) {
-                        let postPos = 0;
-                        for (let i = 0; i < profile.data.length; i++)
-                            if (profile.data[i].uuid === post) postPos = i;
-                        /* Getting the next and back post uuid. */
-                        if (postPos >= 0) {
-                            if (postPos !== 0 && postPos !== profile.data.length - 1) {
-                                server.next = profile.data[postPos + 1].uuid
-                                server.back = profile.data[postPos - 1].uuid
-                            } else if (postPos === 0) {
-                                server.next = profile.data[postPos + 1].uuid
-                                server.back = profile.data[profile.data.length - 1].uuid
-                            } else if (postPos === profile.data.length - 1) {
-                                server.next = profile.data[0].uuid
-                                server.back = profile.data[postPos - 1].uuid
-                                server.page = server.page + 1
-                            }
-                        }
-                    } else {
-                        console.log("error: ", profile)
-                    }
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
-        }
-    }
     return { props: server }
 };
 

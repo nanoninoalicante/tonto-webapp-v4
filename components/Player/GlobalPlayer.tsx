@@ -22,7 +22,6 @@ import { useTheme } from 'next-themes'
 const GlobalPlayer = (props: any) => {
     const { theme, systemTheme } = useTheme();
     const currentTheme = theme === "system" ? systemTheme : theme;
-    console.log(theme)
     // state
     const [isPlaying, setIsPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
@@ -53,7 +52,7 @@ const GlobalPlayer = (props: any) => {
                 hlsRef.current = new Hls(config);
                 hlsRef.current.attachMedia(audioPlayer.current);
                 hlsRef.current.on(Hls.Events.MEDIA_ATTACHED, () => {
-                    hlsRef.current?.loadSource(props.data?.streamingUrl);
+                    hlsRef.current?.loadSource(props.data?.streamingUrl[0]);
                     hlsRef.current?.on(Hls.Events.MANIFEST_PARSED, () => {
                         hlsRef.current?.on(Hls.Events.LEVEL_LOADED, (_: string, data: any) => {
                             const duration: number = data.details.totalduration;
@@ -224,7 +223,7 @@ const GlobalPlayer = (props: any) => {
                     }
                 </button>
             </div>
-            <div className="hidden flex flex-row justify-center font-mono items-center w-full py-0 px-0 mb-2">
+            <div className=" flex flex-row justify-center font-mono items-center w-full py-0 px-0 mb-2">
 
                 {/* current time */}
                 <div className="p-1 mx-1 rounded-md">
