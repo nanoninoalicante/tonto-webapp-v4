@@ -9,10 +9,14 @@ const Description = (props) => {
     }
     return (
         <div className="px-4 text-[14px] text-[#5F5F5F] dark:text-[#EBEBEB] leading-4 mt-2">
-            {isReadMoreShown ? props.text + " " : props.text.substr(0, 200) + "... "}
+            {props.text.length > 200 ?
+            isReadMoreShown ? props.text + " " : props.text.substr(0, 200) + "... " &&
             <button onClick={toogleBtn} className="font-bold text-[#109c90] dark:text-[#00eedc]">
                 {isReadMoreShown ? ' see less' : 'see more'}
             </button>
+            : 
+            props.text
+            }
         </div>
     )
 }

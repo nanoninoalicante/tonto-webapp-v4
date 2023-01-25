@@ -45,34 +45,43 @@ export const getServerSideProps = async (context: any) => {
         next: 0,
         existsId: true,
         randomId: 0,
-        posts: []
+        posts: [],
+        comments: []
     }
 
-    const url = `${process.env.FEED_API}${post}${process.env.API_END}`;
-    await fetch(url, { method: "GET" })
+    const getPost = `${process.env.FEED_API}/post/${post}${process.env.API_KEY}`;
+    await fetch(getPost, { method: "GET" })
         .then((response) => response.json())
         .then(async (data) => {
-            console.log(data)
             server.data = data?.data[0] || postData
-            if (!server.data.uuid) {
-                server.existsId = false
-                const urlUuid = `${process.env.FEED_API}/profile${process.env.API_END}&limit=150&page=1`;
-                await fetch(urlUuid, { method: "GET" })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log(data)
-                        server.posts = data.data
-                    })
-                    .catch((error) => {
-                        console.log(error)
-                    })
-            } else {
-                server.existsId = true;
-            }
+
         })
         .catch(error => {
             console.log(error)
         })
+
+    const getUser = `${process.env.FEED_API}/user/${server.data.userInfo.id}${process.env.API_KEY}`
+    server?.data.uuid &&
+        await fetch(getUser, { method: "GET" })
+            .then((response) => response.json())
+            .then(async (data) => {
+                const postsIds = data.data.postIds;
+                const index = postsIds.indexOf(post);
+                if (index === 0) {
+                    server.back = postsIds[postsIds.length - 1]
+                    server.next = postsIds[index + 1]
+                } else if (index === postsIds.length - 1) {
+                    server.back = postsIds[index - 1]
+                    server.next = postsIds[0]
+                } else {
+                    server.back = postsIds[index - 1]
+                    server.next = postsIds[index + 1]
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
     return { props: server }
 };
 
@@ -82,27 +91,21 @@ const Post = (props: any) => {
             {props.data?.uuid !== "" ?
                 <div>
                     <MetaTags data={props.data} />
-                    <main className='fixed grid gris-cols-3 justify-center'>
+                    <main className='flex flex-row justify-center'>
                         <PrimaryHeader />
-                        <div className=''>
-                            <PrimaryPost
-                                data={props.data}
-                                page={props.page}
-                                back={props.back}
-                                next={props.next}
-                                existsId={props.existsId}
-                            />
-                            <GlobalPlayer
-                                data={props.data}
-                                page={props.page}
-                                back={props.back}
-                                next={props.next}
-                                existsId={props.existsId} />
-                            <div className="text-white hidden flex flex-row items-center text-lg fixed bottom-0 z-50 px-4 w-full h-[4rem] bg-black opacity-70 shadow-lg mouse transition ease-in duration-200 focus:outline-none">
-                                <span className='flex-col'>Get the full experience...</span>
-                                <Link href={"https://gettonto.com"} className='flex-col ml-auto bg-teal-500 px-4 py-2 rounded-md'>Open</Link>
-                            </div>
-                        </div>
+                        <PrimaryPost
+                            data={props.data}
+                            page={props.page}
+                            back={props.back}
+                            next={props.next}
+                            existsId={props.existsId}
+                        />
+                        <GlobalPlayer
+                            data={props.data}
+                            page={props.page}
+                            back={props.back}
+                            next={props.next}
+                            existsId={props.existsId} />
                     </main>
                 </div> :
                 <>

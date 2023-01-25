@@ -158,7 +158,7 @@ const GlobalPlayer = (props: any) => {
     }
 
     return (
-        <div className="relative mx-4 sm:bottom-0 z-50 w-full md:w-[50%] bg-[#EAEAEA] rounded-b-lg dark:bg-[#5f5f5f]">
+        <div className="relative z-50 w-full md:w-[50%] bg-[#EAEAEA] rounded-lg dark:bg-[#5f5f5f]">
             <div className="flex flex-row justify-center items-center w-full gap-2">
                 <audio ref={audioPlayer} preload="metadata" />
 

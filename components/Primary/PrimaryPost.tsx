@@ -4,6 +4,7 @@ import Heart from "../../public/flex-ui-assets/heart.svg"
 import Comment from "../../public/flex-ui-assets/comment.svg"
 import Share from "../../public/flex-ui-assets/share.svg"
 import Description from "./Description";
+import { GlobalPlayer } from "../Player/GlobalPlayer";
 
 interface Props {
     postId: string;
@@ -39,7 +40,7 @@ const PrimaryPost = (props: any) => {
 
     return (
         userData?.id !== "" ?
-            <div className="relative md:w-[50%] w-full mt-28 rounded-t-lg bg-[#F8F8F8] dark:bg-[#6C6C6C] mx-4">
+            <div className="relative md:w-[50%] w-full mt-8 rounded-t-lg bg-[#F8F8F8] dark:bg-[#6C6C6C]">
                 <div className="flex flex-row">
                     <div className="flex flex-col ml-5">
                         <img
@@ -81,10 +82,11 @@ const PrimaryPost = (props: any) => {
                     </div>
                     {/* HERE WILL BE A MAP */}
                 </div>
-                <Description text={post.description}/>
+                <Description text={post.description} />
                 <div className="px-4 py-2 pb-5 mt-2 text-[12px] text-[#109C90] dark:text-[#00eedc] leading-[14px]">
                     2 min ago · 12M plays
                 </div>
+                
             </div>
             :
             <div className="w-[50%] mt-28 justify-center bg-white rounded-b-xl">
