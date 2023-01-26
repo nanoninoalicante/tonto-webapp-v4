@@ -52,6 +52,7 @@ export const getServerSideProps = async (context: any) => {
     }
 
     const getPost = `${process.env.FEED_API}/post/${post}${process.env.API_KEY}`;
+    console.log(getPost)
     await fetch(getPost, { method: "GET" })
         .then((response) => response.json())
         .then(async (data) => {
