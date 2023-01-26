@@ -39,7 +39,7 @@ const DownloadApp = (props: any) => {
                                             </Dialog.Title>
                                             <div className="mt-2 mb-4">
                                                 <p className="text-sm text-gray-500">
-                                                Have you heard of Tonto? Come and listen to my content! Download and get familiarized with Tonto now. Talk to you in Tonto!
+                                                    Have you heard of Tonto? Come and listen to my content! Download and get familiarized with Tonto now. Talk to you in Tonto!
                                                 </p>
                                             </div>
                                             <Link href={"https://app.gettonto.com/download"} className='bg-[#009D9D] text-white px-1 py-2 rounded-lg'>
