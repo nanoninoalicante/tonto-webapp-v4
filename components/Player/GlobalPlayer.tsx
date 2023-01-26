@@ -158,8 +158,8 @@ const GlobalPlayer = (props: any) => {
     }
 
     return (
-        <div className="relative z-50 w-full md:w-[50%] bg-[#EAEAEA] rounded-lg dark:bg-[#5f5f5f]">
-            <div className="flex flex-row justify-center items-center w-full gap-2">
+        <div className="relative container z-0 w-auto mx-4 md:w-[48%] bg-[#EAEAEA] rounded-b-lg dark:bg-[#5f5f5f]">
+            <div className="flex flex-row container overflow-hidden justify-center items-center w-full gap-2">
                 <audio ref={audioPlayer} preload="metadata" />
 
                 {/* SPEED CONTROL */}
@@ -223,7 +223,7 @@ const GlobalPlayer = (props: any) => {
                     }
                 </button>
             </div>
-            <div className=" flex flex-row justify-center font-mono items-center w-full py-0 px-0 mb-2">
+            <div className=" flex flex-row justify-center overflow-hidden font-mono items-center w-full py-0 px-0 mb-2">
 
                 {/* current time */}
                 <div className="p-1 mx-1 rounded-md">

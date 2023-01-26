@@ -1,11 +1,12 @@
 import MetaTags from '../../components/MetaTags'
-import React from "react"
+import React, { useState } from "react"
 import PrimaryHeader from '../../components/Primary/PrimaryHeader'
 import PrimaryPost from '../../components/Primary/PrimaryPost'
 import { GlobalPlayer } from '../../components/Player/GlobalPlayer'
 import Head from 'next/head'
 import PostNotFound from '../../components/PostNotFound'
 import Link from 'next/link'
+import DownloadApp from '../../components/Modals/DownloadApp'
 
 
 //santeetji: 62b131b4db1ec8000f04084e
@@ -86,12 +87,13 @@ export const getServerSideProps = async (context: any) => {
 };
 
 const Post = (props: any) => {
+    
     return (
         <>
             {props.data?.uuid !== "" ?
                 <div>
                     <MetaTags data={props.data} />
-                    <main className='flex flex-row justify-center'>
+                    <main>
                         <PrimaryHeader />
                         <PrimaryPost
                             data={props.data}
