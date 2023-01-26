@@ -4,9 +4,6 @@ import Link from "next/link";
 import PostsList from "./PostsList";
 
 const PostNotFound = (props: any) => {
-    /* const handleRandom = () => {
-        window.location.href = `/post/${props?.randomId}`
-    } */
     return (
         <>
             <PrimaryHeader />

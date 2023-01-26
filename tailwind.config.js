@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx,svg}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
@@ -19,10 +19,8 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
     require('@material-tailwind/react'),
-    require('@tailwindcss/line-clamp'),
   ],
   darkMode: "class"
 

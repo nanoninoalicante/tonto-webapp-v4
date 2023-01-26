@@ -1,15 +1,11 @@
 import MetaTags from '../../components/MetaTags'
-import React from "react"
+import React, { useState } from "react"
 import PrimaryHeader from '../../components/Primary/PrimaryHeader'
 import PrimaryPost from '../../components/Primary/PrimaryPost'
 import { GlobalPlayer } from '../../components/Player/GlobalPlayer'
 import Head from 'next/head'
 import PostNotFound from '../../components/PostNotFound'
-import Sun from '../../public/flex-ui-assets/sun.svg'
-import Moon from '../../public/flex-ui-assets/moon.svg'
-import Floot from '../../public/flex-ui-assets/floating.svg'
 import Link from 'next/link'
-import Comments from '../../components/Comments'
 
 
 //santeetji: 62b131b4db1ec8000f04084e
@@ -49,33 +45,41 @@ export const getServerSideProps = async (context: any) => {
         next: 0,
         existsId: true,
         randomId: 0,
-        posts: []
+        posts: [],
+        comments: []
     }
 
-    const url = `${process.env.WEBFEED_BASE}${post}${process.env.API_END}`;
-    await fetch(url, { method: "GET" })
+    const getPost = `${process.env.FEED_API}/post/${post}${process.env.API_KEY}`;
+    await fetch(getPost, { method: "GET" })
         .then((response) => response.json())
         .then(async (data) => {
             server.data = data.data[0] || postData
             if (!server.data.uuid) {
                 server.existsId = false
-                await fetch(`${process.env.FEED_BASE}/profile${process.env.API_END}&limit=150&page=1`, { method: "GET" })
+                const urlUuid = `${process.env.FEED_BASE}/profile${process.env.API_END}&limit=150&page=1`;
+                await fetch(urlUuid, { method: "GET" })
                     .then((response) => response.json())
-                    .then((data) => { server.posts = data.data })
-                    .catch((error) => { console.log(error) })
+                    .then((data) => {
+                        server.posts = data.data
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
             } else {
                 server.existsId = true;
             }
         })
-        .catch(error => { console.log(error) })
+        .catch(error => {
+            console.log(error)
+        })
 
-        server.data.uuid && await getUuids()
-        
-        /**
-         * It gets the next and back post uuid from the server
-        */
-       async function getUuids() {
-        console.log(server.data)
+
+    server.data.uuid && await getUuids()
+
+    /**
+     * It gets the next and back post uuid from the server
+     */
+    async function getUuids() {
         const limit = 150
         if (server.data?.userInfo.id !== "") {
             const urlUuid = `${process.env.FEED_BASE}${server.data.userInfo.id}/profile${process.env.API_END}&limit=${limit}&page=${server.page}`;
@@ -104,13 +108,16 @@ export const getServerSideProps = async (context: any) => {
                         console.log("error: ", profile)
                     }
                 })
-                .catch((error) => { console.log(error) })
+                .catch((error) => {
+                    console.log(error)
+                })
         }
     }
     return { props: server }
 };
 
 const Post = (props: any) => {
+    
     return (
         <>
             {props.data?.uuid !== "" ?
@@ -126,7 +133,6 @@ const Post = (props: any) => {
                                 next={props.next}
                                 existsId={props.existsId}
                             />
-                            <Comments />
                             <GlobalPlayer
                                 data={props.data}
                                 page={props.page}

@@ -16,7 +16,7 @@ function Home() {
     return (
         <div className='flex justify-center'>
             <PrimaryHeader />
-            <div className="fixed md:w-[50%] w-full mt-28  bg-white rounded-b-xl">
+            <div className="fixed md:w-[50%] w-full mt-28 bg-white rounded-b-xl">
                 <div className="flex flex-col justify-center items-center border-b-2">
 
                     <h2 className="mb-4 text-sm font-medium text-coolGray-900">
