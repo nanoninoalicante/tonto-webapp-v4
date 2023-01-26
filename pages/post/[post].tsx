@@ -47,12 +47,11 @@ export const getServerSideProps = async (context: any) => {
         next: 0,
         existsId: true,
         randomId: 0,
-        posts: [],
+        posts: 0,
         comments: []
     }
 
     const getPost = `${process.env.FEED_API}/post/${post}${process.env.API_KEY}`;
-    console.log(getPost)
     await fetch(getPost, { method: "GET" })
         .then((response) => response.json())
         .then(async (data) => {
@@ -69,6 +68,7 @@ export const getServerSideProps = async (context: any) => {
             .then((response) => response.json())
             .then(async (data) => {
                 const postsIds = data.data.postIds;
+                server.posts = postsIds.length
                 const index = postsIds.indexOf(post);
                 if (index === 0) {
                     server.back = postsIds[postsIds.length - 1]
@@ -95,13 +95,14 @@ const Post = (props: any) => {
             {props.data?.uuid !== "" ?
                 <div>
                     <MetaTags data={props.data} />
-                    <main>
+                    <main className='grid place-items-center'>
                         <PrimaryHeader />
                         <PrimaryPost
                             data={props.data}
                             page={props.page}
                             back={props.back}
                             next={props.next}
+                            posts={props.posts}
                             existsId={props.existsId}
                         />
                         <GlobalPlayer
@@ -110,6 +111,7 @@ const Post = (props: any) => {
                             back={props.back}
                             next={props.next}
                             existsId={props.existsId} />
+                        {}
                     </main>
                 </div> :
                 <>

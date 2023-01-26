@@ -26,7 +26,7 @@ export default function PrimaryHeader() {
         )
     }
     return (
-        <div className="relative grid justify-items-start items-center top-0 w-full md:w-[50%] pt-16 px-4 dark:bg-gradient-to-b from-[#6F6F6F] to-[#3C3C3C]">
+        <div className="relative grid justify-items-start items-center top-0 w-full md:w-[50%] sm:bg-inherit pt-16 px-4 dark:bg-gradient-to-b dark:from-[#6F6F6F] dark:to-[#3C3C3C]">
             {theme === "dark" ? <LogoDark /> :
                 <LogoLight />}
             {renderThemeChanger()}
