@@ -159,7 +159,7 @@ const GlobalPlayer = (props: any) => {
 
     return (
         <div className="relative container z-0 w-auto mx-4 md:w-[48%] bg-[#EAEAEA] rounded-b-lg dark:bg-[#5f5f5f]">
-            <div className="flex flex-row container overflow-hidden justify-center items-center w-full gap-1">
+            <div className="flex flex-row container overflow-hidden justify-center items-center w-full gap-1 sm:gap-3 lg:gap-4">
                 <audio ref={audioPlayer} preload="metadata" />
 
                 {/* SPEED CONTROL */}
