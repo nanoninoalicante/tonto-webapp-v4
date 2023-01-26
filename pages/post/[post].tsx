@@ -39,6 +39,7 @@ const postData = {
  */
 export const getServerSideProps = async (context: any) => {
     const { post } = context.query;
+    
     let server = {
         data: postData,
         page: 1,
