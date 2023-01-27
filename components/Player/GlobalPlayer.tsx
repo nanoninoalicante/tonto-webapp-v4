@@ -163,7 +163,7 @@ const GlobalPlayer = (props: any) => {
                 <audio ref={audioPlayer} preload="metadata" />
 
                 {/* SPEED CONTROL */}
-                <button onClick={handleSpeed} className="p-3 text-[#109C90] dark:text-[#00eedc]">
+                <button onClick={handleSpeed} className="w-8 justify-end ml-1 mr-2 p-3 text-[#109C90] dark:text-[#00eedc]">
                     {
                         {
                             1: "1x",
@@ -216,7 +216,7 @@ const GlobalPlayer = (props: any) => {
 
 
                 {/* OPTIONS */}
-                <button>
+                <button className="mr-1">
                     {theme === "dark" ?
                         <OptionsDark /> :
                         <Options size={30} />

@@ -43,7 +43,7 @@ const DownloadApp = (props: any) => {
                                                 </p>
                                             </div>
                                             <Link href={"https://app.gettonto.com/download"} className='bg-[#009D9D] text-white px-1 py-2 rounded-lg'>
-                                                Download Tonto
+                                                Get Tonto
                                             </Link>
                                         </div>
                                     </div>
