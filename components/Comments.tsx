@@ -11,7 +11,7 @@ const Comments = (props: any) => {
             </div>
             {props.data.map((comment: any, i: number) => {
                 return (
-                    <div key={i} className="flex flex-row ml-2 mb-4">
+                    <div key={i} className="flex flex-row ml-2 mb-4 overflow-hidden">
                         <img className="flex flex-col w-9 h-9 rounded-full" src={comment.userInfo.profileImg} />
                         <div className="flex flex-col pl-4 text-[15px] mb-2">
                             <div className="flex flex-row">
