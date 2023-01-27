@@ -2,7 +2,7 @@ var moment = require('moment');
 
 const Comments = (props: any) => {
     return (
-        <div className="w-[85%] sm:w-[94%] md:w-[50%] mx-4 mt-2 bg-[#5F5F5F] text-white rounded-lg">
+        <div className="w-[85%] sm:w-[94%] md:w-[50%] mx-4 mt-2 overflow-y-visible bg-[#5F5F5F] text-white rounded-lg">
             <div className="text-[14px] leading-4 flex flex-col justify-center place-items-center py-2">
                 <p>
                     COMMENTS

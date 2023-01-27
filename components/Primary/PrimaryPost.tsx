@@ -96,7 +96,7 @@ const PrimaryPost = (props: any) => {
             :
             <div className="w-[50%] mt-28 justify-center bg-white rounded-b-xl">
                 <div className="flex flex-col justify-center items-center border-b-2 animate-pulse">
-                    <div className="my-7 rounded-full w-24 h-24 bg-slate-300" />
+                    <div className="my-7 rounded-full w-24 h-24 bg-slate-300"/>
                     <div className="mb-2 h-2 w-48 bg-slate-300 rounded" />
                     <div className="mb-4 h-2 w-32 bg-slate-300 rounded" />
                     <div className="mb-4 mx-4 text-xs font-medium text-coolGray-400">

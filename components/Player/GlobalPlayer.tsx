@@ -21,6 +21,7 @@ import { useTheme } from 'next-themes'
 
 const GlobalPlayer = (props: any) => {
     const { theme, systemTheme } = useTheme();
+    console.log(props.data)
     const currentTheme = theme === "system" ? systemTheme : theme;
     // state
     const [isPlaying, setIsPlaying] = useState(false);
@@ -41,32 +42,7 @@ const GlobalPlayer = (props: any) => {
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
     useEffect(() => {
-        if (Hls.isSupported()) {
-            if (hlsRef?.current) {
-                hlsRef.current.destroy()
-            }
-            if (audioPlayer?.current) {
-                const config = {
-                    enableWorker: false
-                }
-                hlsRef.current = new Hls(config);
-                hlsRef.current.attachMedia(audioPlayer.current);
-                hlsRef.current.on(Hls.Events.MEDIA_ATTACHED, () => {
-                    hlsRef.current?.loadSource(props.data?.streamingUrl[0]);
-                    hlsRef.current?.on(Hls.Events.MANIFEST_PARSED, () => {
-                        hlsRef.current?.on(Hls.Events.LEVEL_LOADED, (_: string, data: any) => {
-                            const duration: number = data.details.totalduration;
-                            setDuration(duration);
-                            setCurrentTime(0);
-                        })
-                    });
-                })
-            }
-        } else {
-            audioPlayer.current.src = props.data?.streamingUrl;
-            setDuration(duration);
-            setCurrentTime(0);
-        }
+        audioPlayer.current.src = props.data.downloadUrl[0]
     }, [props.data])
 
     const togglePlayPause = () => {
