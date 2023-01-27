@@ -7,6 +7,7 @@ import Head from 'next/head'
 import PostNotFound from '../../components/PostNotFound'
 import Link from 'next/link'
 import DownloadApp from '../../components/Modals/DownloadApp'
+import Comments from '../../components/Comments'
 
 
 //santeetji: 62b131b4db1ec8000f04084e
@@ -39,7 +40,7 @@ const postData = {
  */
 export const getServerSideProps = async (context: any) => {
     const { post } = context.query;
-    
+
     let server = {
         data: postData,
         page: 1,
@@ -70,10 +71,10 @@ export const getServerSideProps = async (context: any) => {
                 const postsIds = data.data.postIds;
                 server.posts = postsIds.length
                 const index = postsIds.indexOf(post);
-                if(index !== -1){
+                if (index !== -1 && postsIds.length > 1) {
                     if (index === 0) {
                         server.back = postsIds[postsIds.length - 1]
-                        server.next = postsIds[index + 1]
+                        //server.next = postsIds[index + 1]
                     } else if (index === postsIds.length - 1) {
                         server.back = postsIds[index - 1]
                         server.next = postsIds[0]
@@ -86,11 +87,21 @@ export const getServerSideProps = async (context: any) => {
             .catch(error => {
                 console.log(error)
             })
+    const getComment = `${process.env.FEED_API}post/${server.data.uuid}/comments${process.env.API_KEY}`
+    server?.data.uuid &&
+        await fetch(getComment, { method: "GET" })
+            .then((response) => response.json())
+            .then(async (data) => {
+                server.comments = data?.data
+            })
+            .catch(error => {
+                console.log(error)
+            })
 
     return { props: server }
 };
 
-const Post = (props: any) => {    
+const Post = (props: any) => {
     return (
         <>
             {props.data?.uuid !== "" ?
@@ -112,7 +123,7 @@ const Post = (props: any) => {
                             back={props.back}
                             next={props.next}
                             existsId={props.existsId} />
-                        {}
+                        <Comments data={props.comments}/>
                     </main>
                 </div> :
                 <>

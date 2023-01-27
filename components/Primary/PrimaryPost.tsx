@@ -43,7 +43,7 @@ const PrimaryPost = (props: any) => {
 
     return (
         userData?.id !== "" ?
-            <div className="container w-[94%] md:w-[50%] mx-4 mt-8 rounded-t-lg bg-[#F8F8F8] dark:bg-[#6C6C6C]">
+            <div className="w-[85%] sm:w-[94%] md:w-[50%] mx-4 mt-8 rounded-t-lg bg-[#F8F8F8] dark:bg-[#6C6C6C]">
                 <div className="flex flex-row">
                     <div className="flex flex-col ml-5">
                         <img
