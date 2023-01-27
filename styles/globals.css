@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply bg-white  dark:bg-[#3C3C3C] sm:dark:bg-gradient-to-b from-[#6F6F6F] to-[#3C3C3C]
+        @apply bg-white md:h-screen dark:bg-[#3C3C3C] md:dark:bg-gradient-to-b from-[#6F6F6F] to-[#3C3C3C]
     }
 }
 

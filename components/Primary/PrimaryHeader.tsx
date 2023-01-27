@@ -26,10 +26,9 @@ export default function PrimaryHeader() {
         )
     }
     return (
-        <div className="relative grid justify-items-start items-center top-0 w-full md:w-[50%] sm:bg-inherit pt-16 px-4 dark:bg-gradient-to-b dark:from-[#6F6F6F] dark:to-[#3C3C3C]">
-            {theme === "dark" ? <LogoDark /> :
-                <LogoLight />}
-            {renderThemeChanger()}
+        <div className="relative grid justify-items-start items-center top-0 w-full md:w-[50%] dark:md:bg-transparent pt-16 px-4 dark:bg-gradient-to-b dark:md:from-transparent dark:md:to-transparent dark:from-[#6F6F6F] dark:to-[#3C3C3C]">
+            {theme === "dark" ? <LogoDark /> : <LogoLight />}
+            { renderThemeChanger() }
         </div>
     )
 }

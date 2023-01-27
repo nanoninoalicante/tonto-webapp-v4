@@ -70,15 +70,17 @@ export const getServerSideProps = async (context: any) => {
                 const postsIds = data.data.postIds;
                 server.posts = postsIds.length
                 const index = postsIds.indexOf(post);
-                if (index === 0) {
-                    server.back = postsIds[postsIds.length - 1]
-                    server.next = postsIds[index + 1]
-                } else if (index === postsIds.length - 1) {
-                    server.back = postsIds[index - 1]
-                    server.next = postsIds[0]
-                } else {
-                    server.back = postsIds[index - 1]
-                    server.next = postsIds[index + 1]
+                if(index !== -1){
+                    if (index === 0) {
+                        server.back = postsIds[postsIds.length - 1]
+                        server.next = postsIds[index + 1]
+                    } else if (index === postsIds.length - 1) {
+                        server.back = postsIds[index - 1]
+                        server.next = postsIds[0]
+                    } else {
+                        server.back = postsIds[index - 1]
+                        server.next = postsIds[index + 1]
+                    }
                 }
             })
             .catch(error => {
@@ -88,8 +90,7 @@ export const getServerSideProps = async (context: any) => {
     return { props: server }
 };
 
-const Post = (props: any) => {
-    
+const Post = (props: any) => {    
     return (
         <>
             {props.data?.uuid !== "" ?

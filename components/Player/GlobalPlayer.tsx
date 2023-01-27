@@ -158,8 +158,8 @@ const GlobalPlayer = (props: any) => {
     }
 
     return (
-        <div className="container w-auto mx-4 sm:w-[50%] bg-[#EAEAEA] rounded-b-lg dark:bg-[#5f5f5f]">
-            <div className="flex flex-row overflow-hidden justify-center items-center w-full gap-1 sm:gap-3 lg:gap-4">
+        <div className="container z-10 w-[94%] mx-4 md:w-[50%] bg-[#EAEAEA] rounded-b-lg dark:bg-[#5f5f5f]">
+            <div className="flex flex-row overflow-hidden justify-center place-items-center gap-1 sm:gap-3 lg:gap-4">
                 <audio ref={audioPlayer} preload="metadata" />
 
                 {/* SPEED CONTROL */}
@@ -177,7 +177,7 @@ const GlobalPlayer = (props: any) => {
                 <button className="p-3" onClick={handleRedo}>
                     {theme === "dark" ?
                         <Redo10Dark /> :
-                        <Redo10 size={30} />
+                        <Redo10 className="dark:text-[#00eedc]" />
                     }
                 </button>
 
@@ -192,8 +192,8 @@ const GlobalPlayer = (props: any) => {
                 {/* PLAY / PAUSE */}
                 <button onClick={togglePlayPause} className="p-3">
                     {theme === "dark" ?
-                        isPlaying ? <PauseDark size={50} /> : <PlayDark size={100} /> :
-                        isPlaying ? <Pause size={50} /> : <Play size={100} />
+                        isPlaying ? <PauseDark /> : <PlayDark /> :
+                        isPlaying ? <Pause /> : <Play />
                     }
 
                 </button>
