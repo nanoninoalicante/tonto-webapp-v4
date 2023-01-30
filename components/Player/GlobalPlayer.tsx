@@ -17,11 +17,8 @@ import BackDark from "../../public/flex-ui-assets/player/back_dark.svg"
 import OptionsDark from "../../public/flex-ui-assets/player/options_dark.svg"
 import { useTheme } from 'next-themes'
 
-
-
 const GlobalPlayer = (props: any) => {
     const { theme, systemTheme } = useTheme();
-    console.log(props.data)
     const currentTheme = theme === "system" ? systemTheme : theme;
     // state
     const [isPlaying, setIsPlaying] = useState(false);
