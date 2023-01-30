@@ -34,9 +34,10 @@ const Comments = (props) => {
 
                     if (playing) {
                         audio.current.pause()
-                        animationRef.current = requestAnimationFrame(whilePlaying)
+                        cancelAnimationFrame(animationRef.current);
                     } else {
                         audio.current.play()
+                        animationRef.current = requestAnimationFrame(whilePlaying)
                     }
                 }
 
@@ -77,7 +78,7 @@ const Comments = (props) => {
                                 </div>
 
                                 <div>
-                                    {playing ? calculateTime(duration) : calculateTime(currentTime)}
+                                    {currentTime == 0 ? calculateTime(duration) : calculateTime(currentTime)}
                                 </div>
                             </div>
                         </div>
