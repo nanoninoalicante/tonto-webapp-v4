@@ -16,7 +16,7 @@ export default function PrimaryHeader() {
     if (!mounted) return null
     const currentTheme = theme === "system" ? systemTheme : theme;
     return (
-        <div className="relative flex flex-row justify-items-start items-center top-0 w-full md:w-[50%] dark:md:bg-transparent pt-16 px-4 dark:bg-gradient-to-b dark:md:from-transparent dark:md:to-transparent dark:from-[#6F6F6F] dark:to-[#3C3C3C]">
+        <div className="relative flex flex-row justify-items-start items-center top-0 w-full md:w-[50%] dark:md:bg-transparent pt-4 px-6 dark:bg-gradient-to-b dark:md:from-transparent dark:md:to-transparent dark:from-[#6F6F6F] dark:to-[#3C3C3C]">
             {theme === "dark" ? <LogoDark /> : <LogoLight />}
             {currentTheme == "dark" ?
                 <Sun onClick={() => { setTheme("light") }} className="relative pt-1 cursor-pointer rounded-lg text-teal-500 h-8 w-8 ml-auto" />

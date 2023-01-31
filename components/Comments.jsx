@@ -99,7 +99,6 @@ const Comments = (props) => {
                 <p>
                     COMMENTS
                 </p>
-                <div className="h-1 w-12 bg-slate-300 rounded-lg" />
             </div>
             {data.length ? showComments() : noData()}
         </div>
