@@ -78,7 +78,7 @@ const Comments = (props) => {
                                 </div>
 
                                 <div>
-                                    {currentTime == 0 ? calculateTime(duration) : calculateTime(currentTime)}
+                                    { currentTime == 0 ? calculateTime(duration) : calculateTime(currentTime) }
                                 </div>
                             </div>
                         </div>
