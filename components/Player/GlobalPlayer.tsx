@@ -88,7 +88,6 @@ const GlobalPlayer = (props: any) => {
 
     const changePlayerCurrentTime = () => {
         progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / audioPlayer.current.duration * 100}%`)
-        progressBar.current.style.setProperty('transition-duration', `${100}ms`)
         setCurrentTime(progressBar.current.value)
     }
 
@@ -197,21 +196,24 @@ const GlobalPlayer = (props: any) => {
                     }
                 </button>
             </div>
-            <div className=" flex flex-row justify-center overflow-hidden font-mono items-center w-full py-0 px-0 mb-2">
-
-                {/* current time */}
-                <div className="p-1 mx-1 rounded-md">
-                    {calculateTime(currentTime)}
-                </div>
+            <div className="relative px-2 grid grid-flow-row justify-center overflow-hidden font-mono items-center w-full py-0 mb-2">
 
                 {/* progress bar */}
-                <div>
+                <div className="mt-2">
                     <input type="range" defaultValue="0" className={style.progressBar} ref={progressBar} onChange={onChangeRange} />
                 </div>
 
-                {/* duration */}
-                <div className="p-1 relative mx-1 rounded-md">
-                    {duration && props.data ? calculateTime(duration) : calculateTime(0)}
+                <div className="grid grid-flow-col text-xs">
+                    {/* current time */}
+                    <div className="p-1 mx-1 rounded-md">
+                        {calculateTime(currentTime)}
+                    </div>
+
+
+                    {/* duration */}
+                    <div className="p-1 rounded-md justify-self-end">
+                        {duration && props.data ? calculateTime(duration) : calculateTime(0)}
+                    </div>
                 </div>
             </div>
         </div>
