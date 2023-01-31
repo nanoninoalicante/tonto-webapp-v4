@@ -13,21 +13,16 @@ export default function PrimaryHeader() {
         setMounted(true)
     }, [])
 
-    const renderThemeChanger = () => {
-        if (!mounted) return null
-        const currentTheme = theme === "system" ? systemTheme : theme;
-        return (
-            currentTheme == "dark" ?
-                <Sun onClick={() => { setTheme("light") }} className="absolute mr-3 cursor-pointer bg-white rounded-lg text-teal-500 h-8 w-8 justify-self-end justify-items-center" />
-                :
-                <Moon onClick={() => { setTheme("dark") }} className="absolute mr-3 cursor-pointer bg-white rounded-lg text-teal-500 h-8 w-8 justify-self-end justify-items-center" />
-
-        )
-    }
+    if (!mounted) return null
+    const currentTheme = theme === "system" ? systemTheme : theme;
     return (
-        <div className="relative grid justify-items-start items-center top-0 w-full md:w-[50%] dark:md:bg-transparent pt-16 px-4 dark:bg-gradient-to-b dark:md:from-transparent dark:md:to-transparent dark:from-[#6F6F6F] dark:to-[#3C3C3C]">
+        <div className="relative flex flex-row justify-items-start items-center top-0 w-full md:w-[50%] dark:md:bg-transparent pt-16 px-4 dark:bg-gradient-to-b dark:md:from-transparent dark:md:to-transparent dark:from-[#6F6F6F] dark:to-[#3C3C3C]">
             {theme === "dark" ? <LogoDark /> : <LogoLight />}
-            { renderThemeChanger() }
+            {currentTheme == "dark" ?
+                <Sun onClick={() => { setTheme("light") }} className="relative pt-1 cursor-pointer rounded-lg text-teal-500 h-8 w-8 ml-auto" />
+                :
+                <Moon onClick={() => { setTheme("dark") }} className="relative pt-1 cursor-pointer rounded-lg text-teal-500 h-8 w-8 ml-auto" />
+            }
         </div>
     )
 }

@@ -43,7 +43,7 @@ const PrimaryPost = (props: any) => {
 
     return (
         userData?.id !== "" ?
-            <div className="w-[85%] sm:w-[94%] md:w-[50%] mx-4 mt-8 rounded-t-lg bg-[#F8F8F8] dark:bg-[#6C6C6C]">
+            <div className="w-[94%]  md:w-[50%] mx-4 mt-8 rounded-t-lg bg-[#F8F8F8] dark:bg-[#6C6C6C]">
                 <div className="flex flex-row">
                     <div className="flex flex-col ml-5">
                         <img
@@ -62,18 +62,18 @@ const PrimaryPost = (props: any) => {
                         </button>
                     </div>
                     <div className="flex flex-col justify-around ml-auto mr-5 text-center text-[14px] py-4 gap-2">
-                        <div className="text-[#F54F74] dark:text-[#EBEBEB]">
+                        <button onClick={() => { setModal(true) }} className="text-[#F54F74] dark:text-[#EBEBEB]">
                             <Heart />
                             {post?.likesCount}
-                        </div>
-                        <div className="text-[#009D9D] dark:text-[#EBEBEB]">
+                        </button>
+                        <button onClick={() => { setModal(true) }} className="text-[#009D9D] dark:text-[#EBEBEB]">
                             <Comment />
                             {post?.commentsCount}
-                        </div>
-                        <div className="text-[#F6C116] dark:text-[#EBEBEB]">
+                        </button>
+                        <button onClick={() => { setModal(true) }} className="text-[#F6C116] dark:text-[#EBEBEB]">
                             <Share />
                             {post?.shareCount}
-                        </div>
+                        </button>
                     </div>
                 </div>
                 <div className="flex justify-center">

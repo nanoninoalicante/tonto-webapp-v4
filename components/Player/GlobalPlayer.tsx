@@ -16,6 +16,7 @@ import NextDark from "../../public/flex-ui-assets/player/next_dark.svg"
 import BackDark from "../../public/flex-ui-assets/player/back_dark.svg"
 import OptionsDark from "../../public/flex-ui-assets/player/options_dark.svg"
 import { useTheme } from 'next-themes'
+import DownloadApp from "../Modals/DownloadApp"
 
 const GlobalPlayer = (props: any) => {
     const { theme, systemTheme } = useTheme();
@@ -25,6 +26,7 @@ const GlobalPlayer = (props: any) => {
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [speed, setSpeed] = useState(1);
+    const [modal, setModal] = useState(false)
 
     // references
     const audioPlayer: any = useRef(null);
@@ -36,7 +38,6 @@ const GlobalPlayer = (props: any) => {
         const seconds = Math.floor(audioPlayer.current.duration)
         setDuration(seconds)
         progressBar.current.max = seconds
-        console.log(duration)
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
     const togglePlayPause = () => {
@@ -128,7 +129,7 @@ const GlobalPlayer = (props: any) => {
     }
 
     return (
-        <div className="relative z-10 w-[85%] sm:w-[94%] mx-4 md:w-[50%] bg-[#EAEAEA] rounded-b-lg dark:bg-[#5f5f5f]">
+        <div className="relative z-10 w-[94%] sm:w-[94%] mx-4 md:w-[50%] bg-[#EAEAEA] rounded-b-lg dark:bg-[#5f5f5f]">
             <div className="flex flex-row overflow-hidden justify-center place-items-center gap-0 sm:gap-1 md:gap-2 lg:gap-3">
                 <audio ref={audioPlayer} preload="metadata" src={props.data.downloadUrl[0]}/>
 
@@ -186,7 +187,7 @@ const GlobalPlayer = (props: any) => {
 
 
                 {/* OPTIONS */}
-                <button className="p-3">
+                <button onClick={() => { setModal(true) }} className="p-3">
                     {theme === "dark" ?
                         <OptionsDark /> :
                         <Options size={30} />
@@ -200,7 +201,7 @@ const GlobalPlayer = (props: any) => {
                     <input type="range" defaultValue="0" className={style.progressBar} ref={progressBar} onChange={onChangeRange} />
                 </div>
 
-                <div className="grid grid-flow-col text-xs">
+                <div className="grid grid-flow-col text-xs text-[#dedede]">
                     {/* current time */}
                     <div className="p-1 mx-1 rounded-md">
                         {calculateTime(currentTime)}
@@ -213,6 +214,7 @@ const GlobalPlayer = (props: any) => {
                     </div>
                 </div>
             </div>
+            <DownloadApp show={modal} close={() => setModal(false)} />
         </div>
     );
 }
