@@ -36,11 +36,8 @@ const GlobalPlayer = (props: any) => {
         const seconds = Math.floor(audioPlayer.current.duration)
         setDuration(seconds)
         progressBar.current.max = seconds
+        console.log(duration)
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
-
-    useEffect(() => {
-        audioPlayer.current.src = props.data.downloadUrl[0]
-    }, [props.data])
 
     const togglePlayPause = () => {
         setIsPlaying(!isPlaying);
@@ -133,7 +130,7 @@ const GlobalPlayer = (props: any) => {
     return (
         <div className="relative z-10 w-[85%] sm:w-[94%] mx-4 md:w-[50%] bg-[#EAEAEA] rounded-b-lg dark:bg-[#5f5f5f]">
             <div className="flex flex-row overflow-hidden justify-center place-items-center gap-0 sm:gap-1 md:gap-2 lg:gap-3">
-                <audio ref={audioPlayer} preload="metadata" />
+                <audio ref={audioPlayer} preload="metadata" src={props.data.downloadUrl[0]}/>
 
                 {/* SPEED CONTROL */}
                 <button onClick={handleSpeed} className="p-3 text-[#109C90] dark:text-[#00eedc]">
@@ -212,7 +209,7 @@ const GlobalPlayer = (props: any) => {
 
                     {/* duration */}
                     <div className="p-1 rounded-md justify-self-end">
-                        {duration && props.data ? calculateTime(duration) : calculateTime(0)}
+                        {duration ? calculateTime(duration) : calculateTime(0)}
                     </div>
                 </div>
             </div>

@@ -6,7 +6,6 @@ import style from "../styles/AudioComment.module.css"
 const Comments = (props) => {
     const { data } = props
     const showComments = () => {
-        console.log("hola")
         return (
             data.map((comment, i) => {
                 const [playing, setPlaying] = useState(false);
