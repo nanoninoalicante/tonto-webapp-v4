@@ -2,33 +2,36 @@
     --bar-bg: rgb(163, 163, 163);
     --seek-before-width: 0;
     --seek-before-color: rgb(0, 184, 186);
-    --knobby: #3452a5;
+    --knobby: #ffffff;
     --selectedKnobby: #26c9c3;
   
     appearance: none;
-    background: var(--bar-bg);;
-    border-radius: 10px;
+    background: var(--bar-bg);
+    display: flex;
+    place-items: center;
     position: relative;
     width: 9em;
-    height: 9px;
+    height: 3px;
     outline: none;
   }
   .progressBar::-webkit-slider-runnable-track {
     background: var(--bar-bg);
-    border-radius: 10px;
+    display: flex;
+    place-items: center;
     position: relative;
     width: 9em;
-    height: 9px;
+    height: 3px;
     outline: none;
   }
   
   /* progress bar - firefox */
   .progressBar::-moz-range-track {
     background: var(--bar-bg);
-    border-radius: 10px;
+    display: flex;
+    place-items: center;
     position: relative;
     width: 9em;
-    height: 9px;
+    height: 3px;
     outline: none;
   }
   
@@ -39,11 +42,9 @@
   /* progress bar - chrome and safari */
   .progressBar::before {
     content: '';
-    height: 11px;
+    height: 3px;
     width: var(--seek-before-width);
     background-color: var(--seek-before-color);
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
     position: absolute;
     top: 0;
     left: 0;
@@ -54,22 +55,20 @@
   /* progress bar - firefox */
   .progressBar::-moz-range-progress {
     background-color: var(--seek-before-color);
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    height: 11px;
+    height: 5px;
   }
   
   /* knobby - chrome and safari */
   .progressBar::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
+    height: 9px;
+    width: 9px;
+    border-radius: 100%;
     border: none;
     background-color: var(--knobby);
     cursor: pointer;
     position: relative;
-    margin: -2px 0 0 0;
+    margin: -3px 0;
     z-index: 3;
     box-sizing: border-box;
   }

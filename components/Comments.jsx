@@ -67,7 +67,7 @@ const Comments = (props) => {
                                     {moment(comment.createdAt).fromNow()}
                                 </div>
                             </div>
-                            <div className='flex p-2 items-center place-items-center gap-2 w-auto bg-[#109C90] rounded-r-xl rounded-bl-xl'>
+                            <div className='flex p-2 items-center place-items-center gap-2 w-full bg-[#109C90] rounded-r-xl rounded-bl-xl'>
                                 <audio ref={audio} src={comment.downloadUrl[0]} />
                                 <button onClick={togglePlay}>
                                     {playing ? <BsFillPauseFill size={30} /> : <BsFillPlayFill size={30} />}
