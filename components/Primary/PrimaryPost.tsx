@@ -77,7 +77,7 @@ const PrimaryPost = (props: any) => {
                     </div>
                 </div>
                 <div className="flex justify-center">
-                    WAVEFORM BAR
+                   {/*  WAVEFORM BAR */}
                 </div>
                 <div className="container w-auto flex flex-row dark:text-[#EBEBEB] text-[#5F5F5F] px-4 py-3 text-[14px]">
                     <div className="dark:bg-[#3C3C3C] bg-[#D7D7D7] rounded-md px-2 py-1 mr-2">

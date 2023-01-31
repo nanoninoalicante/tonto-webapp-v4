@@ -15,7 +15,6 @@ export default function PrimaryHeader() {
 
     const renderThemeChanger = () => {
         if (!mounted) return null
-
         const currentTheme = theme === "system" ? systemTheme : theme;
         return (
             currentTheme == "dark" ?

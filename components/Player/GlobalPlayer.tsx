@@ -69,8 +69,8 @@ const GlobalPlayer = (props: any) => {
 
     const whilePlaying = () => {
         progressBar.current.value = audioPlayer.current.currentTime
-        animationRef.current = requestAnimationFrame(whilePlaying)
         changePlayerCurrentTime();
+        animationRef.current = requestAnimationFrame(whilePlaying)
     }
 
     const calculateTime = (secs: number) => {
@@ -87,7 +87,8 @@ const GlobalPlayer = (props: any) => {
     }
 
     const changePlayerCurrentTime = () => {
-        progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / duration * 100}%`)
+        progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / audioPlayer.current.duration * 100}%`)
+        progressBar.current.style.setProperty('transition-duration', `${100}ms`)
         setCurrentTime(progressBar.current.value)
     }
 

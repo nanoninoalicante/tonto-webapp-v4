@@ -4,8 +4,9 @@ import ReactAudioPlayer from 'react-audio-player';
 import { BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs'
 import style from "../styles/AudioComment.module.css"
 const Comments = (props) => {
-
-    const showComments = (data) => {
+    const { data } = props
+    const showComments = () => {
+        console.log("hola")
         return (
             data.map((comment, i) => {
                 const [playing, setPlaying] = useState(false);
@@ -87,6 +88,11 @@ const Comments = (props) => {
             })
         )
     }
+    const noData = () => {
+        return (
+            <span className='flex justify-center italic text-[14px] text-gray-300'>This post has no comments</span>
+        )
+    }
 
     return (
         <div className="w-[85%] sm:w-[94%] md:w-[50%] mx-4 mt-2 overflow-y-visible bg-[#5F5F5F] text-white rounded-lg">
@@ -96,7 +102,7 @@ const Comments = (props) => {
                 </p>
                 <div className="h-1 w-12 bg-slate-300 rounded-lg" />
             </div>
-            {showComments(props.data)}
+            {data.length ? showComments() : noData()}
         </div>
     )
 }
