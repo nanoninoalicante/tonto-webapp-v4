@@ -201,7 +201,7 @@ const GlobalPlayer = (props: any) => {
                     <input type="range" defaultValue="0" className={style.progressBar} ref={progressBar} onChange={onChangeRange} />
                 </div>
 
-                <div className="grid grid-flow-col text-xs text-[#dedede]">
+                <div className="grid grid-flow-col text-xs text-[#109C90] dark:text-[#00EEDC]">
                     {/* current time */}
                     <div className="p-1 mx-1 rounded-md">
                         {calculateTime(currentTime)}
