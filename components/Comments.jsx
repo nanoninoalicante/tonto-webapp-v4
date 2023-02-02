@@ -58,7 +58,7 @@ const Comments = (props) => {
                 }
 
                 return (
-                    <div key={i} className="flex flex-row ml-2 mb-4 overflow-hidden">
+                    <div key={i} className="flex flex-row ml-2 mb-4">
                         <img className="flex flex-col w-9 h-9 rounded-full" src={comment.userInfo.profileImg} />
                         <div className="flex flex-col pl-4 text-[15px] mb-2">
                             <div className="flex flex-row">
@@ -78,7 +78,7 @@ const Comments = (props) => {
                                 </div>
 
                                 <div>
-                                    { currentTime == 0 ? calculateTime(duration) : calculateTime(currentTime) }
+                                    {currentTime == 0 ? calculateTime(duration) : calculateTime(currentTime)}
                                 </div>
                             </div>
                         </div>
@@ -94,14 +94,7 @@ const Comments = (props) => {
     }
 
     return (
-        <div className="w-[94%] md:w-[50%] mx-4 mt-2 overflow-y-visible bg-[#5F5F5F] text-white rounded-lg">
-            <div className="text-[14px] leading-4 flex flex-col justify-center place-items-center py-2">
-                <p>
-                    COMMENTS
-                </p>
-            </div>
-            {data.length ? showComments() : noData()}
-        </div>
+        data.length ? showComments() : noData() 
     )
 }
 

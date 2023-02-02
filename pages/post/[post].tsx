@@ -8,6 +8,7 @@ import PostNotFound from '../../components/PostNotFound'
 import Link from 'next/link'
 import DownloadApp from '../../components/Modals/DownloadApp'
 import Comments from '../../components/Comments'
+import Substitles from '../../components/Substitles/Substitles'
 
 
 //santeetji: 62b131b4db1ec8000f04084e
@@ -102,6 +103,7 @@ export const getServerSideProps = async (context: any) => {
 };
 
 const Post = (props: any) => {
+    const [selected, setSelected] = useState("comments")
     return (
         <>
             {props.data?.uuid !== "" ?
@@ -123,7 +125,28 @@ const Post = (props: any) => {
                             back={props.back}
                             next={props.next}
                             existsId={props.existsId} />
-                        <Comments data={props.comments}/>
+                        <div className="w-[94%] md:w-[50%] mx-4 mt-2 bg-[#5F5F5F] text-white rounded-lg">
+                            <div className="text-[14px] leading-4 flex flex-col justify-center place-items-center">
+                                <nav className='py-2 flex gap-28'>
+                                    <button className="flex flex-col justify-center bg-slate-800 pt-8" onClick={() => setSelected("comments")}>
+                                        <span>COMMENTS</span>
+                                        { selected === "comments" &&
+                                          <div className='w-7 h-1  bg-slate-500 rounded-lg'/>
+                                        }
+                                    </button>
+                                    <button onClick={() => setSelected("substitles")}>
+                                        <span>SUBSTITLES</span>
+                                    </button>
+                                </nav>
+                                {
+                                    {
+                                        "comments": <Comments data={props.comments} />,
+                                        "substitles": <Substitles />
+                                    }[selected]
+
+                                }
+                            </div>
+                        </div>
                     </main>
                 </div> :
                 <>
