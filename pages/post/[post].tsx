@@ -8,7 +8,7 @@ import PostNotFound from '../../components/PostNotFound'
 import Link from 'next/link'
 import DownloadApp from '../../components/Modals/DownloadApp'
 import Comments from '../../components/Comments'
-import Substitles from '../../components/Substitles/Substitles'
+import Subtitles from '../../components/Subtitles/Subtitles'
 
 
 //santeetji: 62b131b4db1ec8000f04084e
@@ -125,28 +125,31 @@ const Post = (props: any) => {
                             back={props.back}
                             next={props.next}
                             existsId={props.existsId} />
-                        <div className="w-[94%] md:w-[50%] mx-4 mt-2 bg-[#5F5F5F] text-white rounded-lg">
-                            <div className="text-[14px] leading-4 flex flex-col justify-center place-items-center">
-                                <nav className='py-2 flex gap-28'>
-                                    <button className="flex flex-col justify-center bg-slate-800 pt-8" onClick={() => setSelected("comments")}>
-                                        <span>COMMENTS</span>
-                                        { selected === "comments" &&
-                                          <div className='w-7 h-1  bg-slate-500 rounded-lg'/>
-                                        }
-                                    </button>
-                                    <button onClick={() => setSelected("substitles")}>
-                                        <span>SUBSTITLES</span>
-                                    </button>
-                                </nav>
-                                {
-                                    {
-                                        "comments": <Comments data={props.comments} />,
-                                        "substitles": <Substitles />
-                                    }[selected]
-
+                        <nav className='w-[94%] md:w-[50%] pt-2 flex flex-row justify-center'>
+                            <button className="flex flex-col justify-center items-center h-14 bg-[#5F5F5F] w-full rounded-tl-lg" 
+                                    onClick={() => setSelected("comments")}
+                            >
+                                <span className={selected === "comments" ? "text-white" : "text-white/50"}>COMMENTS</span>
+                                {selected === "comments" &&
+                                    <div className='w-[75%] h-1 bg-white/70 rounded-lg' />
                                 }
-                            </div>
-                        </div>
+                            </button>
+                            <button className="flex flex-col justify-center items-center h-14 bg-[#5F5F5F] w-full rounded-tr-lg"
+                                    onClick={() => setSelected("subtitles")}
+                            >
+                                <span className={selected === "subtitles" ? "text-white" : "text-white/50"}>SUBTITLES</span>
+                                {selected === "subtitles" &&
+                                    <div className='w-[75%] h-1 bg-white/70 rounded-lg' />
+                                }
+                            </button>
+                        </nav>
+                        {
+                            {
+                                "comments": <Comments data={props.comments} />,
+                                "subtitles": <Subtitles />
+                            }[selected]
+
+                        }
                     </main>
                 </div> :
                 <>

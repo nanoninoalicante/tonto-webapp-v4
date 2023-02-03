@@ -20,7 +20,7 @@ const Comments = (props) => {
                     const seconds = Math.floor(audio.current.duration)
                     setDuration(seconds)
                     progressBar.current.max = seconds
-                }, [audio?.current?.loadedmetadata, audio?.current?.readyState])
+                }, [])
 
                 const calculateTime = (secs) => {
                     const minutes = Math.floor(secs / 60);
@@ -58,7 +58,7 @@ const Comments = (props) => {
                 }
 
                 return (
-                    <div key={i} className="flex flex-row ml-2 mb-4">
+                    <div key={i} className="w-[94%] md:w-[50%] bg-[#5F5F5F] p-4 flex flex-row mb-4">
                         <img className="flex flex-col w-9 h-9 rounded-full" src={comment.userInfo.profileImg} />
                         <div className="flex flex-col pl-4 text-[15px] mb-2">
                             <div className="flex flex-row">
@@ -78,7 +78,7 @@ const Comments = (props) => {
                                 </div>
 
                                 <div>
-                                    {currentTime == 0 ? calculateTime(duration) : calculateTime(currentTime)}
+                                    {currentTime == '0:00' ? calculateTime(duration) : calculateTime(currentTime)}
                                 </div>
                             </div>
                         </div>
