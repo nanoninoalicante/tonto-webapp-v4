@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import { BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs'
 import style from "../styles/AudioComment.module.css"
+
 const Comments = (props) => {
     const { data } = props
     const showComments = () => {
@@ -59,7 +60,7 @@ const Comments = (props) => {
 
                 return (
                     <div key={i} className="w-[94%] md:w-[50%] bg-[#5F5F5F] p-4 flex flex-row mb-4">
-                        <img className="flex flex-col w-9 h-9 rounded-full" src={comment.userInfo.profileImg} />
+                        <img className="flex flex-col w-9 h-9 rounded-full" src={comment.userInfo.profileImg || "/flex-ui-assets/images/tontoprofile_defualt.png"} />
                         <div className="flex flex-col pl-4 text-[15px] mb-2">
                             <div className="flex flex-row">
                                 <p>@{comment.userInfo.userName}</p>
@@ -67,7 +68,7 @@ const Comments = (props) => {
                                     {moment(comment.createdAt).fromNow()}
                                 </div>
                             </div>
-                            <div className='flex p-2 items-center place-items-center gap-2 w-full bg-[#109C90] rounded-r-xl rounded-bl-xl'>
+                            <div className='flex p-2 items-center place-items-center gap-2 w-[228px] bg-[#109C90] rounded-r-xl rounded-bl-xl'>
                                 <audio ref={audio} src={comment.downloadUrl[0]} />
                                 <button onClick={togglePlay}>
                                     {playing ? <BsFillPauseFill size={30} /> : <BsFillPlayFill size={30} />}

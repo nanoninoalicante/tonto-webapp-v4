@@ -7,7 +7,7 @@ import Cross from "../../public/flex-ui-assets/ic_cross.svg"
 const DownloadApp = (props: any) => {
     return (
         <Transition.Root show={props.show} as={Fragment}>
-            <Dialog as="div"  className="relative z-50" onClose={props.close}>
+            <Dialog as="div" className="relative z-50" onClose={props.close}>
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"

@@ -54,6 +54,7 @@ export const getServerSideProps = async (context: any) => {
     }
 
     const getPost = `${process.env.FEED_API}/post/${post}${process.env.API_KEY}`;
+    console.log(getPost)
     await fetch(getPost, { method: "GET" })
         .then((response) => response.json())
         .then(async (data) => {
@@ -65,6 +66,7 @@ export const getServerSideProps = async (context: any) => {
         })
 
     const getUser = `${process.env.FEED_API}/user/${server.data.userInfo.id}${process.env.API_KEY}`
+    console.log(getUser)
     server?.data.uuid &&
         await fetch(getUser, { method: "GET" })
             .then((response) => response.json())
@@ -75,7 +77,7 @@ export const getServerSideProps = async (context: any) => {
                 if (index !== -1 && postsIds.length > 1) {
                     if (index === 0) {
                         server.back = postsIds[postsIds.length - 1]
-                        //server.next = postsIds[index + 1]
+                        server.next = postsIds[index + 1]
                     } else if (index === postsIds.length - 1) {
                         server.back = postsIds[index - 1]
                         server.next = postsIds[0]
