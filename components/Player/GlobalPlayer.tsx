@@ -145,53 +145,58 @@ const GlobalPlayer = (props: any) => {
                 </button>
 
                 {/* REDO 10*/}
-                <button className="p-3" onClick={handleRedo}>
-                    {theme === "dark" ?
-                        <Redo10Dark /> :
-                        <Redo10 className="dark:text-[#00eedc]" />
-                    }
+                <button className="p-3 dark:hidden" onClick={handleRedo}>
+                        <Redo10 />
+                </button>
+
+                <button className="p-3 hidden dark:block" onClick={handleRedo}>
+                        <Redo10Dark />
                 </button>
 
                 {/* BACK AUDIO */}
-                <button className="p-3 cursor-pointer" onClick={handleBack} >
-                    {theme === "dark" ?
-                        <BackDark /> :
-                        <Back size={30} />
-                    }
+                <button className="p-3 dark:hidden cursor-pointer" onClick={handleBack} >
+                    <Back />
+                </button>
+
+                <button className="p-3 hidden dark:block cursor-pointer" onClick={handleBack} >
+                    <BackDark />
                 </button>
 
                 {/* PLAY / PAUSE */}
-                <button onClick={togglePlayPause} className="p-3">
-                    {theme === "dark" ?
-                        isPlaying ? <PauseDark /> : <PlayDark /> :
-                        isPlaying ? <Pause /> : <Play />
-                    }
+                <button onClick={togglePlayPause} className="p-3 dark:hidden">
+                        {isPlaying ? <Pause /> : <Play />}
+                </button>
 
+                <button onClick={togglePlayPause} className="p-3 hidden dark:block">
+                        {isPlaying ? <PauseDark /> : <PlayDark />}
                 </button>
 
                 {/* NEXT AUDIO */}
-                <button className="p-3 cursor-pointer" onClick={handleNext}>
-                    {theme === "dark" ?
-                        <NextDark /> :
-                        <Next size={30} />
-                    }
+                <button className="p-3 dark:hidden cursor-pointer" onClick={handleNext} >
+                    <Next />
+                </button>
+
+                <button className="p-3 hidden dark:block cursor-pointer" onClick={handleNext} >
+                    <NextDark />
                 </button>
 
                 {/* NEXT 10 */}
-                <button className="p-3" onClick={handleNext10}>
-                    {theme === "dark" ?
-                        <Next10Dark /> :
-                        <Next10 size={30} />
-                    }
+                <button className="p-3 dark:hidden" onClick={handleNext10}>
+                        <Next10 />
+                </button>
+
+                <button className="p-3 hidden dark:block" onClick={handleNext10}>
+                        <Next10Dark />
                 </button>
 
 
                 {/* OPTIONS */}
-                <button onClick={() => { setModal(true) }} className="p-3">
-                    {theme === "dark" ?
-                        <OptionsDark /> :
-                        <Options size={30} />
-                    }
+                <button onClick={() => { setModal(true) }} className="p-3 dark:hidden">
+                        <Options />
+                </button>
+
+                <button onClick={() => { setModal(true) }} className="p-3 hidden dark:block">
+                        <OptionsDark />
                 </button>
             </div>
             <div className="relative px-2 grid grid-flow-row justify-center overflow-hidden font-mono items-center w-full py-0 mb-2">
