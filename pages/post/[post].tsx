@@ -54,7 +54,6 @@ export const getServerSideProps = async (context: any) => {
     }
 
     const getPost = `${process.env.FEED_API}/post/${post}${process.env.API_KEY}`;
-    console.log(getPost)
     await fetch(getPost, { method: "GET" })
         .then((response) => response.json())
         .then(async (data) => {
@@ -66,7 +65,6 @@ export const getServerSideProps = async (context: any) => {
         })
 
     const getUser = `${process.env.FEED_API}/user/${server.data.userInfo.id}${process.env.API_KEY}`
-    console.log(getUser)
     server?.data.uuid &&
         await fetch(getUser, { method: "GET" })
             .then((response) => response.json())

@@ -59,7 +59,7 @@ const Comments = (props) => {
                 }
 
                 return (
-                    <div key={i} className="w-[94%] md:w-[50%] bg-[#5F5F5F] p-4 flex flex-row mb-4">
+                    <div key={i} className="px-4 flex flex-row mb-4">
                         <img className="flex flex-col w-9 h-9 rounded-full" src={comment.userInfo.profileImg || "/flex-ui-assets/images/tontoprofile_defualt.png"} />
                         <div className="flex flex-col pl-4 text-[15px] mb-2">
                             <div className="flex flex-row">
@@ -90,12 +90,16 @@ const Comments = (props) => {
     }
     const noData = () => {
         return (
-            <span className='flex justify-center italic text-[14px] text-gray-300'>This post has no comments</span>
+            <span className='flex justify-center italic text-[14px] text-gray-300 bg-[#5F5F5F] w-[94%] md:w-[50%] py-3 rounded-b-lg'>This post has no comments</span>
         )
     }
 
     return (
-        data.length ? showComments() : noData() 
+        data.length ? 
+            <div className='w-[94%] md:w-[50%] bg-[#5F5F5F] max-h-[293px] overflow-y-scroll no-scrollbar'>
+                {showComments() }
+            </div>
+        :   noData() 
     )
 }
 
