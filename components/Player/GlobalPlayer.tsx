@@ -64,19 +64,19 @@ const GlobalPlayer = (props: any) => {
             }
         }
     }
-
-    const whilePlaying = () => {
-        progressBar.current.value = audioPlayer.current.currentTime
-        changePlayerCurrentTime();
-        animationRef.current = requestAnimationFrame(whilePlaying)
-    }
-
+    
     const calculateTime = (secs: number) => {
         const minutes = Math.floor(secs / 60);
         const returnMin = minutes < 10 ? `0${minutes}` : `${minutes}`;
         const seconds = Math.floor(secs % 60);
         const returnSecs = seconds < 10 ? `0${seconds}` : `${seconds}`;
         return `${returnMin}:${returnSecs}`
+    }
+    
+    const whilePlaying = () => {
+        progressBar.current.value = audioPlayer.current.currentTime
+        changePlayerCurrentTime();
+        animationRef.current = requestAnimationFrame(whilePlaying)
     }
 
     const onChangeRange = () => {

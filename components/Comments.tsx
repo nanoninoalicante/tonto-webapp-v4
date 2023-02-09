@@ -1,4 +1,5 @@
 var moment = require('moment');
+import Hls from 'hls.js';
 import { useEffect, useRef, useState } from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import { BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs'
@@ -13,16 +14,45 @@ const Comments = (props) => {
                 const [duration, setDuration] = useState(0);
                 const [currentTime, setCurrentTime] = useState(0);
 
-                const audio = useRef()
-                const progressBar = useRef()
-                const animationRef = useRef()
+                const audio: any = useRef(null)
+                const hlsRef: any = useRef()
+                const progressBar: any = useRef()
+                const animationRef: any = useRef()
 
                 useEffect(() => {
-                    const seconds = Math.floor(audio.current.duration)
-                    setDuration(seconds)
+                    loadHlsAudio({streamingUrl: comment.streamingUrl[0]})
+                    const seconds = Math.floor(audio?.current.duration)
                     progressBar.current.max = seconds
-                }, [])
+                }, [comment])
 
+                const loadHlsAudio = ({ streamingUrl }) => {
+                    if (Hls.isSupported()) {
+                        if (hlsRef?.current) {
+                            hlsRef.current.destroy()
+                        }
+                        if (audio?.current) {
+                            const config = {
+                                enableWorker: false
+                            }
+                            hlsRef.current = new Hls(config);
+                            hlsRef.current.attachMedia(audio.current);
+                            hlsRef.current.on(Hls.Events.MEDIA_ATTACHED, () => {
+                                hlsRef.current?.loadSource(streamingUrl);
+                                hlsRef.current?.on(Hls.Events.MANIFEST_PARSED, () => {
+                                    hlsRef.current?.on(Hls.Events.LEVEL_LOADED, (_: string, data: any) => {
+                                        const duration: number = data.details.totalduration;
+                                        setDuration(duration);
+                                        setCurrentTime(0);
+                                    })
+                                });
+                            })
+                        }
+                    } else {
+                        audio.current.src = props.data?.streamingUrl;
+                        setDuration(duration);
+                        setCurrentTime(0);
+                    }
+                  };
                 const calculateTime = (secs) => {
                     const minutes = Math.floor(secs / 60);
                     const returnMin = minutes < 10 ? `${minutes}` : `${minutes}`;
@@ -31,14 +61,27 @@ const Comments = (props) => {
                     return `${returnMin}:${returnSecs}`
                 }
                 const togglePlay = () => {
-                    setPlaying(!playing)
+                    setPlaying(!playing);
+                    if (!playing) {
+                        const play = audio.current.play();
 
-                    if (playing) {
-                        audio.current.pause()
-                        cancelAnimationFrame(animationRef.current);
+                        if (play !== undefined) {
+                            play.then(() => {
+                                progressBar.current.value = audio.current.currentTime
+                                animationRef.current = requestAnimationFrame(whilePlaying)
+                            }).catch((error: any) => {
+                                console.log(error)
+                            })
+                        }
                     } else {
-                        audio.current.play()
-                        animationRef.current = requestAnimationFrame(whilePlaying)
+                        const pause = audio.current.pause();
+                        if (pause !== undefined) {
+                            pause.then(() => {
+                                cancelAnimationFrame(animationRef.current)
+                            }).catch((error: any) => {
+                                console.log(error)
+                            })
+                        }
                     }
                 }
 
@@ -50,7 +93,7 @@ const Comments = (props) => {
 
                 const changeRange = () => {
                     audio.current.currentTime = progressBar.current.value;
-                    progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / duration * 100}%`)
+                    changePlayerCurrentTime();
                 }
 
                 const changePlayerCurrentTime = () => {
@@ -69,7 +112,7 @@ const Comments = (props) => {
                                 </div>
                             </div>
                             <div className='flex p-2 items-center place-items-center gap-2 w-[228px] bg-[#109C90] rounded-r-xl rounded-bl-xl'>
-                                <audio ref={audio} src={comment.downloadUrl[0]} />
+                                <audio ref={audio} />
                                 <button onClick={togglePlay}>
                                     {playing ? <BsFillPauseFill size={30} /> : <BsFillPlayFill size={30} />}
                                 </button>
@@ -79,7 +122,7 @@ const Comments = (props) => {
                                 </div>
 
                                 <div>
-                                    {currentTime == '0:00' ? calculateTime(duration) : calculateTime(currentTime)}
+                                    {currentTime == 0 && !isNaN(currentTime) ? calculateTime(duration) : calculateTime(currentTime)}
                                 </div>
                             </div>
                         </div>
@@ -95,11 +138,11 @@ const Comments = (props) => {
     }
 
     return (
-        data.length ? 
+        data.length ?
             <div className='w-[94%] md:w-[50%] bg-[#5F5F5F] max-h-[293px] overflow-y-scroll no-scrollbar'>
-                {showComments() }
+                {showComments()}
             </div>
-        :   noData() 
+            : noData()
     )
 }
 
