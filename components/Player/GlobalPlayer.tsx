@@ -40,6 +40,9 @@ const GlobalPlayer = (props: any) => {
         progressBar.current.max = seconds
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
+    useEffect(() => {
+    },[duration])
+
     const togglePlayPause = () => {
         setIsPlaying(!isPlaying);
         if (!isPlaying) {
