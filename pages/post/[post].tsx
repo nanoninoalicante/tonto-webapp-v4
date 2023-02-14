@@ -5,8 +5,6 @@ import PrimaryPost from '../../components/Primary/PrimaryPost'
 import { GlobalPlayer } from '../../components/Player/GlobalPlayer'
 import Head from 'next/head'
 import PostNotFound from '../../components/PostNotFound'
-import Link from 'next/link'
-import DownloadApp from '../../components/Modals/DownloadApp'
 import Comments from '../../components/Comments'
 import Subtitles from '../../components/Subtitles/Subtitles'
 
