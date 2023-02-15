@@ -56,7 +56,6 @@ export const getServerSideProps = async (context: any) => {
         .then((response) => response.json())
         .then(async (data) => {
             server.data = data?.data[0] || postData
-
         })
         .catch(error => {
             console.log(error)

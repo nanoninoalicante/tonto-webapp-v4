@@ -25,7 +25,6 @@ export const getServerSideProps = async (context: any) => {
     }
 
     const getPost = `${process.env.FEED_API}/post/${preview}${process.env.API_KEY}`;
-    console.log(getPost)
     await fetch(getPost, { method: "GET" })
         .then((response) => response.json())
         .then(async (data) => {
@@ -43,12 +42,12 @@ const Preview = (props: any) => {
     if (!profileImg) profileImg = "/flex-ui-assets/images/tontoprofile_defualt.png";
     const { description } = props.data
     return (
-        <div className="flex flex-col h-screen bg-white text-black">
+        <div className="flex flex-col h-screen bg-white text-black md:justify-center md:items-center md:relative">
             <MetaTags data={props.data} />
-            <div className="top-0 inset-x-0 w-full">
+            <div className="top-0 inset-x-0 w-full md:w-1/3">
                 <img className="w-full" src={profileImg}></img>
             </div>
-            <section className="mx-3">
+            <section className="mx-3 md:w-1/3 md:px-2">
                 <div className="mt-10">
                     <p className="text-xs font-bold">
                         TONTO
@@ -56,7 +55,7 @@ const Preview = (props: any) => {
                     <p className="text-xl ">
                         {userName}
                     </p>
-                    <p>
+                    <p className="max-h-20 overflow-y-scroll no-scrollbar">
                         {description}
                     </p>
                 </div>
@@ -68,7 +67,7 @@ const Preview = (props: any) => {
                     <div className="flex flex-row mt-2">
                         <Icon className="rounded-xl ml-2 h-[56px]"/>
                         <Link href={"https://app.gettonto.com/download"} 
-                            className='bg-gray-800 h-[56px] text-white px-10 py-4 ml-auto w-3/4 flex justify-center items-center'>
+                            className='bg-gray-800 h-[56px] md:w-[85%] text-white px-10 py-4 ml-auto w-3/4 flex justify-center items-center'>
                             Get The App
                         </Link>
                     </div>
