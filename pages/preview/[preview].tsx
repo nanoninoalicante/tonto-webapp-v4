@@ -60,7 +60,7 @@ const Preview = (props: any) => {
                         <div className="text-sm font-light leading-3"> Open in Tonto App</div>
                     </div>
                     <Link href={"https://app.gettonto.com/download"}
-                          className="bg-[#109C90] text-white ml-auto rounded-2xl px-3 py-1 mr-3 h-8 flex items-center">
+                          className="bg-[#109C90] text-white ml-auto font-medium rounded-2xl px-3 py-1 mr-3 h-8 flex items-center">
                         OPEN
                     </Link>
                 </div>
