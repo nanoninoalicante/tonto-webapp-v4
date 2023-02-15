@@ -66,7 +66,7 @@ const Preview = (props: any) => {
                 </div>
             }
             <div className="relative inset-x-0 w-full md:w-1/3">
-                <img className="w-full max-h-96" src={profileImg}></img>
+                <img className="w-full max-h-96 md:max-h-full" src={profileImg}></img>
             </div>
             <section className="mx-3 md:w-1/3 md:px-2">
                 <div className="mt-10">
