@@ -1,8 +1,5 @@
 
 import React from 'react'
-import PrimaryHeader from '../components/Primary/PrimaryHeader'
-import Post from './post/[post]'
-
 type Props = {
     post: string
 }
@@ -15,7 +12,6 @@ type State = {
 function Home() {
     return (
         <div className='flex justify-center'>
-            <PrimaryHeader />
             <div className="fixed md:w-[50%] w-full mt-28 bg-white rounded-b-xl">
                 <div className="flex flex-col justify-center items-center border-b-2">
 
