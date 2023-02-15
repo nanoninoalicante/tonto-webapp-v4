@@ -43,12 +43,12 @@ const Preview = (props: any) => {
     if (!profileImg) profileImg = "/flex-ui-assets/images/tontoprofile_defualt.png";
     const { description } = props.data
     return (
-        <div>
+        <div className="flex flex-col">
             <MetaTags data={props.data} />
             <div className="top-0 inset-x-0 w-full">
                 <img className="w-full" src={profileImg}></img>
             </div>
-            <section className="px-3 mt-5">
+            <section className="px-3 mt-10">
                 <p className="text-xs font-bold">
                     TONTO
                 </p>
@@ -59,9 +59,10 @@ const Preview = (props: any) => {
                     {description}
                 </p>
             </section>
-            <section className="flex">
-                <Icon />
-                <Link href={"https://app.gettonto.com/download"} className='bg-gray-800 text-white px-10 py-4'>
+            <section className="flex mt-2">
+                <Icon className="rounded-xl ml-2 h-[56px]"/>
+                <Link href={"https://app.gettonto.com/download"} 
+                      className='bg-gray-800 h-[56px] text-white px-10 py-4 ml-auto mr-2 w-3/4 flex justify-center items-center'>
                     Get The App
                 </Link>
 
