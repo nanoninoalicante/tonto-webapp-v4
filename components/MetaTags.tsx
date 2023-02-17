@@ -10,7 +10,7 @@ const MetaTags = (data: any) => {
             <meta name="description" content={data.data.description}></meta>
 
             {/* FACEBOOK & INSTAGRAM */}
-            <meta property="og:type" content="music.song" />
+            {/* <meta property="og:type" content="music.song" />
             <meta property="og:url" content="https://tonto-webapp-v4-dev.netlify.app/post/628e108820eaae000f00a887" />
             <meta property="og:title" content={title}></meta>
             <meta property="og:audio" content={data.data.downloadUrl[0]}></meta>
@@ -18,10 +18,10 @@ const MetaTags = (data: any) => {
             <meta property="og:image" content={image}></meta>
             <meta property="og:image:width" content="1200"></meta>
             <meta property="og:image:height" content="630"></meta>
-            <meta property="og:image:url" content={image}></meta>
+            <meta property="og:image:url" content={image}></meta> */}
 
             {/* TWITTER */}
-            <meta name="twitter:card" content="audio" />
+            <meta name="twitter:card" content="player" />
             <meta name="twitter:site" content="@gettonto" />
             <meta name="twitter:url" content="https://www.gettonto.com/" />
             <meta name="twitter:title" content={title} />
@@ -30,7 +30,7 @@ const MetaTags = (data: any) => {
             <meta name="twitter:player:width" content="1200"/>
             <meta name="twitter:player:height" content="630"/>
             <meta name="twitter:player" content={data.data.downloadUrl[0]} />
-            <meta name="twitter:player:stream" content={data.data.downloadUrl[0]} />
+            <meta name="twitter:player:stream" content={data.data.streamingUrl[0]} />
             <meta name="twitter:player:stream:content_type" content="audio/mp3"></meta>
 
 
