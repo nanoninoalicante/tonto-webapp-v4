@@ -21,15 +21,15 @@ const MetaTags = (data: any) => {
             <meta property="og:image:url" content={image}></meta>
 
             {/* TWITTER */}
-            <meta name="twitter:card" content="player" />
+            <meta name="twitter:card" content="audio" />
             <meta name="twitter:site" content="@gettonto" />
             <meta name="twitter:url" content="https://www.gettonto.com/" />
             <meta name="twitter:title" content={title} />
             <meta name="twitter:description" content={data.data.description} />
             <meta name="twitter:image" content={image} />
-            <meta name="twitter:image:width" content="1200"/>
-            <meta name="twitter:image:height" content="630"/>
-            <meta name="twitter:player" content="https://example.com/player.html" />
+            <meta name="twitter:player:width" content="1200"/>
+            <meta name="twitter:player:height" content="630"/>
+            <meta name="twitter:player" content={data.data.downloadUrl[0]} />
             <meta name="twitter:player:stream" content={data.data.downloadUrl[0]} />
             <meta name="twitter:player:stream:content_type" content="audio/mp3"></meta>
 
