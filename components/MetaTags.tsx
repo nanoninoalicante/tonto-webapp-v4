@@ -23,6 +23,7 @@ const MetaTags = (data: any) => {
             <meta name="twitter:title" content={title}></meta>
             <meta name="twitter:description" content={data.data.description}/>
             <meta name="twitter:image" content={image}/>
+            <meta name="twitter:player" content={data.data.downloadUrl[0]} />
         </Head>
     )
 }
