@@ -11,7 +11,7 @@ const MetaTags = (data: any) => {
 
             {/* FACEBOOK & INSTAGRAM */}
             <meta property="og:type" content="music.song" />
-            <meta property="og:url" content="https://www.gettonto.com/" />
+            <meta property="og:url" content="https://tonto-webapp-v4-dev.netlify.app/post/628e108820eaae000f00a887" />
             <meta property="og:title" content={title}></meta>
             <meta property="og:audio" content={data.data.downloadUrl[0]}></meta>
             <meta property="og:description" content={data.data.description} />
