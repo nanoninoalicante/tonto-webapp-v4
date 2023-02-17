@@ -8,10 +8,11 @@ const MetaTags = (data: any) => {
             <title>{title}</title>
             <meta name="title" content={title}></meta>
             <meta name="description" content={data.data.description}></meta>
-            
+
             {/* FACEBOOK & INSTAGRAM */}
             <meta property="og:type" content="website"></meta>
             <meta property="og:url" content="https://www.gettonto.com/"></meta>
+            <meta name="twitter:site" content="@gettonto"></meta>
             <meta property="og:title" content={title}></meta>
             <meta property="og:description" content={data.data.description}></meta>
             <meta property="og:image" content={image}></meta>
@@ -19,11 +20,15 @@ const MetaTags = (data: any) => {
 
             {/* TWITTER */}
             <meta name="twitter:card" content="player" />
-            <meta name="twitter:url" content="https://www.gettonto.com/"/>
+            <meta name="twitter:url" content="https://www.gettonto.com/" />
             <meta name="twitter:title" content={title}></meta>
-            <meta name="twitter:description" content={data.data.description}/>
-            <meta name="twitter:image" content={image}/>
+            <meta name="twitter:description" content={data.data.description} />
+            <meta name="twitter:image" content={image} />
             <meta name="twitter:player" content={data.data.downloadUrl[0]} />
+            <meta name="twitter:player:stream" content={data.data.downloadUrl[0]} />
+            <meta name="twitter:player:stream:content_type" content="audio/mp3"></meta>
+
+
         </Head>
     )
 }
