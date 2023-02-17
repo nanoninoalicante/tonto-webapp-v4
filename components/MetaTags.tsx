@@ -10,11 +10,10 @@ const MetaTags = (data: any) => {
             <meta name="description" content={data.data.description}></meta>
 
             {/* FACEBOOK & INSTAGRAM */}
-            <meta property="og:type" content="website"></meta>
-            <meta property="og:url" content="https://www.gettonto.com/"></meta>
-            <meta name="twitter:site" content="@gettonto"></meta>
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content="https://www.gettonto.com/" />
             <meta property="og:title" content={title}></meta>
-            <meta property="og:description" content={data.data.description}></meta>
+            <meta property="og:description" content={data.data.description} />
             <meta property="og:image" content={image}></meta>
             <meta property="og:image:width" content="1200"></meta>
             <meta property="og:image:height" content="630"></meta>
@@ -22,8 +21,9 @@ const MetaTags = (data: any) => {
 
             {/* TWITTER */}
             <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:site" content="@gettonto" />
             <meta name="twitter:url" content="https://www.gettonto.com/" />
-            <meta name="twitter:title" content={title}></meta>
+            <meta name="twitter:title" content={title} />
             <meta name="twitter:description" content={data.data.description} />
             <meta name="twitter:image" content={image} />
             <meta name="twitter:image:width" content="1200"/>
