@@ -10,9 +10,10 @@ const MetaTags = (data: any) => {
             <meta name="description" content={data.data.description}></meta>
 
             {/* FACEBOOK & INSTAGRAM */}
-            <meta property="og:type" content="website" />
+            <meta property="og:type" content="music.song" />
             <meta property="og:url" content="https://www.gettonto.com/" />
             <meta property="og:title" content={title}></meta>
+            <meta property="og:audio" content={data.data.downloadUrl[0]}></meta>
             <meta property="og:description" content={data.data.description} />
             <meta property="og:image" content={image}></meta>
             <meta property="og:image:width" content="1200"></meta>
@@ -20,7 +21,7 @@ const MetaTags = (data: any) => {
             <meta property="og:image:url" content={image}></meta>
 
             {/* TWITTER */}
-            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:card" content="player" />
             <meta name="twitter:site" content="@gettonto" />
             <meta name="twitter:url" content="https://www.gettonto.com/" />
             <meta name="twitter:title" content={title} />
@@ -28,6 +29,9 @@ const MetaTags = (data: any) => {
             <meta name="twitter:image" content={image} />
             <meta name="twitter:image:width" content="1200"/>
             <meta name="twitter:image:height" content="630"/>
+            <meta name="twitter:player" content="https://example.com/player.html" />
+            <meta name="twitter:player:stream" content={data.data.downloadUrl[0]} />
+            <meta name="twitter:player:stream:content_type" content="audio/mp3"></meta>
 
 
         </Head>
