@@ -73,7 +73,7 @@ const Preview = (props: any) => {
                     <p className="text-xs font-bold">
                         TONTO
                     </p>
-                    <p className="text-xl ">
+                    <p className="text-xl">
                         {userName}
                     </p>
                     <p className="max-h-20 overflow-y-scroll no-scrollbar">

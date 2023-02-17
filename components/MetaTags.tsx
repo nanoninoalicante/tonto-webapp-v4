@@ -15,13 +15,14 @@ const MetaTags = (data: any) => {
             <meta property="og:title" content={title}></meta>
             <meta property="og:description" content={data.data.description}></meta>
             <meta property="og:image" content={image}></meta>
+            <meta property="og:image:url" content={image}></meta>
 
             {/* TWITTER */}
-            <meta property="twitter:card" content="summary_large_image"></meta>
-            <meta property="twitter:url" content="https://www.gettonto.com/"></meta>
+            <meta property="twitter:card" content="summary_large_image"/>
+            <meta property="twitter:url" content="https://www.gettonto.com/"/>
             <meta property="twitter:title" content={title}></meta>
-            <meta property="twitter:description" content={data.data.description}></meta>
-            <meta property="twitter:image" content={image}></meta>
+            <meta property="twitter:description" content={data.data.description}/>
+            <meta property="twitter:image" content={image}/>
         </Head>
     )
 }
