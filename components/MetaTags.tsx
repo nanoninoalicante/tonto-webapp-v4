@@ -21,8 +21,17 @@ const MetaTags = (data: any) => {
             <meta property="og:image:url" content={image}></meta>
 
             {/* TWITTER */}
-            {/** do the twitter meta tags */}
-            
+            {/* meta tags twitter for audio card*/}
+            <meta name="twitter:card" content="player" />
+            <meta name="twitter:site" content="@gettonto" />
+            <meta name="twitter:creator" content="@gettonto" />
+            <meta name="twitter:title" content={title} />
+            <meta name="twitter:description" content={data.data.description} />
+            <meta name="twitter:image" content={image} />
+            <meta name="twitter:player" content={data.data.downloadUrl[0]} />
+            <meta name="twitter:player:width" content="1200" />
+            <meta name="twitter:player:height" content="630" />       
+
             {/* LINKEDIN */}    
             <meta property="og:site_name" content="Tonto - Social Audio App" />
             <meta property="og:locale" content="en_US" />
