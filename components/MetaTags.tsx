@@ -21,14 +21,20 @@ const MetaTags = (data: any) => {
             <meta property="og:image:url" content={image}></meta>
 
             {/* TWITTER */}
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:url" content="https://www.gettonto.com/"/>
-            <meta name="twitter:title" content={title}></meta>
-            <meta name="twitter:description" content={data.data.description}/>
-            <meta name="twitter:image" content={image}/>
-            <meta name="twitter:image:width" content="1200"></meta>
-            <meta name="twitter:image:height" content="630"></meta>
-
+            {/** do the twitter meta tags */}
+            
+            {/* LINKEDIN */}    
+            <meta property="og:site_name" content="Tonto - Social Audio App" />
+            <meta property="og:locale" content="en_US" />
+            <meta property="og:audio:secure_url" content={data.data.downloadUrl[0]}></meta>
+            <meta property="og:audio:type" content="audio/mpeg"></meta>
+            <meta property="og:audio:alt" content={data.data.description}></meta>
+            <meta property="og:audio:title" content={title}></meta>
+            <meta property="og:audio:artist" content={data.data.userInfo.userName}></meta>
+            <meta property="og:audio:album" content="Tonto - Social Audio App"></meta>
+            <meta property="og:audio:duration" content={data.data.duration}></meta>
+            <meta property="og:audio:secure_url" content={data.data.downloadUrl[0]}></meta>
+            <meta property="og:audio:type" content="audio/mpeg"></meta>
             
 
 
