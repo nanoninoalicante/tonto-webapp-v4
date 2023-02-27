@@ -10,21 +10,21 @@ const MetaTags = (data: any) => {
             <meta name="description" content={data.data.description}></meta>
 
             {/* FACEBOOK & INSTAGRAM */}
-            {/* meta tags for audio card */}
-            <meta property="og:type" content="music.song" />
-            <meta property="og:url" content={data.data.downloadUrl[0]} />
-            <meta property="og:title" content={title} />
-            <meta property="og:description" content={data.data.description} />
-            <meta property="og:image" content={image} />
-            <meta property="music:duration" content="300" />
-            <meta property="music:album" content="Tonto" />
-            <meta property="music:album:disc" content="1" />
-            <meta property="music:album:track" content="1" />
-            <meta property="music:musician" content={data.data.userInfo.userName} />
-            <meta property="music:song" content={data.data.userInfo.userName} />
-            <meta property="music:song:disc" content="1" />
-            <meta property="music:song:track" content="1" />
-            <meta property="music:creator" content={data.data.userInfo.userName} />
+            <meta property="og:type" content="website"></meta>
+            <meta property="og:url" content="https://app.gettonto.com/download"></meta>
+            <meta property="og:title" content={title}></meta>
+            <meta property="og:description" content={data.data.description}></meta>
+            <meta property="og:image" content={image}></meta>
+
+            {/* TWITTER for player card*/}
+            <meta name="twitter:card" content="summary_large_image"></meta>
+            <meta name="twitter:url" content="https://app.gettonto.com/download"></meta>
+            <meta name="twitter:title" content={title}></meta>
+            <meta name="twitter:description" content={data.data.description}></meta>
+            <meta name="twitter:image" content={image}></meta>
+
+            
+            
                         
 
 
