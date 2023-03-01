@@ -122,21 +122,21 @@ const Post = (props: any) => {
                             back={props.back}
                             next={props.next}
                             existsId={props.existsId} />
-                        <nav className='w-[94%] md:w-[50%] pt-2 flex flex-row justify-center'>
-                            <button className="flex flex-col justify-center items-center h-14 bg-[#5F5F5F] w-full rounded-tl-lg" 
+                        <nav className='w-[94%] md:w-[50%] pt-2 flex flex-row justify-center font-medium'>
+                            <button className="flex flex-col justify-center items-center h-14 bg-[#5F5F5F] dark:bg-[#F8F8F8] w-full rounded-tl-lg" 
                                     onClick={() => setSelected("comments")}
                             >
-                                <span className={selected === "comments" ? "text-white" : "text-white/50"}>COMMENTS</span>
+                                <span className={selected === "comments" ? "text-white dark:text-[#3C3C3C]" : "text-white/50 dark:text-[#3C3C3C]/50"}>COMMENTS</span>
                                 {selected === "comments" &&
-                                    <div className='w-[75%] h-1 bg-white/70 rounded-lg' />
+                                    <div className='w-[75%] h-1 dark:bg-[#3C3C3C] bg-white rounded-lg' />
                                 }
                             </button>
-                            <button className="flex flex-col justify-center items-center h-14 bg-[#5F5F5F] w-full rounded-tr-lg"
+                            <button className="flex flex-col justify-center items-center h-14 bg-[#5F5F5F] dark:bg-[#F8F8F8] w-full rounded-tr-lg"
                                     onClick={() => setSelected("subtitles")}
                             >
-                                <span className={selected === "subtitles" ? "text-white" : "text-white/50"}>SUBTITLES</span>
+                                <span className={selected === "subtitles" ? "text-white dark:text-[#3C3C3C]" : "text-white/50 dark:text-[#3C3C3C]/50"}>SUBTITLES</span>
                                 {selected === "subtitles" &&
-                                    <div className='w-[75%] h-1 bg-white/70 rounded-lg' />
+                                    <div className='w-[75%] h-1 dark:bg-[#3C3C3C] bg-white rounded-lg' />
                                 }
                             </button>
                         </nav>
@@ -145,7 +145,6 @@ const Post = (props: any) => {
                                 "comments": <Comments data={props.comments} />,
                                 "subtitles": <Subtitles />
                             }[selected]
-
                         }
                     </main>
                 </div> :

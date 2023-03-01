@@ -97,8 +97,10 @@ const Comments = (props) => {
                 }
 
                 const changePlayerCurrentTime = () => {
-                    progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / duration * 100}%`)
-                    setCurrentTime(progressBar.current.value);
+                    if (currentTime !== progressBar.current.value) {
+                        progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / audio.current.duration * 100}%`)
+                        setCurrentTime(progressBar.current.value);
+                    }
                 }
 
                 return (
@@ -106,22 +108,22 @@ const Comments = (props) => {
                         <img className="flex flex-col w-9 h-9 rounded-full" src={comment.userInfo.profileImg || "/flex-ui-assets/images/tontoprofile_defualt.png"} />
                         <div className="flex flex-col pl-4 text-[15px] mb-2">
                             <div className="flex flex-row">
-                                <p>@{comment.userInfo.userName}</p>
-                                <div className="ml-[8px] text-[14px] flex items-center text-[#EBEBEB]">
+                                <p className='text-white dark:text-[#3C3C3C] font-bold text-[15px] leading-[18px]'>@{comment.userInfo.userName}</p>
+                                <div className="ml-[8px] text-[14px] dark:text-[#5F5F5F] font-light flex items-center text-[#EBEBEB]">
                                     {moment(comment.createdAt).fromNow()}
                                 </div>
                             </div>
                             <div className='flex p-2 items-center place-items-center gap-2 w-[228px] bg-[#109C90] rounded-r-xl rounded-bl-xl'>
                                 <audio ref={audio} />
-                                <button onClick={togglePlay}>
-                                    {playing ? <BsFillPauseFill size={30} /> : <BsFillPlayFill size={30} />}
+                                <button onClick={togglePlay} >
+                                    {playing ? <BsFillPauseFill className="text-white" size={30} /> : <BsFillPlayFill className="text-white" size={30} />}
                                 </button>
 
                                 <div>
                                     <input type="range" ref={progressBar} defaultValue={0} className={style.progressBar} onChange={changeRange} />
                                 </div>
 
-                                <div>
+                                <div className='text-white'>
                                     {currentTime == 0 && !isNaN(currentTime) ? calculateTime(duration) : calculateTime(currentTime)}
                                 </div>
                             </div>
@@ -139,7 +141,7 @@ const Comments = (props) => {
 
     return (
         data.length ?
-            <div className='w-[94%] md:w-[50%] bg-[#5F5F5F] max-h-[293px] overflow-y-scroll no-scrollbar'>
+            <div className='w-[94%] md:w-[50%] dark:bg-[#F8F8F8] bg-[#5F5F5F] max-h-[293px] overflow-y-scroll no-scrollbar'>
                 {showComments()}
             </div>
             : noData()

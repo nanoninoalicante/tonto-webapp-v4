@@ -3,6 +3,7 @@ import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key } 
 
 
 const PostsList = (props: any) => {
+    console.log(props)
     return (
         props?.posts &&
         props?.posts.map((post: any, i: number) => {

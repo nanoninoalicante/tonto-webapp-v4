@@ -202,7 +202,7 @@ const GlobalPlayer = (props: any) => {
                         <OptionsDark />
                 </button>
             </div>
-            <div className="relative px-2 grid grid-flow-row justify-center overflow-hidden font-mono items-center w-full py-0 mb-2">
+            <div className="relative px-2 grid grid-flow-row justify-center overflow-hidden items-center w-full py-0 mb-2">
 
                 {/* progress bar */}
                 <div className="mt-2">
