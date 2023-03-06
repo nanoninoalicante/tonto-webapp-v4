@@ -52,7 +52,7 @@ const Comments = (props) => {
                         setDuration(duration);
                         setCurrentTime(0);
                     }
-                  };
+                };
                 const calculateTime = (secs) => {
                     const minutes = Math.floor(secs / 60);
                     const returnMin = minutes < 10 ? `${minutes}` : `${minutes}`;

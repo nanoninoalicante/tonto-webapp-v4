@@ -16,6 +16,6 @@
     "incremental": true,
     "noImplicitAny": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Comments.tsx", "components/Comments.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Comments.tsx", "components/Comments.tsx", "components/Subtitles/Cue.jsx", "components/Subtitles/Cue.jsx", "components/Subtitles/Subtitles.Jsx"],
   "exclude": ["node_modules"]
 }
