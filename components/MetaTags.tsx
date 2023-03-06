@@ -21,13 +21,8 @@ const MetaTags = (data: any) => {
             <meta name="twitter:url" content="https://app.gettonto.com/download"></meta>
             <meta name="twitter:title" content={title}></meta>
             <meta name="twitter:description" content={data.data.description}></meta>
-            <meta name="twitter:image" content={image}></meta>
-
+            <meta name="twitter:image" content={image}></meta>    
             
-            
-                        
-
-
         </Head>
     )
 }
