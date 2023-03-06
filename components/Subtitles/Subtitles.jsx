@@ -3,7 +3,7 @@ import Cue from "./Cue";
 import  useSubtitlesComposable from "./subtitlesComposable";
 import Hls from "hls.js";
 
-const Subtitles = () => {
+const Subtitles = (props) => {
   const { cuesHolder } = useSubtitlesComposable();
   const audioRef = useRef(null);
   const [cues, setCues] = useState([]);
