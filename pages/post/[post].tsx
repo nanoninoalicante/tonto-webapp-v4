@@ -7,6 +7,7 @@ import Head from 'next/head'
 import PostNotFound from '../../components/PostNotFound'
 import Comments from '../../components/Comments'
 import Subtitles from '../../components/Subtitles/Subtitles'
+import { getCommentsByUser, getPost, getUserInfo } from '../../utils/post'
 
 
 //santeetji: 62b131b4db1ec8000f04084e
@@ -39,7 +40,6 @@ const postData = {
  */
 export const getServerSideProps = async (context: any) => {
     const { post } = context.query;
-
     let server = {
         data: postData,
         page: 1,
@@ -51,50 +51,14 @@ export const getServerSideProps = async (context: any) => {
         comments: []
     }
 
-    const getPost = `${process.env.FEED_API}/post/${post}${process.env.API_KEY}`;
-    await fetch(getPost, { method: "GET" })
-        .then((response) => response.json())
-        .then(async (data) => {
-            server.data = data?.data[0] || postData
-        })
-        .catch(error => {
-            console.log(error)
-        })
-
-    const getUser = `${process.env.FEED_API}/user/${server.data.userInfo.id}${process.env.API_KEY}`
-    server?.data.uuid &&
-        await fetch(getUser, { method: "GET" })
-            .then((response) => response.json())
-            .then(async (data) => {
-                const postsIds = data.data.postIds;
-                server.posts = postsIds.length
-                const index = postsIds.indexOf(post);
-                if (index !== -1 && postsIds.length > 1) {
-                    if (index === 0) {
-                        server.back = postsIds[postsIds.length - 1]
-                        server.next = postsIds[index + 1]
-                    } else if (index === postsIds.length - 1) {
-                        server.back = postsIds[index - 1]
-                        server.next = postsIds[0]
-                    } else {
-                        server.back = postsIds[index - 1]
-                        server.next = postsIds[index + 1]
-                    }
-                }
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    const getComment = `${process.env.FEED_API}post/${server.data.uuid}/comments${process.env.API_KEY}`
-    server?.data.uuid &&
-        await fetch(getComment, { method: "GET" })
-            .then((response) => response.json())
-            .then(async (data) => {
-                server.comments = data?.data
-            })
-            .catch(error => {
-                console.log(error)
-            })
+    const dataPost = await getPost(post)
+    server.data = dataPost;
+    const getUser = await getUserInfo(server.data.userInfo.id, post)
+    const getComment = await getCommentsByUser(post)
+    server.back = getUser.back;
+    server.next = getUser.next;
+    server.posts = getUser.posts;
+    server.comments = getComment;
 
     return { props: server }
 };
@@ -102,11 +66,11 @@ export const getServerSideProps = async (context: any) => {
 const Post = (props: any) => {
     const [selected, setSelected] = useState("comments")
     return (
-        <>
+        <main>
             {props.data?.uuid !== "" ?
                 <div>
                     <MetaTags data={props.data} />
-                    <main className='grid place-items-center'>
+                    <main className='grid place-items-center relative md:top-[10vh]'>
                         <PrimaryHeader />
                         <PrimaryPost
                             data={props.data}
@@ -156,7 +120,7 @@ const Post = (props: any) => {
                         <PostNotFound randomId={props.randomId} posts={props.posts} />
                     </div>
                 </>}
-        </>
+        </main>
     )
 }
 

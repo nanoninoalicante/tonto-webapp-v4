@@ -51,7 +51,7 @@ const PrimaryPost = (props: any) => {
                             src={userData?.profileImg}
                             alt="avatar"
                         />
-                        <h2 className="mb-1 text-[17px] font-medium text-[#222222] dark:text-white leading-5">
+                        <h2 className="mb-1 text-[17px]  text-[#222222] dark:text-white leading-5">
                             @{userData?.userName}
                         </h2>
                         <h3 className="text-[15px] text-[#5F5F5F] dark:text-[#EBEBEB] leading-4">
