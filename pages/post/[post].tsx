@@ -43,6 +43,7 @@ const postData = {
 export const getServerSideProps = async (context: any) => {
     const { post, deeplink } = context.query;
     const link = deeplink || process.env.APP_LINK!
+    console.log(link)
     const { req } = context;
     const userAgent = req.headers["user-agent"];
     let isPhone: boolean = false;
@@ -89,7 +90,7 @@ const Post = (props: any) => {
                                 <div className="text-md font-medium"> Tonto - Social Audio App </div>
                                 <div className="text-sm font-light leading-3"> Open in Tonto App </div>
                             </div>
-                            <Link href={link}
+                            <Link href={`${link}`}
                                 className="bg-[#109C90] text-white ml-auto font-medium rounded-2xl px-3 py-1 mr-3 h-8 flex items-center">
                                 GET TONTO
                             </Link>
@@ -111,7 +112,9 @@ const Post = (props: any) => {
                             page={page}
                             back={back}
                             next={next}
-                            existsId={existsId} />
+                            existsId={existsId}
+                            link={link} 
+                        />
                         {
                             comments.length ?
                                 <div className='w-[94%] md:w-[50%] pt-2 grid place-items-center font-medium'>

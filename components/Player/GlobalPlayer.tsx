@@ -222,7 +222,7 @@ const GlobalPlayer = (props: any) => {
                     </div>
                 </div>
             </div>
-            <DownloadApp show={modal} close={() => setModal(false)} />
+            <DownloadApp link={props.link} show={modal} close={() => setModal(false)} />
         </div>
     );
 }
