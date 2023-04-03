@@ -31,7 +31,7 @@ const Profile = (props: any) => {
                 <div className="flex flex-col justify-center items-center mt-10">
                     <img src={props.profileImg} className="w-[300px] rounded-full" alt="Profile" />
                     <div className="text-3xl font-bold mt-2">{props.userName}</div>
-                    <Link href={`${props.link}`} className="bg-teal-500/70 hover:bg-white hover:text-teal-500  text-white rounded-[5px] py-3 px-4 mt-10"> See in the app </Link>
+                    <Link href={`${props.link}`} className="bg-teal-500/70 hover:bg-teal-600 dark:hover:bg-white dark:hover:text-teal-500  text-white rounded-[5px] py-3 px-4 mt-10"> See in the app </Link>
                 </div>
             </section>
         </main>
