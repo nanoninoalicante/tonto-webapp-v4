@@ -141,7 +141,7 @@ const Comments = (props) => {
 
     return (
         data.length ?
-            <div className='w-[94%] md:w-[50%] dark:bg-[#F8F8F8] bg-[#5F5F5F] max-h-[293px] overflow-y-scroll no-scrollbar'>
+            <div className='w-full dark:bg-[#F8F8F8] bg-[#5F5F5F] max-h-[293px] overflow-y-scroll no-scrollbar rounded-b-xl'>
                 {showComments()}
             </div>
             : noData()

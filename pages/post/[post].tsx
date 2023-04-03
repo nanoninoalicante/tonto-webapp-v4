@@ -86,30 +86,40 @@ const Post = (props: any) => {
                             back={props.back}
                             next={props.next}
                             existsId={props.existsId} />
-                        <nav className='w-[94%] md:w-[50%] pt-2 flex flex-row justify-center font-medium'>
-                            <button className="flex flex-col justify-center items-center h-14 bg-[#5F5F5F] dark:bg-[#F8F8F8] w-full rounded-tl-lg" 
-                                    onClick={() => setSelected("comments")}
-                            >
-                                <span className={selected === "comments" ? "text-white dark:text-[#3C3C3C]" : "text-white/50 dark:text-[#3C3C3C]/50"}>COMMENTS</span>
-                                {selected === "comments" &&
-                                    <div className='w-[75%] h-1 dark:bg-[#3C3C3C] bg-white rounded-lg' />
-                                }
-                            </button>
-                            <button className="flex flex-col justify-center items-center h-14 bg-[#5F5F5F] dark:bg-[#F8F8F8] w-full rounded-tr-lg"
-                                    onClick={() => setSelected("subtitles")}
-                            >
-                                <span className={selected === "subtitles" ? "text-white dark:text-[#3C3C3C]" : "text-white/50 dark:text-[#3C3C3C]/50"}>SUBTITLES</span>
-                                {selected === "subtitles" &&
-                                    <div className='w-[75%] h-1 dark:bg-[#3C3C3C] bg-white rounded-lg' />
-                                }
-                            </button>
-                        </nav>
                         {
+                        props.comments.length ?
+                        <div className='w-[94%] md:w-[50%] pt-2 grid place-items-center font-medium'>
+                                {/* <button className="flex flex-col justify-center items-center h-14 bg-[#5F5F5F] dark:bg-[#F8F8F8] w-full rounded-tl-lg" 
+                                        onClick={() => setSelected("comments")}
+                                >
+                                    <span className={selected === "comments" ? "text-white dark:text-[#3C3C3C]" : "text-white/50 dark:text-[#3C3C3C]/50"}> COMMENTS </span>
+                                    {selected === "comments" &&
+                                        <div className='w-[75%] h-1 dark:bg-[#3C3C3C] bg-white rounded-lg' />
+                                    }
+                                </button> */}
+                                <div className='flex justify-center items-center h-14 bg-[#5F5F5F] dark:bg-[#F8F8F8] w-full rounded-t-lg text-white dark:text-[#3C3C3C]'>
+                                    COMMENTS
+                                </div>
+                                {/* <button className="flex flex-col justify-center items-center h-14 bg-[#5F5F5F] dark:bg-[#F8F8F8] w-full rounded-tr-lg"
+                                        onClick={() => setSelected("subtitles")}
+                                >
+                                    <span className={selected === "subtitles" ? "text-white dark:text-[#3C3C3C]" : "text-white/50 dark:text-[#3C3C3C]/50"}>SUBTITLES</span>
+                                    {selected === "subtitles" &&
+                                        <div className='w-[75%] h-1 dark:bg-[#3C3C3C] bg-white rounded-lg' />
+                                    }
+                                </button> */}
+                                <div className='w-full'>
+                                    <Comments data={props.comments} /> 
+                                </div>
+                        </div> : ""
+                        }
+                        
+                        {/* {
                             {
                                 "comments": <Comments data={props.comments} />,
                                 "subtitles": <Subtitles data={props.data}/>
                             }[selected]
-                        }
+                        } */}
                     </main>
                 </div> :
                 <>
