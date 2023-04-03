@@ -81,15 +81,15 @@ const Post = (props: any) => {
                 <div>
                     <MetaTags data={data} />
                     {isPhone &&
-                        <div className="fixed z-50 bottom-0 w-full h-20 bg-white flex flex-row items-center text-black">
+                        <div className="fixed z-50 bottom-0 inset-x-0 w-full h-20 bg-white flex flex-row items-center text-black">
                             <Icon className="mx-3 w-15 h-15 rounded-full" />
                             <div className="flex flex-col">
-                                <div className="text-lg font-medium"> Tonto - Social Audio App </div>
+                                <div className="text-MD font-medium"> Tonto - Social Audio App </div>
                                 <div className="text-sm font-light leading-3"> Open in Tonto App </div>
                             </div>
                             <Link href={"https://app.gettonto.com/download"}
                                 className="bg-[#109C90] text-white ml-auto font-medium rounded-2xl px-3 py-1 mr-3 h-8 flex items-center">
-                                OPEN
+                                GET TONTO
                             </Link>
                         </div>
                     }
