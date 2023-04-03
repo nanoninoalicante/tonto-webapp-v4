@@ -81,7 +81,7 @@ const Post = (props: any) => {
                 <div>
                     <MetaTags data={data} />
                     {isPhone &&
-                        <div className="absolute bottom-0 w-full h-20 bg-white flex flex-row items-center text-black">
+                        <div className="fixed z-50 bottom-0 w-full h-20 bg-white flex flex-row items-center text-black">
                             <Icon className="mx-3 w-15 h-15 rounded-full" />
                             <div className="flex flex-col">
                                 <div className="text-lg font-medium"> Tonto - Social Audio App </div>
