@@ -8,31 +8,12 @@ import { GlobalPlayer } from "../Player/GlobalPlayer";
 import DownloadApp from "../Modals/DownloadApp";
 var moment = require('moment');
 
-interface Props {
-    postId: string;
-}
-const state = {
-    commentsCount: 0,
-    createdAt: "",
-    description: "",
-    explicit: { badWords: 'no', sex: 'no', content: 'no', others: 'no', violence: 'no' },
-    hasExplicitContent: false,
-    language: "en",
-    likesCount: 0,
-    shareCount: 0,
-    status: "",
-    streamingUrl: "",
-    userInfo: {},
-    updatedAt: "",
-    uuid: "",
-    visibility: ""
-}
-
 export const getServerSideProps = (props: any) => {
     return { props: props }
 }
 const PrimaryPost = (props: any) => {
     let post = props.data;
+    const { link } = props;
     const [userData, setUserData] = useState(post?.userInfo)
     const [modal, setModal] = useState(false)
 
@@ -91,7 +72,7 @@ const PrimaryPost = (props: any) => {
                 <div className="px-4 py-2 pb-5 mt-2 text-[12px] text-[#109C90] dark:text-[#00eedc] leading-[14px]">
                     { moment(post.createdAt).fromNow() }
                 </div>
-                <DownloadApp show={modal} close={() => setModal(false)} />
+                <DownloadApp link={link} show={modal} close={() => setModal(false)} />
             </div>
             :
             <div className="w-[50%] mt-28 justify-center bg-white rounded-b-xl">

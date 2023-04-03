@@ -20,7 +20,7 @@ const Comments = (props) => {
                 const animationRef: any = useRef()
 
                 useEffect(() => {
-                    loadHlsAudio({streamingUrl: comment.streamingUrl[0]})
+                    loadHlsAudio({ streamingUrl: comment.streamingUrl[0] })
                     const seconds = Math.floor(audio?.current.duration)
                     progressBar.current.max = seconds
                 }, [comment])
@@ -98,9 +98,9 @@ const Comments = (props) => {
 
                 const changePlayerCurrentTime = () => {
                     if (currentTime !== progressBar.current.value) {
-                        progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / audio.current.duration * 100}%`)
                         setCurrentTime(progressBar.current.value);
                     }
+                    progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / audio.current.duration * 100}%`)
                 }
 
                 return (

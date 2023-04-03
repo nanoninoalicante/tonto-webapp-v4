@@ -41,7 +41,8 @@ const postData = {
  * @returns The server object is being returned.
  */
 export const getServerSideProps = async (context: any) => {
-    const { post } = context.query;
+    const { post, deeplink } = context.query;
+    const link = deeplink || process.env.APP_LINK!
     const { req } = context;
     const userAgent = req.headers["user-agent"];
     let isPhone: boolean = false;
@@ -57,7 +58,8 @@ export const getServerSideProps = async (context: any) => {
         randomId: 0,
         posts: 0,
         comments: [],
-        isPhone: isPhone
+        isPhone: isPhone,
+        link: link
     }
 
     const dataPost = await getPost(post)
@@ -74,7 +76,7 @@ export const getServerSideProps = async (context: any) => {
 
 const Post = (props: any) => {
     const [selected, setSelected] = useState("comments")
-    const { data, page, back, next, posts, existsId, comments, isPhone, randomId } = props;
+    const { data, page, back, next, posts, existsId, comments, isPhone, randomId, link } = props;
     return (
         <main>
             {data?.uuid !== "" ?
@@ -84,10 +86,10 @@ const Post = (props: any) => {
                         <div className="fixed z-50 bottom-0 inset-x-0 w-full h-20 bg-white flex flex-row items-center text-black">
                             <Icon className="mx-3 w-15 h-15 rounded-full" />
                             <div className="flex flex-col">
-                                <div className="text-MD font-medium"> Tonto - Social Audio App </div>
+                                <div className="text-md font-medium"> Tonto - Social Audio App </div>
                                 <div className="text-sm font-light leading-3"> Open in Tonto App </div>
                             </div>
-                            <Link href={"https://app.gettonto.com/download"}
+                            <Link href={link}
                                 className="bg-[#109C90] text-white ml-auto font-medium rounded-2xl px-3 py-1 mr-3 h-8 flex items-center">
                                 GET TONTO
                             </Link>
@@ -102,6 +104,7 @@ const Post = (props: any) => {
                             next={next}
                             posts={posts}
                             existsId={existsId}
+                            link={link}
                         />
                         <GlobalPlayer
                             data={data}
