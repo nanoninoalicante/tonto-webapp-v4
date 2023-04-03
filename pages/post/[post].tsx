@@ -43,7 +43,6 @@ const postData = {
 export const getServerSideProps = async (context: any) => {
     const { post, deeplink } = context.query;
     const link = deeplink || process.env.APP_LINK!
-    console.log(link)
     const { req } = context;
     const userAgent = req.headers["user-agent"];
     let isPhone: boolean = false;
