@@ -56,8 +56,8 @@ const Preview = (props: any) => {
                 <div className="relative w-full h-20 bg-white flex flex-row items-center">
                     <Icon className="mx-3 w-15 h-15 rounded-full"/>
                     <div className="flex flex-col">
-                        <div className="text-lg font-medium"> Tonto - Social Audio App</div>
-                        <div className="text-sm font-light leading-3"> Open in Tonto App</div>
+                        <div className="text-lg font-medium"> Tonto - Social Audio App </div>
+                        <div className="text-sm font-light leading-3"> Open in Tonto App </div>
                     </div>
                     <Link href={"https://app.gettonto.com/download"}
                           className="bg-[#109C90] text-white ml-auto font-medium rounded-2xl px-3 py-1 mr-3 h-8 flex items-center">
