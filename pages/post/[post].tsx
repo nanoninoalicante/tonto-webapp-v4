@@ -6,8 +6,10 @@ import { GlobalPlayer } from '../../components/Player/GlobalPlayer'
 import Head from 'next/head'
 import PostNotFound from '../../components/PostNotFound'
 import Comments from '../../components/Comments'
+import Icon from "../../public/flex-ui-assets/logos/icon.svg"
 import Subtitles from '../../components/Subtitles/Subtitles'
 import { getCommentsByUser, getPost, getUserInfo } from '../../utils/post'
+import Link from 'next/link'
 
 
 //santeetji: 62b131b4db1ec8000f04084e
@@ -40,6 +42,12 @@ const postData = {
  */
 export const getServerSideProps = async (context: any) => {
     const { post } = context.query;
+    const { req } = context;
+    const userAgent = req.headers["user-agent"];
+    let isPhone: boolean = false;
+    if (userAgent.indexOf("iPhone") !== -1 || userAgent.indexOf("Android") !== -1) {
+        isPhone = true
+    }
     let server = {
         data: postData,
         page: 1,
@@ -48,7 +56,8 @@ export const getServerSideProps = async (context: any) => {
         existsId: true,
         randomId: 0,
         posts: 0,
-        comments: []
+        comments: [],
+        isPhone: isPhone
     }
 
     const dataPost = await getPost(post)
@@ -65,31 +74,45 @@ export const getServerSideProps = async (context: any) => {
 
 const Post = (props: any) => {
     const [selected, setSelected] = useState("comments")
+    const { data, page, back, next, posts, existsId, comments, isPhone, randomId } = props;
     return (
         <main>
-            {props.data?.uuid !== "" ?
+            {data?.uuid !== "" ?
                 <div>
-                    <MetaTags data={props.data} />
+                    <MetaTags data={data} />
+                    {isPhone &&
+                        <div className="absolute bottom-0 w-full h-20 bg-white flex flex-row items-center text-black">
+                            <Icon className="mx-3 w-15 h-15 rounded-full" />
+                            <div className="flex flex-col">
+                                <div className="text-lg font-medium"> Tonto - Social Audio App </div>
+                                <div className="text-sm font-light leading-3"> Open in Tonto App </div>
+                            </div>
+                            <Link href={"https://app.gettonto.com/download"}
+                                className="bg-[#109C90] text-white ml-auto font-medium rounded-2xl px-3 py-1 mr-3 h-8 flex items-center">
+                                OPEN
+                            </Link>
+                        </div>
+                    }
                     <main className='grid place-items-center relative md:top-[10vh]'>
                         <PrimaryHeader />
                         <PrimaryPost
-                            data={props.data}
-                            page={props.page}
-                            back={props.back}
-                            next={props.next}
-                            posts={props.posts}
-                            existsId={props.existsId}
+                            data={data}
+                            page={page}
+                            back={back}
+                            next={next}
+                            posts={posts}
+                            existsId={existsId}
                         />
                         <GlobalPlayer
-                            data={props.data}
-                            page={props.page}
-                            back={props.back}
-                            next={props.next}
-                            existsId={props.existsId} />
+                            data={data}
+                            page={page}
+                            back={back}
+                            next={next}
+                            existsId={existsId} />
                         {
-                        props.comments.length ?
-                        <div className='w-[94%] md:w-[50%] pt-2 grid place-items-center font-medium'>
-                                {/* <button className="flex flex-col justify-center items-center h-14 bg-[#5F5F5F] dark:bg-[#F8F8F8] w-full rounded-tl-lg" 
+                            comments.length ?
+                                <div className='w-[94%] md:w-[50%] pt-2 grid place-items-center font-medium'>
+                                    {/* <button className="flex flex-col justify-center items-center h-14 bg-[#5F5F5F] dark:bg-[#F8F8F8] w-full rounded-tl-lg" 
                                         onClick={() => setSelected("comments")}
                                 >
                                     <span className={selected === "comments" ? "text-white dark:text-[#3C3C3C]" : "text-white/50 dark:text-[#3C3C3C]/50"}> COMMENTS </span>
@@ -97,10 +120,10 @@ const Post = (props: any) => {
                                         <div className='w-[75%] h-1 dark:bg-[#3C3C3C] bg-white rounded-lg' />
                                     }
                                 </button> */}
-                                <div className='flex justify-center items-center h-14 bg-[#5F5F5F] dark:bg-[#F8F8F8] w-full rounded-t-lg text-white dark:text-[#3C3C3C]'>
-                                    COMMENTS
-                                </div>
-                                {/* <button className="flex flex-col justify-center items-center h-14 bg-[#5F5F5F] dark:bg-[#F8F8F8] w-full rounded-tr-lg"
+                                    <div className='flex justify-center items-center h-14 bg-[#5F5F5F] dark:bg-[#F8F8F8] w-full rounded-t-lg text-white dark:text-[#3C3C3C]'>
+                                        COMMENTS
+                                    </div>
+                                    {/* <button className="flex flex-col justify-center items-center h-14 bg-[#5F5F5F] dark:bg-[#F8F8F8] w-full rounded-tr-lg"
                                         onClick={() => setSelected("subtitles")}
                                 >
                                     <span className={selected === "subtitles" ? "text-white dark:text-[#3C3C3C]" : "text-white/50 dark:text-[#3C3C3C]/50"}>SUBTITLES</span>
@@ -108,16 +131,16 @@ const Post = (props: any) => {
                                         <div className='w-[75%] h-1 dark:bg-[#3C3C3C] bg-white rounded-lg' />
                                     }
                                 </button> */}
-                                <div className='w-full'>
-                                    <Comments data={props.comments} /> 
-                                </div>
-                        </div> : ""
+                                    <div className='w-full'>
+                                        <Comments data={comments} />
+                                    </div>
+                                </div> : ""
                         }
-                        
+
                         {/* {
                             {
-                                "comments": <Comments data={props.comments} />,
-                                "subtitles": <Subtitles data={props.data}/>
+                                "comments": <Comments data={comments} />,
+                                "subtitles": <Subtitles data={data}/>
                             }[selected]
                         } */}
                     </main>
@@ -127,7 +150,7 @@ const Post = (props: any) => {
                         <Head>
                             <meta name="robots" content='noindex' />
                         </Head>
-                        <PostNotFound randomId={props.randomId} posts={props.posts} />
+                        <PostNotFound randomId={randomId} posts={posts} />
                     </div>
                 </>}
         </main>
