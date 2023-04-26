@@ -7,7 +7,7 @@ import Link from "next/link";
 export const getServerSideProps = async (context: any) => {
     const { profile, deeplink, userId } = context.query;
     const link = deeplink || process.env.APP_LINK!
-    console.log(context.query)
+    console.log(context)
     const { req } = context;
     const userAgent = req.headers["user-agent"];
     let isPhone: boolean = false;
