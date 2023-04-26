@@ -5,7 +5,7 @@ import { getProfile } from "../../utils/profile";
 import Link from "next/link";
 
 export const getServerSideProps = async (context: any) => {
-    const { profile, deeplink } = context.query;
+    const { profile, deeplink, userId } = context.query;
     const link = deeplink || process.env.APP_LINK!
     const { req } = context;
     const userAgent = req.headers["user-agent"];
@@ -13,10 +13,11 @@ export const getServerSideProps = async (context: any) => {
     if (userAgent.indexOf("iPhone") !== -1 || userAgent.indexOf("Android") !== -1) {
         isPhone = true
     }
-    const response = await getProfile(profile);
+    const response = await getProfile(profile || userId);
+    console.log(response)
     const data = {
         profileImg: response.data.profileImg,
-        userName: response.data.userName,
+        userName: response.data.userName || "",
         link: link
     };
 
@@ -33,7 +34,7 @@ const Profile = (props: any) => {
                     <div className="relative inset-x-0 w-full md:w-1/3">
                         <img loading="lazy" className="w-full max-h-96 md:max-h-full" src={image}></img>
                     </div>
-                    <div className="text-3xl font-bold mt-2">{props.userName}</div>
+                    <div className="text-3xl font-bold mt-2">{props.userName || ""}</div>
                     <Link href={`${props.link}`} className="bg-teal-500/70 hover:bg-teal-600 dark:hover:bg-white dark:hover:text-teal-500  text-white rounded-[5px] py-3 px-4 mt-10"> See in the app </Link>
                 </div>
             </section>
