@@ -15,7 +15,6 @@ export const getServerSideProps = async (context: any) => {
         isPhone = true
     }
     const response = await getProfile(profile || userId);
-    console.log(response)
     const data = {
         data: response.data,
         profileImg: response.data.profileImg,
@@ -27,7 +26,6 @@ export const getServerSideProps = async (context: any) => {
 }
 
 const Profile = (props: any) => {
-    console.log(props)
     const image = props.profileImg || "/flex-ui-assets/images/tontoprofile_defualt.png";
     return (
         <main className="grid place-items-center relative md:top-[10vh]">
