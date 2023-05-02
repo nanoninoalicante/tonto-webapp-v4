@@ -11,6 +11,11 @@ export const getServerSideProps = async (context: any) => {
     const { req } = context;
     const userAgent = req.headers["user-agent"];
     let isPhone: boolean = false;
+    const parsedUrl = new URL(req.url, 'https://web-dev.gettonto.com');
+    const deeplinkParam = parsedUrl.searchParams.get('deeplink') || process.env.APP_LINK!;
+    const deeplinkUrl = decodeURIComponent(deeplinkParam);
+
+  console.log(deeplinkUrl); 
     if (userAgent.indexOf("iPhone") !== -1 || userAgent.indexOf("Android") !== -1) {
         isPhone = true
     }
@@ -19,7 +24,7 @@ export const getServerSideProps = async (context: any) => {
         data: response.data,
         profileImg: response.data.profileImg,
         userName: response.data.userName || "",
-        link: link
+        link: deeplinkUrl
     };
 
     return { props: data };
