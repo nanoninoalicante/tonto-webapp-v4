@@ -15,7 +15,6 @@ export const getServerSideProps = async (context: any) => {
     const deeplinkParam = parsedUrl.searchParams.get('deeplink') || process.env.APP_LINK!;
     const deeplinkUrl = decodeURIComponent(deeplinkParam);
 
-  console.log(deeplinkUrl); 
     if (userAgent.indexOf("iPhone") !== -1 || userAgent.indexOf("Android") !== -1) {
         isPhone = true
     }
