@@ -7,26 +7,29 @@ import Link from "next/link";
 export const getServerSideProps = async (context: any) => {
     const { profile, deeplink, userId } = context.query;
     const link = deeplink || process.env.APP_LINK!
+    console.log(context)
     const { req } = context;
     const userAgent = req.headers["user-agent"];
     let isPhone: boolean = false;
+    const parsedUrl = new URL(req.url, 'https://web-dev.gettonto.com');
+    const deeplinkParam = parsedUrl.searchParams.get('deeplink') || process.env.APP_LINK!;
+    const deeplinkUrl = decodeURIComponent(deeplinkParam);
+
     if (userAgent.indexOf("iPhone") !== -1 || userAgent.indexOf("Android") !== -1) {
         isPhone = true
     }
     const response = await getProfile(profile || userId);
-    console.log(response)
     const data = {
         data: response.data,
         profileImg: response.data.profileImg,
         userName: response.data.userName || "",
-        link: link
+        link: deeplinkUrl
     };
 
     return { props: data };
 }
 
 const Profile = (props: any) => {
-    console.log(props)
     const image = props.profileImg || "/flex-ui-assets/images/tontoprofile_defualt.png";
     return (
         <main className="grid place-items-center relative md:top-[10vh]">
