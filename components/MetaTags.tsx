@@ -1,8 +1,9 @@
 import Head from "next/head";
 
 const MetaTags = (data: any) => {
-    const image = data.data.userInfo.profileImg ? data.data.userInfo.profileImg : "/flex-ui-assets/images/tontoprofile_defualt.png"
-    const title = `Tonto - Social Audio App - Record, Listen and Share audios - Posted by ${data.data.userInfo.userName}`
+    const image = data?.data?.userInfo?.profileImg ||  data?.data?.profileImg || "/flex-ui-assets/images/tontoprofile_defualt.png"
+    const username = data?.data?.userInfo?.userName || data?.data.username
+    const title = `Tonto - Social Audio App - Record, Listen and Share audios - Posted by ${username}`
     return (
         <Head>
             <title>{title}</title>
