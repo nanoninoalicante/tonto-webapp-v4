@@ -3,11 +3,11 @@ import { Context, ContextType } from "react"
 import PrimaryHeader from "../../components/Primary/PrimaryHeader";
 import { getProfile } from "../../utils/profile";
 import Link from "next/link";
+import MetaTags from "../../components/MetaTags";
 
 export const getServerSideProps = async (context: any) => {
     const { profile, deeplink, userId } = context.query;
     const link = deeplink || process.env.APP_LINK!
-    console.log(context)
     const { req } = context;
     const userAgent = req.headers["user-agent"];
     let isPhone: boolean = false;
@@ -33,6 +33,7 @@ const Profile = (props: any) => {
     const image = props.profileImg || "/flex-ui-assets/images/tontoprofile_defualt.png";
     return (
         <main className="grid place-items-center relative md:top-[10vh]">
+            <MetaTags data={props.data} />
             <section className="w-full flex flex-col items-center justify-center font-medium ">
                 <PrimaryHeader />
                 <div className="flex flex-col justify-center items-center mt-10">
