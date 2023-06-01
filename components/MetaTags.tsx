@@ -1,9 +1,8 @@
 import Head from "next/head";
 
 const MetaTags = (data: any) => {
-    const image = data?.data?.userInfo?.profileImg ||  data?.data?.profileImg || "/flex-ui-assets/images/tontoprofile_defualt.png"
-    const username = data?.data?.userInfo?.userName || data?.data.username || data?.data.userName || data?.userName
-    console.log(data)
+    const image = data?.data?.userInfo?.profileImg ||  data?.profileImg ||  data?.data?.profileImg || "/flex-ui-assets/images/tontoprofile_defualt.png";
+    const username = data?.data?.userInfo?.userName || data?.userName || data?.data?.username;
     const title = `Tonto - Social Audio App - Record, Listen and Share audios - Posted by ${username}`
     return (
         <Head>
