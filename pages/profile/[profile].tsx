@@ -19,6 +19,9 @@ export const getServerSideProps = async (context: any) => {
         isPhone = true
     }
     const response = await getProfile(profile || userId);
+    if (response.error) {
+        return { props: { error: response.error } };
+    }
     const data = {
         data: response.data,
         profileImg: response.data.profileImg,
