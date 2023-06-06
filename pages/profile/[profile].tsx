@@ -6,30 +6,37 @@ import Link from "next/link";
 import MetaTags from "../../components/MetaTags";
 
 export const getServerSideProps = async (context: any) => {
-    const { profile, deeplink, userId } = context.query;
-    const link = deeplink || process.env.APP_LINK!
-    const { req } = context;
-    const userAgent = req.headers["user-agent"];
-    let isPhone: boolean = false;
-    const parsedUrl = new URL(req.url, 'https://web-dev.gettonto.com');
-    const deeplinkParam = parsedUrl.searchParams.get('deeplink') || process.env.APP_LINK!;
-    const deeplinkUrl = decodeURIComponent(deeplinkParam);
+    try {
+        const { profile, deeplink, userId } = context.query;
+        const { req } = context;
+        //const userAgent = req.headers["user-agent"];
+        console.log(context.query)
+        console.log(context)
+        //let isPhone: boolean = false;
+        const parsedUrl = new URL(req.url, 'https://web-dev.gettonto.com');
+        const deeplinkParam = parsedUrl.searchParams.get('deeplink') || process.env.APP_LINK!;
+        const deeplinkUrl = decodeURIComponent(deeplinkParam);
 
-    if (userAgent.indexOf("iPhone") !== -1 || userAgent.indexOf("Android") !== -1) {
-        isPhone = true
-    }
-    const response = await getProfile(profile || userId);
-    if (response.error) {
-        return { props: { error: response.error } };
-    }
-    const data = {
-        data: response.data,
-        profileImg: response.data.profileImg,
-        userName: response.data.userName || "",
-        link: deeplinkUrl
-    };
+        /* if (userAgent.indexOf("iPhone") !== -1 || userAgent.indexOf("Android") !== -1) {
+            isPhone = true
+        } */
+        const response = await getProfile(profile || userId);
+        if (response.error) {
+            return { props: { error: response.error } };
+        }
+        const data = {
+            data: response.data,
+            profileImg: response.data.profileImg,
+            userName: response.data.userName || "",
+            link: deeplinkUrl
+        };
+        console.log(data)
+        return { props: data };
 
-    return { props: data };
+    } catch (error) {
+        console.log(error);
+    }
+
 }
 
 const Profile = (props: any) => {
