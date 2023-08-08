@@ -41,7 +41,7 @@ const GlobalPlayer = (props: any) => {
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
     useEffect(() => {
-    },[duration])
+    }, [duration])
 
     const togglePlayPause = () => {
         setIsPlaying(!isPlaying);
@@ -67,7 +67,7 @@ const GlobalPlayer = (props: any) => {
             }
         }
     }
-    
+
     const calculateTime = (secs: number) => {
         const minutes = Math.floor(secs / 60);
         const returnMin = minutes < 10 ? `0${minutes}` : `${minutes}`;
@@ -75,10 +75,19 @@ const GlobalPlayer = (props: any) => {
         const returnSecs = seconds < 10 ? `0${seconds}` : `${seconds}`;
         return `${returnMin}:${returnSecs}`
     }
-    
+
+    let timer = 0;
     const whilePlaying = () => {
         progressBar.current.value = audioPlayer.current.currentTime
         changePlayerCurrentTime();
+
+        timer += progressBar.current.value;
+        console.log(timer)
+        if (timer >= 10) {
+            setModal(true);  
+            timer = 0;   
+        }
+
         animationRef.current = requestAnimationFrame(whilePlaying)
     }
 
@@ -134,7 +143,7 @@ const GlobalPlayer = (props: any) => {
     return (
         <div className="relative z-10 w-[94%] sm:w-[94%] mx-4 md:w-[50%] bg-[#EAEAEA] rounded-b-lg dark:bg-[#5f5f5f]">
             <div className="flex flex-row overflow-hidden justify-around sm:justify-center place-items-center gap-0 sm:gap-1 md:gap-2 lg:gap-4">
-                <audio ref={audioPlayer} preload="metadata" src={props.data.downloadUrl[0]}/>
+                <audio ref={audioPlayer} preload="metadata" src={props.data.downloadUrl[0]} />
 
                 {/* SPEED CONTROL */}
                 <button onClick={handleSpeed} className="p-3 text-[#109C90] dark:text-[#00eedc]">
@@ -148,58 +157,58 @@ const GlobalPlayer = (props: any) => {
                 </button>
 
                 {/* REDO 10*/}
-                <button className="p-3 dark:hidden" onClick={handleRedo}>
-                        <Redo10 />
+                <button className="p-3 dark:hidden" onClick={() => { setModal(true) }}>
+                    <Redo10 />
                 </button>
 
-                <button className="p-3 hidden dark:block" onClick={handleRedo}>
-                        <Redo10Dark />
+                <button className="p-3 hidden dark:block" onClick={() => { setModal(true) }}>
+                    <Redo10Dark />
                 </button>
 
                 {/* BACK AUDIO */}
-                <button className="p-3 dark:hidden cursor-pointer" onClick={handleBack} >
+                <button className="p-3 dark:hidden cursor-pointer" onClick={() => { setModal(true) }} >
                     <Back />
                 </button>
 
-                <button className="p-3 hidden dark:block cursor-pointer" onClick={handleBack} >
+                <button className="p-3 hidden dark:block cursor-pointer" onClick={() => { setModal(true) }} >
                     <BackDark />
                 </button>
 
                 {/* PLAY / PAUSE */}
                 <button onClick={togglePlayPause} className="p-3 dark:hidden">
-                        {isPlaying ? <Pause /> : <Play />}
+                    {isPlaying ? <Pause /> : <Play />}
                 </button>
 
                 <button onClick={togglePlayPause} className="p-3 hidden dark:block">
-                        {isPlaying ? <PauseDark /> : <PlayDark />}
+                    {isPlaying ? <PauseDark /> : <PlayDark />}
                 </button>
 
                 {/* NEXT AUDIO */}
-                <button className="p-3 dark:hidden cursor-pointer" onClick={handleNext} >
+                <button className="p-3 dark:hidden cursor-pointer" onClick={() => { setModal(true) }} >
                     <Next />
                 </button>
 
-                <button className="p-3 hidden dark:block cursor-pointer" onClick={handleNext} >
+                <button className="p-3 hidden dark:block cursor-pointer" onClick={() => { setModal(true) }} >
                     <NextDark />
                 </button>
 
                 {/* NEXT 10 */}
                 <button className="p-3 dark:hidden" onClick={handleNext10}>
-                        <Next10 />
+                    <Next10 />
                 </button>
 
                 <button className="p-3 hidden dark:block" onClick={handleNext10}>
-                        <Next10Dark />
+                    <Next10Dark />
                 </button>
 
 
                 {/* OPTIONS */}
                 <button onClick={() => { setModal(true) }} className="p-3 dark:hidden">
-                        <Options />
+                    <Options />
                 </button>
 
                 <button onClick={() => { setModal(true) }} className="p-3 hidden dark:block">
-                        <OptionsDark />
+                    <OptionsDark />
                 </button>
             </div>
             <div className="relative px-2 grid grid-flow-row justify-center overflow-hidden items-center w-full py-0 mb-2">

@@ -10,8 +10,6 @@ export const getServerSideProps = async (context: any) => {
         const { profile, deeplink, userId } = context.query;
         const { req } = context;
         //const userAgent = req.headers["user-agent"];
-        console.log(context.query)
-        console.log(context)
         //let isPhone: boolean = false;
         const parsedUrl = new URL(req.url, 'https://web-dev.gettonto.com');
         const deeplinkParam = parsedUrl.searchParams.get('deeplink') || process.env.APP_LINK!;
@@ -30,7 +28,6 @@ export const getServerSideProps = async (context: any) => {
             userName: response.data.userName || "",
             link: deeplinkUrl
         };
-        console.log(data)
         return { props: data };
 
     } catch (error) {

@@ -141,13 +141,6 @@ const Post = (props: any) => {
                                     </div>
                                 </div> : ""
                         }
-
-                        {/* {
-                            {
-                                "comments": <Comments data={comments} />,
-                                "subtitles": <Subtitles data={data}/>
-                            }[selected]
-                        } */}
                     </main>
                 </div> :
                 <>
