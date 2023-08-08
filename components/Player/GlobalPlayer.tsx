@@ -83,7 +83,8 @@ const GlobalPlayer = (props: any) => {
 
         timer += progressBar.current.value;
         console.log(timer)
-        if (timer >= 10) {
+        if (timer >= 10000) {
+            setIsPlaying(false);
             setModal(true);  
             timer = 0;   
         }
