@@ -76,17 +76,14 @@ const GlobalPlayer = (props: any) => {
         return `${returnMin}:${returnSecs}`
     }
 
-    let timer = 0;
     const whilePlaying = () => {
         progressBar.current.value = audioPlayer.current.currentTime
         changePlayerCurrentTime();
 
-        timer += progressBar.current.value;
-        console.log(progressBar.current.value)
         if (progressBar.current.value >= 10) {
             setIsPlaying(false);
-            setModal(true);  
-            timer = 0;   
+            audioPlayer.current.pause();
+            setModal(true);   
         }
 
         animationRef.current = requestAnimationFrame(whilePlaying)
