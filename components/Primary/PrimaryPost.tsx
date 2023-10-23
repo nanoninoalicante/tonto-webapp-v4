@@ -13,6 +13,7 @@ export const getServerSideProps = (props: any) => {
 }
 const PrimaryPost = (props: any) => {
     let post = props.data;
+    const { likesCount, shareCount, commentsCount } = props.firestore;
     const { link } = props;
     const [userData, setUserData] = useState(post?.userInfo)
     const [modal, setModal] = useState(false)
@@ -45,16 +46,16 @@ const PrimaryPost = (props: any) => {
                     <div className="flex flex-col gap-x-2 ml-auto mr-5 text-center text-[14px] py-4 gap-2">
                         <button onClick={() => { setModal(true) }} className="text-[#F54F74] dark:text-[#EBEBEB]">
                             <Heart />
-                            {post?.likesCount}
+                            {likesCount}
                         </button>
                         <button onClick={() => { setModal(true) }} className="text-[#009D9D] dark:text-[#EBEBEB]">
                             <Comment />
-                            {post?.commentsCount}
+                            {commentsCount}
                         </button>
-                        {/* <button onClick={() => { setModal(true) }} className="text-[#F6C116] dark:text-[#EBEBEB]">
+                        <button onClick={() => { setModal(true) }} className="text-[#F6C116] dark:text-[#EBEBEB]">
                             <Share />
-                            {post?.shareCount}
-                        </button> */}
+                            {shareCount}
+                        </button>
                     </div>
                 </div>
                 <div className="flex justify-center">

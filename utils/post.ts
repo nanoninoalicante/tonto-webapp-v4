@@ -1,6 +1,6 @@
 
 export async function getPost(postId: string): Promise<any> {
-    const response = await fetch(`${process.env.FEED_API}/post/${postId}${process.env.API_KEY}`, {
+    const response = await fetch(`${process.env.FEED_API}post/${postId}${process.env.API_KEY}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

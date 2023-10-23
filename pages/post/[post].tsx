@@ -51,6 +51,7 @@ export const getServerSideProps = async (context: any) => {
     }
     let server = {
         data: postData,
+        firebase: {},
         page: 1,
         back: 0,
         next: 0,
@@ -59,9 +60,12 @@ export const getServerSideProps = async (context: any) => {
         posts: 0,
         comments: [],
         isPhone: isPhone,
-        link: link
+        link: link,
+        post
     }
-
+    
+    const postFirestore = await getPost(post)
+    server.firebase = postFirestore;
     const dataPost = await getPost(post)
     server.data = dataPost;
     const getUser = await getUserInfo(server.data.userInfo.id, post)
@@ -76,7 +80,7 @@ export const getServerSideProps = async (context: any) => {
 
 const Post = (props: any) => {
     const [selected, setSelected] = useState("comments")
-    const { data, page, back, next, posts, existsId, comments, isPhone, randomId, link } = props;
+    const { data, page, back, next, posts, existsId, comments, isPhone, randomId, link, firebase } = props;
     return (
         <main>
             {data?.uuid !== "" ?
@@ -98,6 +102,7 @@ const Post = (props: any) => {
                     <main className='grid place-items-center relative md:top-[10vh]'>
                         <PrimaryHeader />
                         <PrimaryPost
+                            firestore={firebase}
                             data={data}
                             page={page}
                             back={back}
