@@ -68,6 +68,8 @@ export const getServerSideProps = async (context: any) => {
     server.firebase = postFirestore;
     const dataPost = await getPost(post)
     server.data = dataPost;
+    console.log("post: ", post)
+    console.log("post firestore: ", postFirestore)
     console.log("post data: ", dataPost)
     console.log("server data: ", server.data)
     const getUser = await getUserInfo(server.data.userInfo.id, post)
