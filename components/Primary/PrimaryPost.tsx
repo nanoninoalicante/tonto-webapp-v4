@@ -13,7 +13,7 @@ export const getServerSideProps = (props: any) => {
 }
 const PrimaryPost = (props: any) => {
     let post = props.data;
-    const { likesCount, shareCount, commentsCount } = props.firestore;
+    const { likesCount, shareCount, commentsCount } = props.firestore.data;
     const { link } = props;
     const [userData, setUserData] = useState(post?.userInfo)
     const [modal, setModal] = useState(false)

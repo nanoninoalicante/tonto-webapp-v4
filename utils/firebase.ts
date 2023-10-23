@@ -3,14 +3,12 @@ import { getFirestore, doc, getDoc, collection, getDocs, limit, query, where, Qu
 
 const db = getFirestore(firebaseApp);
 
-export async function getPost(postId: string) {
+export async function getPostFirestore(postId: string) {
     try {
         const postRef = doc(db, "posts", postId);
         const postSnap = await getDoc(postRef);
         if (postSnap.exists()) {
             return postSnap.data();
-        } else {
-            return null;
         }
     } catch (error) {
         console.log(error);

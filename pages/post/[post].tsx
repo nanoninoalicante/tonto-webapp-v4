@@ -10,7 +10,7 @@ import Icon from "../../public/flex-ui-assets/logos/icon.svg"
 import Subtitles from '../../components/Subtitles/Subtitles'
 import { getCommentsByUser, getPost, getUserInfo } from '../../utils/post'
 import Link from 'next/link'
-
+import { getPostFirestore } from '../../utils/firebase'
 
 //santeetji: 62b131b4db1ec8000f04084e
 //begaes: 628e108820eaae000f00a887
@@ -63,8 +63,8 @@ export const getServerSideProps = async (context: any) => {
         link: link,
         post
     }
-    
-    const postFirestore = await getPost(post)
+
+    const postFirestore = await getPostFirestore(post) || {};
     server.firebase = postFirestore;
     const dataPost = await getPost(post)
     server.data = dataPost;
@@ -117,7 +117,7 @@ const Post = (props: any) => {
                             back={back}
                             next={next}
                             existsId={existsId}
-                            link={link} 
+                            link={link}
                         />
                         {
                             comments.length ?
