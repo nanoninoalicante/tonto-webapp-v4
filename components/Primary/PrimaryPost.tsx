@@ -13,8 +13,9 @@ export const getServerSideProps = (props: any) => {
 }
 const PrimaryPost = (props: any) => {
     let post = props.data;
-    const { likesCount, shareCount, commentsCount } = props.firestore.data;
+    const { likesCount, shareCount, commentsCount, shortLink } = props.firestore.data;
     const { link } = props;
+    const deeplink = link || shortLink;
     const [userData, setUserData] = useState(post?.userInfo)
     const [modal, setModal] = useState(false)
 
@@ -73,7 +74,7 @@ const PrimaryPost = (props: any) => {
                 <div className="px-4 py-2 pb-5 mt-2 text-[12px] text-[#109C90] dark:text-[#00eedc] leading-[14px]">
                     { moment(post.createdAt).fromNow() }
                 </div>
-                <DownloadApp link={link} show={modal} close={() => setModal(false)} />
+                <DownloadApp link={deeplink} show={modal} close={() => setModal(false)} />
             </div>
             :
             <div className="w-[50%] mt-28 justify-center bg-white rounded-b-xl">
