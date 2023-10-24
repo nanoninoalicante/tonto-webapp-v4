@@ -10,7 +10,7 @@ import Icon from "../../public/flex-ui-assets/logos/icon.svg"
 import Subtitles from '../../components/Subtitles/Subtitles'
 import { getCommentsByUser, getPost, getUserInfo } from '../../utils/post'
 import Link from 'next/link'
-
+import { getPostFirestore } from '../../utils/firebase'
 
 //santeetji: 62b131b4db1ec8000f04084e
 //begaes: 628e108820eaae000f00a887
@@ -51,6 +51,7 @@ export const getServerSideProps = async (context: any) => {
     }
     let server = {
         data: postData,
+        firebase: {},
         page: 1,
         back: 0,
         next: 0,
@@ -59,11 +60,18 @@ export const getServerSideProps = async (context: any) => {
         posts: 0,
         comments: [],
         isPhone: isPhone,
-        link: link
+        link: link,
+        post
     }
 
+    const postFirestore = await getPostFirestore(post) || {};
+    server.firebase = postFirestore;
     const dataPost = await getPost(post)
     server.data = dataPost;
+    console.log("post: ", post)
+    console.log("post firestore: ", postFirestore)
+    console.log("post data: ", dataPost)
+    console.log("server data: ", server.data)
     const getUser = await getUserInfo(server.data.userInfo.id, post)
     const getComment = await getCommentsByUser(post)
     server.back = getUser.back;
@@ -76,7 +84,7 @@ export const getServerSideProps = async (context: any) => {
 
 const Post = (props: any) => {
     const [selected, setSelected] = useState("comments")
-    const { data, page, back, next, posts, existsId, comments, isPhone, randomId, link } = props;
+    const { data, page, back, next, posts, existsId, comments, isPhone, randomId, link, firebase } = props;
     return (
         <main>
             {data?.uuid !== "" ?
@@ -98,6 +106,7 @@ const Post = (props: any) => {
                     <main className='grid place-items-center relative md:top-[10vh]'>
                         <PrimaryHeader />
                         <PrimaryPost
+                            firestore={firebase}
                             data={data}
                             page={page}
                             back={back}
@@ -112,7 +121,7 @@ const Post = (props: any) => {
                             back={back}
                             next={next}
                             existsId={existsId}
-                            link={link} 
+                            link={link}
                         />
                         {
                             comments.length ?

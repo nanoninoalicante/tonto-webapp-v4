@@ -13,7 +13,9 @@ export const getServerSideProps = (props: any) => {
 }
 const PrimaryPost = (props: any) => {
     let post = props.data;
+    const { likesCount, shareCount, commentsCount, shortLink } = props.firestore.data;
     const { link } = props;
+    const deeplink = link || shortLink;
     const [userData, setUserData] = useState(post?.userInfo)
     const [modal, setModal] = useState(false)
 
@@ -45,16 +47,16 @@ const PrimaryPost = (props: any) => {
                     <div className="flex flex-col gap-x-2 ml-auto mr-5 text-center text-[14px] py-4 gap-2">
                         <button onClick={() => { setModal(true) }} className="text-[#F54F74] dark:text-[#EBEBEB]">
                             <Heart />
-                            {post?.likesCount}
+                            {likesCount}
                         </button>
                         <button onClick={() => { setModal(true) }} className="text-[#009D9D] dark:text-[#EBEBEB]">
                             <Comment />
-                            {post?.commentsCount}
+                            {commentsCount}
                         </button>
-                        {/* <button onClick={() => { setModal(true) }} className="text-[#F6C116] dark:text-[#EBEBEB]">
+                        <button onClick={() => { setModal(true) }} className="text-[#F6C116] dark:text-[#EBEBEB]">
                             <Share />
-                            {post?.shareCount}
-                        </button> */}
+                            {shareCount}
+                        </button>
                     </div>
                 </div>
                 <div className="flex justify-center">
@@ -72,7 +74,7 @@ const PrimaryPost = (props: any) => {
                 <div className="px-4 py-2 pb-5 mt-2 text-[12px] text-[#109C90] dark:text-[#00eedc] leading-[14px]">
                     { moment(post.createdAt).fromNow() }
                 </div>
-                <DownloadApp link={link} show={modal} close={() => setModal(false)} />
+                <DownloadApp link={deeplink} show={modal} close={() => setModal(false)} />
             </div>
             :
             <div className="w-[50%] mt-28 justify-center bg-white rounded-b-xl">
