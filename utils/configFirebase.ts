@@ -11,7 +11,7 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID, //"1:813869637977:web:565cceeff6dc19ae76ec48",
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID, //"G-ZF5JWCMYC9"
 };
-
+console.log("firebaseConfig", firebaseConfig);
 let firebaseApp = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 

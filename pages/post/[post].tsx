@@ -98,7 +98,7 @@ const Post = (props: any) => {
                                 <div className="text-sm font-light leading-3"> Open in Tonto App </div>
                             </div>
                             <Link href={`${link}`}
-                                className="bg-[#109C90] text-white ml-auto font-medium rounded-2xl px-3 py-1 mr-3 h-8 flex items-center">
+                                className="bg-[#109C90] text-white ml-auto whitespace-nowrap font-medium rounded-2xl px-3 py-1 mr-3 h-8 flex items-center overflow">
                                 GET TONTO
                             </Link>
                         </div>
