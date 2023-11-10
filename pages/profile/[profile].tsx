@@ -11,7 +11,9 @@ export const getServerSideProps = async (context: any) => {
         const { req } = context;
         //const userAgent = req.headers["user-agent"];
         //let isPhone: boolean = false;
+        console.log("profile: ", profile)
         const parsedUrl = new URL(req.url, 'https://web-dev.gettonto.com');
+        console.log("parsedUrl: ", parsedUrl)
         const deeplinkParam = parsedUrl.searchParams.get('deeplink') || process.env.APP_LINK!;
         const deeplinkUrl = decodeURIComponent(deeplinkParam);
 
