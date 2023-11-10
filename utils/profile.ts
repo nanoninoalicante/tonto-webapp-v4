@@ -17,6 +17,7 @@ export async function getProfile(userId: string): Promise<any> {
     }
 
     if (response.status !== 204) {
+        console.log("response: ", response)
         const data = await response.json();
         return data;
     }
