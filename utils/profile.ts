@@ -21,4 +21,5 @@ export async function getProfile(userId: string): Promise<any> {
         const data = await response.json();
         return data;
     }
+    return {}
 }
