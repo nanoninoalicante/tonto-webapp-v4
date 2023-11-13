@@ -1,7 +1,7 @@
 
 
 export async function getProfile(userId: string): Promise<any> {
-    const url = `${process.env.FEED_API}/user/${userId}${process.env.API_KEY}`;
+    const url = `${process.env.FEED_API}user/${userId}${process.env.API_KEY}`;
     const response = await fetch(url, {
         method: 'GET',
         headers: {
