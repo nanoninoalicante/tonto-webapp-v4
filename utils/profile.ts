@@ -5,7 +5,6 @@ export async function getProfile(userId: string): Promise<any> {
         headers: {
             "Content-Type": "application/json",
             "X-Tonto-Feed-Api-Origin": "web-nestify-ssr",
-            "User-Agent": "Tonto Web SSR",
         },
     });
     console.log("response: ", response);
