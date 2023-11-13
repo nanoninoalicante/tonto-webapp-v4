@@ -5,9 +5,10 @@ export async function getProfile(userId: string): Promise<any> {
         headers: {
             "Content-Type": "application/json",
             "X-Tonto-Feed-Api-Origin": "web-nestify-ssr",
+            "User-Agent": "Tonto Web SSR",
         },
     });
-    console.log("response: ", response)
+    console.log("response: ", response);
 
     if (!response.ok) {
         const error = await response.json();
@@ -21,5 +22,5 @@ export async function getProfile(userId: string): Promise<any> {
         const data = await response.json();
         return data;
     }
-    return {}
+    return {};
 }
