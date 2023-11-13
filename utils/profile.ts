@@ -9,6 +9,9 @@ export async function getProfile(userId: string): Promise<any> {
         },
     });
     console.log("response: ", response);
+    if (response.headers) {
+        response.headers.forEach((value, name) => console.log(name, value));
+    }
 
     if (!response.ok) {
         const error = await response.json();
