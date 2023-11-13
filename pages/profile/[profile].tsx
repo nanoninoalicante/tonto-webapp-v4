@@ -21,6 +21,7 @@ export const getServerSideProps = async (context: any) => {
             isPhone = true
         } */
         const response = await getProfile(profile || userId);
+        console.log("response: ", response)
         if (response.error) {
             return { props: { error: response.error } };
         }
