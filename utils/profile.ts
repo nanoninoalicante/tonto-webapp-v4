@@ -1,11 +1,10 @@
 export async function getProfile(userId: string): Promise<any> {
     const url = `${process.env.FEED_API}user/${userId}${process.env.API_KEY}`;
     const response = await fetch(url, {
-        method: "GET",
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
             "X-Tonto-Feed-Api-Origin": "web-nestify-ssr",
-            "User-Agent": "Tonto Web SSR",
         },
     });
     console.log("response: ", response);
