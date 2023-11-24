@@ -80,11 +80,11 @@ const GlobalPlayer = (props: any) => {
         progressBar.current.value = audioPlayer.current.currentTime
         changePlayerCurrentTime();
 
-        if (progressBar.current.value >= 10) {
+        /* if (progressBar.current.value >= 10) {
             setIsPlaying(false);
             audioPlayer.current.pause();
             setModal(true);   
-        }
+        } */
 
         animationRef.current = requestAnimationFrame(whilePlaying)
     }
