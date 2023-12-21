@@ -9,10 +9,11 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET, //"urlo-development.appspot.com",
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSENGING_SENDER_ID, //"813869637977",
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID, //"1:813869637977:web:565cceeff6dc19ae76ec48",
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID, //"G-ZF5JWCMYC9"
 };
 console.log("firebaseConfig", firebaseConfig);
-let firebaseApp = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+let firebaseApp = getApps().length
+  ? getApps()[0]
+  : initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 
 export { auth };
