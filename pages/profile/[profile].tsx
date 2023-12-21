@@ -20,6 +20,7 @@ export const getServerSideProps = async (context: any) => {
         /* if (userAgent.indexOf("iPhone") !== -1 || userAgent.indexOf("Android") !== -1) {
             isPhone = true
         } */
+        
         const response = await getProfile(profile || userId);
         console.log("response: ", response)
         if (response.error) {
