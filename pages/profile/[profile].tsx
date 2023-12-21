@@ -18,9 +18,9 @@ export const getServerSideProps = async (context: any) => {
         const deeplinkUrl = decodeURIComponent(deeplinkParam);
 
         /* if (userAgent.indexOf("iPhone") !== -1 || userAgent.indexOf("Android") !== -1) {
-            isPhone = true
+            isPhone = tru
         } */
-        
+
         const response = await getProfile(profile || userId);
         console.log("response: ", response)
         if (response.error) {
