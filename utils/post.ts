@@ -24,7 +24,7 @@ export async function getUserInfo(userId: string, postId: string): Promise<any> 
     if (!userId) {
         return ""
     }
-    const url = `${process.env.FEED_API}user/${userId}${process.env.API_KEY}`
+    const url = `${process.env.FEED_API}user/${userId}?api_key=${process.env.API_KEY}`
     const response = await fetch(url, {
         method: 'GET'
     });
@@ -60,7 +60,7 @@ export async function getUserInfo(userId: string, postId: string): Promise<any> 
 }
 
 export async function getCommentsByUser(postId: string): Promise<any> {
-    const url = `${process.env.FEED_API}post/${postId}/comments${process.env.API_KEY}`
+    const url = `${process.env.FEED_API}post/${postId}/comments?api_key=${process.env.API_KEY}`
     const response = await fetch(url, {
         method: 'GET',
         headers: {
