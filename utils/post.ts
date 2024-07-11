@@ -1,6 +1,6 @@
 
 export async function getPost(postId: string): Promise<any> {
-    const url = `${process.env.FEED_API}post/${postId}${process.env.API_KEY}`
+    const url = `${process.env.FEED_API}post/${postId}?api_key=${process.env.API_KEY}`
     console.log("url: ", url)
     const response = await fetch(url, {
         method: 'GET',
