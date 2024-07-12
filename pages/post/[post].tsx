@@ -72,6 +72,7 @@ export const getServerSideProps = async (context: any) => {
     console.log("post firestore: ", postFirestore)
     console.log("post data: ", dataPost)
     console.log("server data: ", server.data)
+    return { props: server }
     const getUser = await getUserInfo(server.data.userInfo.id, post)
     const getComment = await getCommentsByUser(post)
     server.back = getUser.back;
