@@ -8,7 +8,6 @@ export async function getPost(postId: string): Promise<any> {
             'Content-Type': 'application/json',
         },
     });
-
     if (!response.ok) {
         const error = await response.json();
         throw new Error(error.message || 'An error occurred while making the API call');
