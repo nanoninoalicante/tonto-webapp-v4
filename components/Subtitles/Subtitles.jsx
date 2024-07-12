@@ -43,7 +43,7 @@ const Subtitles = (props) => {
 
   return (
     <div className="container px-4 mx-auto">
-      <h1 className="text-2xl my-4">Tonto</h1>
+      <h1 className="text-2xl my-4">Truth Voice</h1>
       <div className="flex">
         <audio
           ref={audioRef}
