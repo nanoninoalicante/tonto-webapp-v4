@@ -72,6 +72,7 @@ export const getServerSideProps = async (context: any) => {
     console.log("post firestore: ", postFirestore)
     console.log("post data: ", dataPost)
     console.log("server data: ", server.data)
+    return { props: server }
     const getUser = await getUserInfo(server.data.userInfo.id, post)
     const getComment = await getCommentsByUser(post)
     server.back = getUser.back;
@@ -95,11 +96,11 @@ const Post = (props: any) => {
                             <Icon className="mx-3 w-15 h-15 rounded-full" />
                             <div className="flex flex-col">
                                 <div className="text-md font-medium"> Tonto - Social Audio App </div>
-                                <div className="text-sm font-light leading-3"> Open in Tonto App </div>
+                                <div className="text-sm font-light leading-3"> Open in Truth Voice App </div>
                             </div>
                             <Link href={`${link}`}
                                 className="bg-[#109C90] text-white ml-auto whitespace-nowrap font-medium rounded-2xl px-3 py-1 mr-3 h-8 flex items-center overflow">
-                                GET TONTO
+                                GET Truth Voice
                             </Link>
                         </div>
                     }
