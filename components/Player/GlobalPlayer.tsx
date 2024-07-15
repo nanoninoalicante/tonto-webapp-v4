@@ -144,7 +144,7 @@ const GlobalPlayer = (props: any) => {
                 <audio ref={audioPlayer} preload="metadata" src={props.data.downloadUrl[0]} />
 
                 {/* SPEED CONTROL */}
-                <button onClick={handleSpeed} className="p-3 text-[#109C90] dark:text-[#00eedc]">
+                <button onClick={handleSpeed} className="p-3 text-[#CF2508] dark:text-[#FE4424]">
                     {
                         {
                             1: "1x",
@@ -216,7 +216,7 @@ const GlobalPlayer = (props: any) => {
                     <input type="range" defaultValue="0" className={style.progressBar} ref={progressBar} onChange={onChangeRange} />
                 </div>
 
-                <div className="grid grid-flow-col text-xs text-[#109C90] dark:text-[#00EEDC]">
+                <div className="grid grid-flow-col text-xs text-[#CF2508] dark:text-[#FE4424]">
                     {/* current time */}
                     <div className="p-1 mx-1 rounded-md">
                         {calculateTime(currentTime)}
