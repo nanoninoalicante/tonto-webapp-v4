@@ -95,7 +95,7 @@ const Post = (props: any) => {
                         <div className="fixed z-50 bottom-0 inset-x-0 w-full h-20 bg-white flex flex-row items-center text-black">
                             <Icon className="mx-3 w-15 h-15 rounded-full" />
                             <div className="flex flex-col">
-                                <div className="text-md font-medium"> Tonto - Social Audio App </div>
+                                <div className="text-md font-medium"> Truth Voice - Social Audio App </div>
                                 <div className="text-sm font-light leading-3"> Open in Truth Voice App </div>
                             </div>
                             <Link href={`${link}`}
