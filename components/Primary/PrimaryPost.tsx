@@ -51,7 +51,7 @@ const PrimaryPost = (props: any) => {
                         onClick={() => {
                             setModal(true);
                         }}
-                        className="bg-[#109C90] dark:bg-[#00EEDC] dark:text-[#5F5F5F] rounded-[4px] text-white text-[14px] w-[64px] py-0.5 my-3"
+                        className="bg-[#CF2508] dark:bg-[#FE4424] dark:text-[#5F5F5F] rounded-[4px] text-white text-[14px] w-[64px] py-0.5 my-3"
                     >
                         follow
                     </button>
@@ -96,7 +96,7 @@ const PrimaryPost = (props: any) => {
                     </div>
                 </div> */}
             <Description text={post.description} />
-            <div className="px-4 py-2 pb-5 mt-2 text-[12px] text-[#109C90] dark:text-[#00eedc] leading-[14px]">
+            <div className="px-4 py-2 pb-5 mt-2 text-[12px] text-[#CF2508] dark:text-[#FE4424] leading-[14px]">
                 {moment(post.createdAt).fromNow()}
             </div>
             <DownloadApp

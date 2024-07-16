@@ -45,7 +45,7 @@ const DownloadApp = (props: any) => {
                                                 Have you heard of Truth Voice? Come and listen to my content! Download and get familiarized with Truth Voice now. Talk to you in Truth Voice!
                                             </p>
                                         </div>
-                                        <Link href={`${props.link}`} className='bg-[#009D9D] text-white px-1 py-2 rounded-lg'>
+                                        <Link href={`${props.link}`} className='bg-[#CF2508] text-white px-1 py-2 rounded-lg'>
                                             Get Truth Voice
                                         </Link>
                                     </div>
